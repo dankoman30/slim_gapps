@@ -17,11 +17,11 @@
 <!--                                                                         -->
 <!--  Subversion Tags                                                        -->
 <!--                                                                         -->
-<!--    $Author$                                                       -->
-<!--    $LastChangedDate$      -->
-<!--    $LastChangedRevision$                                         -->
-<!--    $LastChangedBy$                                                -->
-<!--    $Id$                       -->
+<!--    $Author$                                               -->
+<!--    $LastChangedDate$     -->
+<!--    $LastChangedRevision$                                            -->
+<!--    $LastChangedBy$                                        -->
+<!--    $Id$                  -->
 <!--=========================================================================-->
 <project name="buildGapps"
          default="buildAll"
