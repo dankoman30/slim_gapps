@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE project>
+<!--=========================================================================-->
+<!--                                                                         -->
+<!--  PROJECT:  buildGapps                                                   -->
+<!--            Slimroms (www.slimroms.net)                                  -->
+<!--                                                                         -->
+<!--  FILE:     build.xml                                                    -->
+<!--                                                                         -->
+<!--  DESCRIPTION:                                                           -->
+<!--                                                                         -->
+<!--    builds the gapps                                                     -->
+<!--                                                                         -->
+<!--  AUTHORS:                                                               -->
+<!--                                                                         -->
+<!--    mho: Manfred Hofbauer                                                -->
+<!--                                                                         -->
+<!--  Subversion Tags                                                        -->
+<!--                                                                         -->
+<!--    $Author: svn $                                                       -->
+<!--    $LastChangedDate: 2010-08-29 11:17:40 +0200 (So, 29 Aug 2010) $      -->
+<!--    $LastChangedRevision: 2615 $                                         -->
+<!--    $LastChangedBy: svn $                                                -->
+<!--    $Id: build.xml 2615 2010-08-29 09:17:40Z svn $                       -->
+<!--=========================================================================-->
+<project name="buildGapps"
+         default="buildAll"
+         basedir=".">
+
+  <description>
+    This file ist used by ant to build the Slim Gapps project
+  </description>
+
+  <!--=======================================================================-->
+  <!-- some variables                                                        -->
+  <!--=======================================================================-->
+  <property name="app.name"           value="buildGapps"/>
+  <property name="app.dir"            value="${basedir}"/>
+  <property name="build.dir"          value="${app.dir}/build"/>
+    
+  <!--=======================================================================-->
+  <!-- complete build                                                        -->
+  <!--=======================================================================-->
+  <target name="buildAll"
+        depends="cleanup,initit"
+          description="execute complete build"/>
+	
+  <!--=======================================================================-->
+  <!-- minimal                                                              -->
+  <!--=======================================================================-->
+  <target name="buildMinimal"
+          description="execute minimal gapps build"/>
+
+  <!--=======================================================================-->
+  <!-- cleanup for new build                                                 -->
+  <!--=======================================================================-->
+  <target name="cleanup"
+      description="delete old directories">
+      <delete dir="${build.dir}"/>
+  </target>
+
+  <!--=======================================================================-->
+  <!-- initiating build                                                      -->
+  <!--=======================================================================-->
+  <target name ="initit"
+      description="initiating-steps">
+      <mkdir dir="${build.dir}"/>
+  </target>
+
+  <!--=======================================================================-->
+  <!-- zip the files                                                         -->
+  <!--=======================================================================-->
+  <target name="zipit"
+          description="Creates the ZIP-file">
+
+    <zip zipfile="${build.dir}/${app.name}_${app.version}.zip">
+      <zipfileset dir="." includes="articlebuttons.xml" />
+      <zipfileset dir="." includes="index.html" />
+      <zipfileset dir="." includes="articlebuttons.php" />
+      <zipfileset dir="." includes="LICENSE.txt" />
+      <zipfileset dir="." includes="README.txt" />
+      <zipfileset dir="." includes="INSTALL.txt" />
+      <zipfileset dir="." includes="CHANGELOG.txt" />
+      <zipfileset dir="." includes="articlebuttons\**/*" />
+    </zip>
+  </target>
+    
+</project>
