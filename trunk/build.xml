@@ -26,7 +26,7 @@
 <project name="buildGapps"
          default="buildAll"
          basedir=".">
-
+  <property file="build.properties"/>
   <description>
     This file ist used by ant to build the Slim Gapps project
   </description>
@@ -34,23 +34,58 @@
   <!--=======================================================================-->
   <!-- some variables                                                        -->
   <!--=======================================================================-->
-  <property name="app.name"           value="buildGapps"/>
-  <property name="app.dir"            value="${basedir}"/>
-  <property name="build.dir"          value="${app.dir}/build"/>
-    
+  <property name="app.name"           			value="buildGapps"/>
+  <property name="app.dir"            			value="${basedir}"/>
+  <property name="build.dir"          			value="${app.dir}/build"/>
+  <property name="system.dir"         			value="${app.dir}/system"/>
+  <property name="optional.dir"       			value="${app.dir}/optional"/>
+  <property name="optional.install.script"      value="${app.dir}/tools/install-optional.sh"/>
+  <property name="update-binary"      			value="${app.dir}/tools/update-binary"/>
+  <property name="updater-script"      			value="${app.dir}/tools/updater-script"/>
+	
   <!--=======================================================================-->
   <!-- complete build                                                        -->
   <!--=======================================================================-->
   <target name="buildAll"
-        depends="cleanup,initit"
-          description="execute complete build"/>
-	
+        depends="cleanup,initit,buildAIO"
+          description="execute complete build">
+  </target>
+
   <!--=======================================================================-->
   <!-- minimal                                                              -->
   <!--=======================================================================-->
   <target name="buildMinimal"
-          description="execute minimal gapps build"/>
+          description="execute minimal gapps build">
+  </target>
 
+  <!--=======================================================================-->
+  <!-- minimal                                                              -->
+  <!--=======================================================================-->
+  <target name="buildAIO"
+          description="execute All-In-One gapps build">
+    
+  	<jar destfile="${build.dir}/Slim_AIO_gapps.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}.zip">
+    	<fileset dir="${system.dir}"/>
+	    <manifest>
+	    	<attribute name="Permissions" value="all-permissions"/>
+	    	<attribute name="Codebase" value="*"/>
+	    </manifest>
+    </jar>
+  </target>
+	<!--
+	  <target name="jarIt" depends="">
+	  	<jar destfile="${basedir}/georef.jar" duplicate="preserve">
+	    	<fileset dir="${work.dir}"/>
+		    <manifest>
+		    	<attribute name="Permissions" value="all-permissions"/>
+		    	<attribute name="Codebase" value="*"/>
+	            <attribute name="Created-By" value="INODP"/>
+	            <attribute name="Manifest-Version" value="1.0"/>
+		    </manifest>
+	    </jar>
+	  </target> 
+	-->
+	
   <!--=======================================================================-->
   <!-- cleanup for new build                                                 -->
   <!--=======================================================================-->
