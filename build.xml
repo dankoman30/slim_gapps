@@ -19,9 +19,9 @@
 <!--                                                                         -->
 <!--    $Author$                                               -->
 <!--    $LastChangedDate$     -->
-<!--    $LastChangedRevision$                                            -->
+<!--    $LastChangedRevision$                                           -->
 <!--    $LastChangedBy$                                        -->
-<!--    $Id$                  -->
+<!--    $Id$                 -->
 <!--=========================================================================-->
 <project name="buildGapps"
          default="buildAll"
@@ -52,7 +52,7 @@
   </target>
 
   <!--=======================================================================-->
-  <!-- minimal                                                              -->
+  <!-- minimal                                                               -->
   <!--=======================================================================-->
   <target name="buildMinimal"
           description="execute minimal gapps build">
@@ -70,6 +70,10 @@
   			<exclude name="system/app/LatinIME.apk"/>
   			<exclude name="system/priv-app/GoogleSearch.apk"/>
   			<exclude name="system/priv-app/talkback.apk"/>
+  			<exclude name="system/lib/libgoogle_hotword_jni.so"/>
+  			<exclude name="system/lib/libgoogle_recognizer_jni_l.so"/>
+  			<exclude name="system/lib/libjni_latinime.so"/>
+  			<exclude name="system/lib/librectifier.so"/>
   			<exclude name="system/tts/**"/>
   			<exclude name="system/usr/**"/>
   			<exclude name="system/vendor/**"/>
