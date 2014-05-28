@@ -38,11 +38,7 @@
   <property name="app.dir"            			value="${basedir}"/>
   <property name="work.dir"                     value="${app.dir}/work"/>
   <property name="build.dir"          			value="${app.dir}/build"/>
-  <property name="system.dir"         			value="${app.dir}/system"/>
-  <property name="optional.dir"       			value="${app.dir}/optional"/>
-  <property name="optional.install.script"      value="${app.dir}/tools/install-optional.sh"/>
-  <property name="update-binary"      			value="${app.dir}/tools/update-binary"/>
-  <property name="updater-script"      			value="${app.dir}/tools/updater-script"/>
+  <property name="source.dir"         			value="${app.dir}/structure"/>
 	
   <!--=======================================================================-->
   <!-- complete build                                                        -->
@@ -64,9 +60,11 @@
   <!--=======================================================================-->
   <target name="buildAIO"
           description="execute All-In-One gapps build">
-    
+  	<copy todir="${work.dir}">
+  	   <fileset dir="${xxx.dir}"/>
+  	</copy>
   	<jar destfile="${build.dir}/Slim_AIO_gapps.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}.zip" indexMetaInf="true">
-    	<fileset dir="${basedir}"/>
+    	<fileset dir="${source.dir}"/>
 	    <manifest>
             <attribute name="Created-By" value="SlimTeam (www.slimroms.net)"/>
             <attribute name="Manifest-Version" value="1.0"/>
