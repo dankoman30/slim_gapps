@@ -85,10 +85,10 @@ app/GoogleContactsSyncAdapter.apk
 app/GoogleTTS.apk
 app/GoogleCalendarSyncAdapter.apk
 app/Hangouts.apk
-app/GooglePlus.apk
 app/GoogleEars.apk
 app/GenieWidget.apk
 app/Music.apk
+app/PlusOne.apk
 usr/srec/en-US/phone_state_map
 usr/srec/en-US/hotword_classifier
 usr/srec/en-US/hotword_prompt.txt

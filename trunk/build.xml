@@ -59,14 +59,29 @@
     <delete dir="${work.dir}"/>
 
   	<!-- copy files -->
-    <copy todir="${work.dir}"><fileset dir="${structure.dir}"/></copy>
-    <copy file="${app.dir}/extras/aio/updater-script"  todir="${work.dir}/META-INF/com/google/android"/>
-    <copy file="${app.dir}/extras/aio/81-aio_gapps.sh" todir="${work.dir}/system/addon.d"/>
+  	<copy todir="${work.dir}">
+  		<fileset dir="${structure.dir}">
+  			<exclude name="system/app/FaceLock.apk"/>
+  			<exclude name="system/app/GenieWidget.apk"/>
+  			<exclude name="system/app/GoogleEars.apk"/>
+  			<exclude name="system/app/GoogleHome.apk"/>
+  			<exclude name="system/app/PlusOne.apk"/>
+  			<exclude name="system/app/GoogleTTS.apk"/>
+  			<exclude name="system/app/LatinIME.apk"/>
+  			<exclude name="system/priv-app/GoogleSearch.apk"/>
+  			<exclude name="system/priv-app/talkback.apk"/>
+  			<exclude name="system/tts/**"/>
+  			<exclude name="system/usr/**"/>
+  			<exclude name="system/vendor/**"/>
+  		</fileset>
+  	</copy>
+    <copy file="${app.dir}/extras/minimal/updater-script"  todir="${work.dir}/META-INF/com/google/android"/>
+    <copy file="${app.dir}/extras/minimal/80-gapps.sh" todir="${work.dir}/system/addon.d"/>
 
-  	<!-- zip and sign it -->
+  	<!-- zip and sign it --> 
     <zip destfile="${build.dir}/unsigned.zip" basedir="${work.dir}"></zip>
     <echo message="Signing gapps"/>
-    <java dir="${build.dir}" fork="true" failonerror="true" maxmemory="128m" jar="${sign.jar}">
+  	<java dir="${build.dir}" fork="true" failonerror="true" maxmemory="128m" jar="${sign.jar}">
       <arg value="${sign.pem}"/>
       <arg value="${sign.pk8}"/>
       <arg value="${build.dir}/unsigned.zip"/>
