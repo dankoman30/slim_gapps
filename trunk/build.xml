@@ -38,7 +38,10 @@
   <property name="app.dir"            			value="${basedir}"/>
   <property name="work.dir"                     value="${app.dir}/work"/>
   <property name="build.dir"          			value="${app.dir}/build"/>
-  <property name="source.dir"         			value="${app.dir}/structure"/>
+  <property name="structure.dir"       			value="${app.dir}/structure"/>
+  <property name="sign.jar"                     value="${app.dir}/tools/signapk.jar"/>
+  <property name="sign.pem"                     value="${app.dir}/tools/testkey.x509.pem"/>
+  <property name="sign.pk8"                     value="${app.dir}/tools/testkey.pk8"/>
 	
   <!--=======================================================================-->
   <!-- complete build                                                        -->
@@ -53,38 +56,48 @@
   <!--=======================================================================-->
   <target name="buildMinimal"
           description="execute minimal gapps build">
+    <delete dir="${work.dir}"/>
+
+  	<!-- copy files -->
+    <copy todir="${work.dir}"><fileset dir="${structure.dir}"/></copy>
+    <copy file="${app.dir}/extras/aio/updater-script"  todir="${work.dir}/META-INF/com/google/android"/>
+    <copy file="${app.dir}/extras/aio/81-aio_gapps.sh" todir="${work.dir}/system/addon.d"/>
+
+  	<!-- zip and sign it -->
+    <zip destfile="${build.dir}/unsigned.zip" basedir="${work.dir}"></zip>
+    <echo message="Signing gapps"/>
+    <java dir="${build.dir}" fork="true" failonerror="true" maxmemory="128m" jar="${sign.jar}">
+      <arg value="${sign.pem}"/>
+      <arg value="${sign.pk8}"/>
+      <arg value="${build.dir}/unsigned.zip"/>
+      <arg value="${build.dir}/Slim_minimal_gapps.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}.zip"/>
+    </java>
+
   </target>
 
   <!--=======================================================================-->
-  <!-- minimal                                                              -->
+  <!-- all-in-one                                                            -->
   <!--=======================================================================-->
   <target name="buildAIO"
           description="execute All-In-One gapps build">
-  	<copy todir="${work.dir}">
-  	   <fileset dir="${xxx.dir}"/>
-  	</copy>
-  	<jar destfile="${build.dir}/Slim_AIO_gapps.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}.zip" indexMetaInf="true">
-    	<fileset dir="${source.dir}"/>
-	    <manifest>
-            <attribute name="Created-By" value="SlimTeam (www.slimroms.net)"/>
-            <attribute name="Manifest-Version" value="1.0"/>
-	    </manifest>
-    </jar>
+  	<delete dir="${work.dir}"/>
+
+  	<!-- copy files -->
+  	<copy todir="${work.dir}"><fileset dir="${structure.dir}"/></copy>
+  	<copy file="${app.dir}/extras/aio/updater-script"  todir="${work.dir}/META-INF/com/google/android"/>
+  	<copy file="${app.dir}/extras/aio/81-aio_gapps.sh" todir="${work.dir}/system/addon.d"/>
+
+  	<!-- zip and sign it -->
+  	<zip destfile="${build.dir}/unsigned.zip" basedir="${work.dir}"></zip>
+  	<echo message="Signing gapps"/>
+    <java dir="${build.dir}" fork="true" failonerror="true" maxmemory="128m" jar="${sign.jar}">
+      <arg value="${sign.pem}"/>
+      <arg value="${sign.pk8}"/>
+      <arg value="${build.dir}/unsigned.zip"/>
+      <arg value="${build.dir}/Slim_AIO_gapps.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}.zip"/>
+    </java>
   </target>
-	<!--
-	  <target name="jarIt" depends="">
-	  	<jar destfile="${basedir}/georef.jar" duplicate="preserve">
-	    	<fileset dir="${work.dir}"/>
-		    <manifest>
-		    	<attribute name="Permissions" value="all-permissions"/>
-		    	<attribute name="Codebase" value="*"/>
-	            <attribute name="Created-By" value="INODP"/>
-	            <attribute name="Manifest-Version" value="1.0"/>
-		    </manifest>
-	    </jar>
-	  </target> 
-	-->
-	
+
   <!--=======================================================================-->
   <!-- cleanup for new build                                                 -->
   <!--=======================================================================-->
