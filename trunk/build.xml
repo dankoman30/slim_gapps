@@ -13,7 +13,7 @@
 <!--                                                                         -->
 <!--  AUTHORS:                                                               -->
 <!--                                                                         -->
-<!--    mho: Manfred Hofbauer                                                -->
+<!--    tortureduck: Manfred Hofbauer                                        -->
 <!--                                                                         -->
 <!--  Subversion Tags                                                        -->
 <!--                                                                         -->
@@ -47,7 +47,7 @@
   <!-- complete build                                                        -->
   <!--=======================================================================-->
   <target name="buildAll"
-        depends="cleanup,initit,buildAIO"
+        depends="cleanup,initit,buildMinimal,buildAIO"
           description="execute complete build">
   </target>
 
@@ -133,24 +133,6 @@
       description="initiating-steps">
       <mkdir dir="${build.dir}"/>
   	  <mkdir dir="${work.dir}"/>
-  </target>
-
-  <!--=======================================================================-->
-  <!-- zip the files                                                         -->
-  <!--=======================================================================-->
-  <target name="zipit"
-          description="Creates the ZIP-file">
-
-    <zip zipfile="${build.dir}/${app.name}_${app.version}.zip">
-      <zipfileset dir="." includes="articlebuttons.xml" />
-      <zipfileset dir="." includes="index.html" />
-      <zipfileset dir="." includes="articlebuttons.php" />
-      <zipfileset dir="." includes="LICENSE.txt" />
-      <zipfileset dir="." includes="README.txt" />
-      <zipfileset dir="." includes="INSTALL.txt" />
-      <zipfileset dir="." includes="CHANGELOG.txt" />
-      <zipfileset dir="." includes="articlebuttons\**/*" />
-    </zip>
   </target>
     
 </project>
