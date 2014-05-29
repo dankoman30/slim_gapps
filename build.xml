@@ -113,7 +113,7 @@
       <arg value="${sign.pem}"/>
       <arg value="${sign.pk8}"/>
       <arg value="${build.dir}/unsigned.zip"/>
-      <arg value="${build.dir}/Slim_AIO_gapps.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}.zip"/>
+      <arg value="${build.dir}/Slim_AIO_gapps.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}.${env.BUILD_TAG}.zip"/>
     </java>
   </target>
 
