@@ -60,8 +60,8 @@
   	<property environment="env"/>
     <property name="file.name.minimal" value="${build.dir}/Slim_minimal_gapps.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}.${env.BUILD_TAG}.zip"/>
   	<delete dir="${work.dir}"/>
-  	<propertyfile file="${build.dir}/minimal.filename">
-  	  <entry  key="gappsfilename" value="${file.name.minimal}"/>
+  	<propertyfile file="${build.dir}/gapps.filenames">
+  	  <entry  key="minfilename" value="${file.name.minimal}"/>
   	</propertyfile>
   	<!-- copy files -->
   	<copy todir="${work.dir}">
@@ -108,8 +108,8 @@
     <property environment="env"/>
     <property name="file.name.aio" value="${build.dir}/Slim_AIO_gapps.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}.${env.BUILD_TAG}.zip"/>
     <delete dir="${work.dir}"/>
-    <propertyfile file="${build.dir}/aio.filename">
-      <entry  key="gappsfilename" value="${file.name.aio}"/>
+    <propertyfile file="${build.dir}/gapps.filenames">
+      <entry  key="aiofilename" value="${file.name.aio}"/>
     </propertyfile>
   	<!-- copy files -->
   	<copy todir="${work.dir}"><fileset dir="${structure.dir}"/></copy>
