@@ -58,10 +58,10 @@
           description="execute minimal gapps build">
   	<!-- preparations -->
   	<property environment="env"/>
-    <property name="file.name" value="${build.dir}/Slim_minimal_gapps.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}.${env.BUILD_TAG}.zip"/>
+    <property name="file.name.minimal" value="${build.dir}/Slim_minimal_gapps.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}.${env.BUILD_TAG}.zip"/>
   	<delete dir="${work.dir}"/>
   	<propertyfile file="${build.dir}/minimal.filename">
-  	  <entry  key="gappsfilename" value="${build.dir}/${file.name}"/>
+  	  <entry  key="gappsfilename" value="${build.dir}/${file.name.minimal}"/>
   	</propertyfile>
   	<!-- copy files -->
   	<copy todir="${work.dir}">
@@ -94,7 +94,7 @@
       <arg value="${sign.pem}"/>
       <arg value="${sign.pk8}"/>
       <arg value="${build.dir}/unsigned.zip"/>
-      <arg value="${file.name}"/>
+      <arg value="${file.name.minimal}"/>
     </java>
 
   </target>
@@ -106,10 +106,10 @@
           description="execute All-In-One gapps build">
     <!-- preparations -->
     <property environment="env"/>
-    <property name="file.name" value="${build.dir}/Slim_AIO_gapps.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}.${env.BUILD_TAG}.zip"/>
+    <property name="file.name.aio" value="${build.dir}/Slim_AIO_gapps.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}.${env.BUILD_TAG}.zip"/>
     <delete dir="${work.dir}"/>
     <propertyfile file="${build.dir}/aio.filename">
-      <entry  key="gappsfilename" value="${file.name}"/>
+      <entry  key="gappsfilename" value="${file.name.aio}"/>
     </propertyfile>
   	<!-- copy files -->
   	<copy todir="${work.dir}"><fileset dir="${structure.dir}"/></copy>
@@ -123,7 +123,7 @@
       <arg value="${sign.pem}"/>
       <arg value="${sign.pk8}"/>
       <arg value="${build.dir}/unsigned.zip"/>
-      <arg value="${file.name}"/>
+      <arg value="${file.name.aio}"/>
     </java>
   </target>
 
