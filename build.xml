@@ -61,7 +61,7 @@
     <property name="file.name.minimal" value="${build.dir}/Slim_minimal_gapps.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}.${env.BUILD_TAG}.zip"/>
   	<delete dir="${work.dir}"/>
   	<propertyfile file="${build.dir}/minimal.filename">
-  	  <entry  key="gappsfilename" value="${build.dir}/${file.name.minimal}"/>
+  	  <entry  key="gappsfilename" value="${file.name.minimal}"/>
   	</propertyfile>
   	<!-- copy files -->
   	<copy todir="${work.dir}">
