@@ -56,9 +56,13 @@
   <!--=======================================================================-->
   <target name="buildMinimal"
           description="execute minimal gapps build">
+  	<!-- preparations -->
   	<property environment="env"/>
+    <property name="file.name" value="${build.dir}/Slim_minimal_gapps.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}.${env.BUILD_TAG}.zip"/>
   	<delete dir="${work.dir}"/>
-
+  	<propertyfile file="minimal.filename">
+  	  <entry  key="gappsfilename" value="${build.dir}/${file.name}"/>
+  	</propertyfile>
   	<!-- copy files -->
   	<copy todir="${work.dir}">
   		<fileset dir="${structure.dir}">
@@ -90,7 +94,7 @@
       <arg value="${sign.pem}"/>
       <arg value="${sign.pk8}"/>
       <arg value="${build.dir}/unsigned.zip"/>
-      <arg value="${build.dir}/Slim_minimal_gapps.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}.zip"/>
+      <arg value="${file.name}"/>
     </java>
 
   </target>
@@ -100,9 +104,13 @@
   <!--=======================================================================-->
   <target name="buildAIO"
           description="execute All-In-One gapps build">
-  	<property environment="env"/>
-  	<delete dir="${work.dir}"/>
-  	
+    <!-- preparations -->
+    <property environment="env"/>
+    <property name="file.name" value="${build.dir}/Slim_AIO_gapps.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}.${env.BUILD_TAG}.zip"/>
+    <delete dir="${work.dir}"/>
+    <propertyfile file="aio.filename">
+      <entry  key="gappsfilename" value="${build.dir}/${file.name}"/>
+    </propertyfile>
   	<!-- copy files -->
   	<copy todir="${work.dir}"><fileset dir="${structure.dir}"/></copy>
   	<copy file="${app.dir}/extras/aio/updater-script"  todir="${work.dir}/META-INF/com/google/android"/>
@@ -115,7 +123,7 @@
       <arg value="${sign.pem}"/>
       <arg value="${sign.pk8}"/>
       <arg value="${build.dir}/unsigned.zip"/>
-      <arg value="${build.dir}/Slim_AIO_gapps.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}.${env.BUILD_TAG}.zip"/>
+      <arg value="${file.name}"/>
     </java>
   </target>
 
@@ -142,9 +150,10 @@
   <!--=======================================================================-->
   <target name ="testit"
       description="testtest">
-    <property environment="env"/>
-    <echo message="BUILD_TAG = ${env.BUILD_TAG}"/>
-    <echo message="BUILD_NUMBER = ${env.BUILD_NUMBER}"/>
+  	<echo message="${x.dir}"/>
+  	<property name="x.dir" value="test9899"/>
+  	<echo message="${x.dir}"/>
+  	
   </target>
     
     
