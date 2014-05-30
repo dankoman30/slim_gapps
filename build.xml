@@ -56,7 +56,8 @@
   <!--=======================================================================-->
   <target name="buildMinimal"
           description="execute minimal gapps build">
-    <delete dir="${work.dir}"/>
+  	<property environment="env"/>
+  	<delete dir="${work.dir}"/>
 
   	<!-- copy files -->
   	<copy todir="${work.dir}">
@@ -99,8 +100,9 @@
   <!--=======================================================================-->
   <target name="buildAIO"
           description="execute All-In-One gapps build">
+  	<property environment="env"/>
   	<delete dir="${work.dir}"/>
-
+  	
   	<!-- copy files -->
   	<copy todir="${work.dir}"><fileset dir="${structure.dir}"/></copy>
   	<copy file="${app.dir}/extras/aio/updater-script"  todir="${work.dir}/META-INF/com/google/android"/>
@@ -108,8 +110,6 @@
 
   	<!-- zip and sign it -->
   	<zip destfile="${build.dir}/unsigned.zip" basedir="${work.dir}"></zip>
-  	<echo message="Signing gapps"/>
-    <echo message="BUILD_TAG = ${env.BUILD_TAG}"/>
   	<echo message="Signing gapps"/>
     <java dir="${build.dir}" fork="true" failonerror="true" maxmemory="128m" jar="${sign.jar}">
       <arg value="${sign.pem}"/>
