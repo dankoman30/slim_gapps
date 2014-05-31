@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE project>
+<!--=========================================================================-->
+<!--                                                                         -->
+<!--  PROJECT:  buildGapps                                                   -->
+<!--            Slimroms (www.slimroms.net)                                  -->
+<!--                                                                         -->
+<!--  FILE:     build.xml                                                    -->
+<!--                                                                         -->
+<!--  DESCRIPTION:                                                           -->
+<!--                                                                         -->
+<!--    builds the gapps                                                     -->
+<!--                                                                         -->
+<!--  AUTHORS:                                                               -->
+<!--                                                                         -->
+<!--    tortureduck: Manfred Hofbauer                                        -->
+<!--                                                                         -->
+<!--  Subversion Tags                                                        -->
+<!--                                                                         -->
+<!--    $Author$                                               -->
+<!--    $LastChangedDate$     -->
+<!--    $LastChangedRevision$                                           -->
+<!--    $LastChangedBy$                                        -->
+<!--    $Id$                 -->
+<!--=========================================================================-->
+<project name="buildGapps"
+         default="buildAll"
+         basedir=".">
+  <property file="build.properties"/>
+  <description>
+    This file ist used by ant to build the Slim Gapps project
+  </description>
+
+  <!--=======================================================================-->
+  <!-- some variables                                                        -->
+  <!--=======================================================================-->
+  <property name="app.name"           			value="buildGapps"/>
+  <property name="app.dir"            			value="${basedir}"/>
+  <property name="work.dir"                     value="${app.dir}/work"/>
+  <property name="build.dir"          			value="${app.dir}/build"/>
+  <property name="structure.dir"       			value="${app.dir}/structure"/>
+  <property name="sign.jar"                     value="${app.dir}/tools/signapk.jar"/>
+  <property name="sign.pem"                     value="${app.dir}/tools/testkey.x509.pem"/>
+  <property name="sign.pk8"                     value="${app.dir}/tools/testkey.pk8"/>
+	
+  <!--=======================================================================-->
+  <!-- complete build                                                        -->
+  <!--=======================================================================-->
+  <target name="buildAll"
+        depends="cleanup,initit,buildMinimal,buildAIO"
+          description="execute complete build">
+  </target>
+
+  <!--=======================================================================-->
+  <!-- minimal                                                               -->
+  <!--=======================================================================-->
+  <target name="buildMinimal"
+          description="execute minimal gapps build">
+  	<!-- preparations -->
+  	<property environment="env"/>
+    <property name="file.name.minimal" value="${build.dir}/Slim_minimal_gapps.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}.${env.BUILD_TAG}.zip"/>
+  	<delete dir="${work.dir}"/>
+  	<propertyfile file="${build.dir}/gapps.filenames">
+  	  <entry  key="minfilename" value="${file.name.minimal}"/>
+  	</propertyfile>
+  	<!-- copy files -->
+  	<copy todir="${work.dir}">
+  		<fileset dir="${structure.dir}">
+  			<exclude name="system/app/FaceLock.apk"/>
+  			<exclude name="system/app/GenieWidget.apk"/>
+  			<exclude name="system/app/GoogleEars.apk"/>
+  			<exclude name="system/app/GoogleHome.apk"/>
+  			<exclude name="system/app/PlusOne.apk"/>
+  			<exclude name="system/app/GoogleTTS.apk"/>
+  			<exclude name="system/app/LatinIME.apk"/>
+  			<exclude name="system/priv-app/GoogleSearch.apk"/>
+  			<exclude name="system/priv-app/talkback.apk"/>
+  			<exclude name="system/lib/libgoogle_hotword_jni.so"/>
+  			<exclude name="system/lib/libgoogle_recognizer_jni_l.so"/>
+  			<exclude name="system/lib/libjni_latinime.so"/>
+  			<exclude name="system/lib/librectifier.so"/>
+  			<exclude name="system/tts/**"/>
+  			<exclude name="system/usr/**"/>
+  			<exclude name="system/vendor/**"/>
+  		</fileset>
+  	</copy>
+    <copy file="${app.dir}/extras/minimal/updater-script"  todir="${work.dir}/META-INF/com/google/android"/>
+    <copy file="${app.dir}/extras/minimal/80-gapps.sh" todir="${work.dir}/system/addon.d"/>
+
+  	<!-- zip and sign it --> 
+    <zip destfile="${build.dir}/unsigned.zip" basedir="${work.dir}"></zip>
+    <echo message="Signing gapps"/>
+  	<java dir="${build.dir}" fork="true" failonerror="true" maxmemory="128m" jar="${sign.jar}">
+      <arg value="${sign.pem}"/>
+      <arg value="${sign.pk8}"/>
+      <arg value="${build.dir}/unsigned.zip"/>
+      <arg value="${file.name.minimal}"/>
+    </java>
+
+  </target>
+
+  <!--=======================================================================-->
+  <!-- all-in-one                                                            -->
+  <!--=======================================================================-->
+  <target name="buildAIO"
+          description="execute All-In-One gapps build">
+    <!-- preparations -->
+    <property environment="env"/>
+    <property name="file.name.aio" value="${build.dir}/Slim_AIO_gapps.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}.${env.BUILD_TAG}.zip"/>
+    <delete dir="${work.dir}"/>
+    <propertyfile file="${build.dir}/gapps.filenames">
+      <entry  key="aiofilename" value="${file.name.aio}"/>
+    </propertyfile>
+  	<!-- copy files -->
+  	<copy todir="${work.dir}"><fileset dir="${structure.dir}"/></copy>
+  	<copy file="${app.dir}/extras/aio/updater-script"  todir="${work.dir}/META-INF/com/google/android"/>
+  	<copy file="${app.dir}/extras/aio/81-aio_gapps.sh" todir="${work.dir}/system/addon.d"/>
+
+  	<!-- zip and sign it -->
+  	<zip destfile="${build.dir}/unsigned.zip" basedir="${work.dir}"></zip>
+  	<echo message="Signing gapps"/>
+    <java dir="${build.dir}" fork="true" failonerror="true" maxmemory="128m" jar="${sign.jar}">
+      <arg value="${sign.pem}"/>
+      <arg value="${sign.pk8}"/>
+      <arg value="${build.dir}/unsigned.zip"/>
+      <arg value="${file.name.aio}"/>
+    </java>
+  </target>
+
+  <!--=======================================================================-->
+  <!-- cleanup for new build                                                 -->
+  <!--=======================================================================-->
+  <target name="cleanup"
+      description="delete old directories">
+      <delete dir="${build.dir}"/>
+  	  <delete dir="${work.dir}"/>
+  </target>
+
+  <!--=======================================================================-->
+  <!-- initiating build                                                      -->
+  <!--=======================================================================-->
+  <target name ="initit"
+      description="initiating-steps">
+      <mkdir dir="${build.dir}"/>
+  	  <mkdir dir="${work.dir}"/>
+  </target>
+
+  <!--=======================================================================-->
+  <!-- test build                                                            -->
+  <!--=======================================================================-->
+  <target name ="testit"
+      description="testtest">
+  	<echo message="${x.dir}"/>
+  	<property name="x.dir" value="test9899"/>
+  	<echo message="${x.dir}"/>
+  	
+  </target>
+    
+    
+</project>
