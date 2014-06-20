@@ -74,7 +74,6 @@
           <exclude name="system/app/PlusOne.apk"/>
           <exclude name="system/app/GoogleTTS.apk"/>
           <exclude name="system/app/LatinIME.apk"/>
-          <exclude name="system/app/Hangouts.apk"/>
           <exclude name="system/app/Music.apk"/>
           <exclude name="system/app/YouTube.apk"/>
           <exclude name="system/app/Chrome.apk"/>

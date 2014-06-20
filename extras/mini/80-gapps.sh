@@ -12,6 +12,7 @@ app\CloudPrint2.apk
 app\Gmail.apk
 app\GoogleCalendarSyncAdapter.apk
 app\GoogleContactsSyncAdapter.apk
+app\Hangouts.apk
 etc\g.prop
 etc\permissions\com.google.android.camera2.xml
 etc\permissions\com.google.android.maps.xml
