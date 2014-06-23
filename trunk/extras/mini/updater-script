@@ -1,17 +1,3 @@
-ui_print(" ");
-ui_print("                    _____________________ ");
-ui_print("                   /                     |");
-ui_print("                  /                      |");
-ui_print("                 /    ___________________|");
-ui_print("                /    /    ___             ");
-ui_print("               /    / ___/   \            ");
-ui_print("              /    / /   \___/____   ____ ");
-ui_print("             /    /  |   |___|    \_/    |");
-ui_print(" ___________/    /   |   |   |           |");
-ui_print("|               /    |   |   |   |   |   |");
-ui_print("|              /     |   |   |   |   |   |");
-ui_print("|_____________/      \___^___^___^___^___/");
-ui_print(" ");
 ui_print("SlimKat 4.4 Slim_mini_gapps");
 ui_print("Mounting system...");
 run_program("/sbin/busybox", "mount", "/data");
