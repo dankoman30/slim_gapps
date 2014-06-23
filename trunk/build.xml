@@ -228,10 +228,8 @@
   <target name ="createChangelog"
       description="creates the changelog, one for all builds">
         <!-- preparations -->
-        <delete dir="${work.dir}"/>
-  	    <mkdir dir="${work.dir}"/>
   	    <property environment="env"/>
-        <property name="changelog.file" value="${work.dir}/Slim_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${env.BUILD_NUMBER}.CHANGELOG.txt"/>
+        <property name="changelog.file" value="${build.dir}/Slim_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${env.BUILD_NUMBER}.CHANGELOG.txt"/>
         <propertyfile file="${build.dir}/gapps.filenames">
           <entry  key="changelogfilename" value="${changelog.file}"/>
         </propertyfile>
