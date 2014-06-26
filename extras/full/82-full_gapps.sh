@@ -42,6 +42,7 @@ lib/libWVphoneAPI.so
 lib/libchrome.1916.141.so
 lib/libclientvision-new-v7a.so
 lib/libclientvision-new.so
+lib/libconscrypt_gmscore_jni.so
 lib/libcrashreporter.so
 lib/libdocscanner_image.so
 lib/libdocsimageutils.so
@@ -53,6 +54,7 @@ lib/libgames_rtmp_jni.so
 lib/libgcastv2_base.so
 lib/libgcastv2_support.so
 lib/libgmm-jni.so
+lib/libgmscore.so
 lib/libgoggles_clientvision-v7a.so
 lib/libgoggles_clientvision.so
 lib/libgoggles_imageutils-v7a.so
