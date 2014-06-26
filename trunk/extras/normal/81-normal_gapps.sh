@@ -34,6 +34,7 @@ framework/com.google.android.media.effects.jar
 framework/com.google.widevine.software.drm.jar
 lib/libAppDataSearch.so
 lib/libWVphoneAPI.so
+lib/libconscrypt_gmscore_jni.so
 lib/libcrashreporter.so
 lib/libfacelock_jni.so
 lib/libfilterframework_jni.so
@@ -42,6 +43,7 @@ lib/libframesequence.so
 lib/libgames_rtmp_jni.so
 lib/libgcastv2_base.so
 lib/libgcastv2_support.so
+lib/libgmscore.so
 lib/libgoogle_hotword_jni.so
 lib/libgoogle_recognizer_jni_l.so
 lib/libjgcastservice.so
