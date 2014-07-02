@@ -1,0 +1,18 @@
+ui_print("SlimKat 4.4 Slim_full_gapps");
+ui_print("Mounting system...");
+run_program("/sbin/busybox", "mount", "/data");
+run_program("/sbin/busybox", "mount", "/system");
+show_progress(1, 15);
+delete("/system/app/Provision.apk", "/system/app/CalendarGoogle.apk", "/system/app/Phonesky.apk", "/system/app/GoogleBookmarksSyncAdapter.apk");
+delete("/lib/libgoogle_recognizer_jni.so", "/system/priv-app/ConfigUpdater.apk");
+ui_print("Copying Files...");
+package_extract_dir("data", "/data");
+package_extract_dir("system", "/system");
+package_extract_dir("optional", "/tmp");
+package_extract_file("install-optional.sh", "/tmp/install-optional.sh");
+set_perm(0, 0, 0777, "/tmp/install-optional.sh");
+run_program("/tmp/install-optional.sh", "");
+ui_print("Unmounting system...");
+run_program("/sbin/busybox", "umount", "/data");
+run_program("/sbin/busybox", "umount", "/system");
+ui_print("Installation complete!");
