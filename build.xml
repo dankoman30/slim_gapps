@@ -237,7 +237,7 @@
           <arg line="-l 10 -o ${changelog.file}"/>
         </exec>
         <exec dir="${app.dir}" executable="sed">
-          <arg line="-i '/@@/!d' ${changelog.file}"/>
+          <arg line="-i '/@@/d' ${changelog.file}"/>
         </exec>
   </target>
 
