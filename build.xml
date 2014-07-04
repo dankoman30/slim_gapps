@@ -236,7 +236,9 @@
         <exec dir="${app.dir}" executable="svn2cl">
           <arg line="-l 10 -o ${changelog.file}"/>
         </exec>
-  	<echo message="${changelog.file}"/>
+        <exec dir="${app.dir}" executable="sed">
+          <arg line="-i '/@@/!d' ${changelog.file}"/>
+        </exec>
   </target>
 
   <!--=======================================================================-->
