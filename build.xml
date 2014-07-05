@@ -81,6 +81,7 @@
           <exclude name="system/app/Maps.apk"/>
           <exclude name="system/app/Drive.apk"/>
           <exclude name="system/app/Translate.apk"/>
+		  <exclude name="system/app/Calendar2.apk"/>
           <exclude name="system/priv-app/GoogleSearch.apk"/>
           <exclude name="system/priv-app/talkback.apk"/>
           <exclude name="system/lib/libgoogle_hotword_jni.so"/>

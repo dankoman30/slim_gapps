@@ -6,7 +6,8 @@
 
 list_files() {
 cat <<EOF
-addon.d/81-med_gapps.sh
+addon.d/81-normal_gapps.sh
+app/Calendar2.apk
 app/ChromeBookmarksSyncAdapter.apk
 app/CloudPrint2.apk
 app/FaceLock.apk
