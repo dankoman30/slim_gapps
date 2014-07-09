@@ -14,6 +14,7 @@ delete("/data/app/com.android.music-1.apk");
 delete("/data/app/com.android.music-2.apk");
 delete("/system/app/Music.apk");
 delete("/data/app-lib/com.google.android.music-1/libAppDataSearch.so");
+delete("/data/app-lib/com.google.android.music-2/libAppDataSearch.so");
 ui_print("Copying Files...");
 package_extract_dir("data", "/data");
 package_extract_dir("system", "/system");
