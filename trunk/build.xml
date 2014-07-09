@@ -74,11 +74,7 @@
           <exclude name="system/app/PlusOne.apk"/>
           <exclude name="system/app/GoogleTTS.apk"/>
           <exclude name="system/app/LatinIME.apk"/>
-    <!--  <exclude name="system/app/Music.apk"/> -->
-    <!-- temp fix for google music -->
-          <exclude name="data/app/com.google.android.music-1.apk"/>
-          <exclude name="data/app-lib/com.google.android.music-1/libAppDataSearch.so"/>
-    <!-- end of tempfix -->
+<!--          <exclude name="system/app/Music.apk"/> -->
           <exclude name="system/app/YouTube.apk"/>
           <exclude name="system/app/Chrome.apk"/>
           <exclude name="system/app/Keep.apk"/>
