@@ -24,7 +24,6 @@ app/Hangouts.apk
 app/Keep.apk
 app/LatinIME.apk
 app/Maps.apk
-app/Music.apk
 app/PlusOne.apk
 app/Translate.apk
 app/YouTube.apk
