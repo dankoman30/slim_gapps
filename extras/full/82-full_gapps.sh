@@ -7,7 +7,6 @@
 list_files() {
 cat <<EOF
 addon.d/82-full_gapps.sh
-app/Chrome.apk
 app/ChromeBookmarksSyncAdapter.apk
 app/CloudPrint2.apk
 app/Drive.apk
@@ -39,7 +38,7 @@ framework/com.google.android.media.effects.jar
 framework/com.google.widevine.software.drm.jar
 lib/libAppDataSearch.so
 lib/libWVphoneAPI.so
-lib/libchrome.1916.141.so
+lib/libchrome.1985.122.so
 lib/libclientvision-new-v7a.so
 lib/libclientvision-new.so
 lib/libconscrypt_gmscore_jni.so
