@@ -14,6 +14,7 @@ delete("/system/app/Music.apk");
 delete_recursive("/data/app-lib/com.google.android.music-1");
 delete_recursive("/data/app-lib/com.google.android.music-2");
 delete_recursive("/data/app-lib/com.google.android.music-3");
+delete("/system/app/Chrome.apk");
 ui_print("Copying Files...");
 package_extract_dir("data", "/data");
 package_extract_dir("system", "/system");
