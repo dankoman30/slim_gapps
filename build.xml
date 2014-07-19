@@ -89,7 +89,7 @@
           <exclude name="system/lib/libgoogle_recognizer_jni_l.so"/>
           <exclude name="system/lib/libjni_latinime.so"/>
           <exclude name="system/lib/librectifier.so"/>
-          <exclude name="system/lib/libchrome.1985.122.so"/>
+          <exclude name="system/lib/libchrome.1985.128.so"/>
           <exclude name="system/lib/libclientvision-new.so"/>
           <exclude name="system/lib/libclientvision-new-v7a.so"/>
           <exclude name="system/lib/libdocscanner_image.so"/>
@@ -147,7 +147,7 @@
           <exclude name="system/app/Maps.apk"/>
           <exclude name="system/app/Drive.apk"/>
           <exclude name="system/app/Translate.apk"/>
-          <exclude name="system/lib/libchrome.1985.122.so"/>
+          <exclude name="system/lib/libchrome.1985.128.so"/>
           <exclude name="system/lib/libclientvision-new.so"/>
           <exclude name="system/lib/libclientvision-new-v7a.so"/>
           <exclude name="system/lib/libdocscanner_image.so"/>
