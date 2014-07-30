@@ -239,8 +239,13 @@
         <exec dir="${app.dir}" executable="svn2cl">
           <arg line="-l 10 -o ${changelog.file}"/>
         </exec>
+        <!-- remove lines that begin with @@ -->
         <exec dir="${app.dir}" executable="sed">
           <arg line="-i '/@@/d' ${changelog.file}"/>
+        </exec>
+        <!-- insert build # at beginning of file -->
+        <exec dir="${app.dir}" executable="sed">
+          <arg line="-i '1s/^/Build $(env.BUILD_NUMBER) /' ${changelog.file}"/>
         </exec>
   </target>
 
