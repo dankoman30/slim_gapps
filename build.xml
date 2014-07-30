@@ -245,7 +245,7 @@
         </exec>
         <!-- insert build # at beginning of file -->
         <exec dir="${app.dir}" executable="sed">
-          <arg line="-i '1s/^/Build $(env.BUILD_NUMBER) /' ${changelog.file}"/>
+          <arg line="-i '1s/^/Build "$(env.BUILD_NUMBER)" /' ${changelog.file}"/>
         </exec>
   </target>
 
