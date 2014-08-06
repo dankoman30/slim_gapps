@@ -35,6 +35,7 @@ lib/libAppDataSearch.so
 lib/libWVphoneAPI.so
 lib/libconscrypt_gmscore_jni.so
 lib/libcrashreporter.so
+lib/libcronet.so
 lib/libfacelock_jni.so
 lib/libfilterframework_jni.so
 lib/libfilterpack_facedetect.so

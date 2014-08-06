@@ -38,7 +38,8 @@ framework/com.google.android.media.effects.jar
 framework/com.google.widevine.software.drm.jar
 lib/libAppDataSearch.so
 lib/libWVphoneAPI.so
-lib/libchrome.1985.128.so
+lib/libchrome.1985.131.so
+lib/libcronet.so
 lib/libclientvision-new-v7a.so
 lib/libclientvision-new.so
 lib/libconscrypt_gmscore_jni.so
