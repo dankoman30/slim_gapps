@@ -92,6 +92,7 @@
           <exclude name="system/lib/libchrome.1985.128.so"/>
           <exclude name="system/lib/libclientvision-new.so"/>
           <exclude name="system/lib/libclientvision-new-v7a.so"/>
+		  <exclude name="system/lib/libcronet.so"/>
           <exclude name="system/lib/libdocscanner_image.so"/>
           <exclude name="system/lib/libdocsimageutils.so"/>
           <exclude name="system/lib/libgmm-jni.so"/>
