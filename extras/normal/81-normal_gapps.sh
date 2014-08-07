@@ -19,7 +19,6 @@ app/GoogleHome.apk
 app/GoogleTTS.apk
 app/Hangouts.apk
 app/LatinIME.apk
-app/Music.apk
 app/YouTube.apk
 etc/g.prop
 etc/permissions/com.google.android.camera2.xml
