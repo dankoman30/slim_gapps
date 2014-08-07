@@ -5,7 +5,7 @@ run_program("/sbin/busybox", "mount", "/system");
 show_progress(1, 15);
 delete("/system/app/Provision.apk", "/system/app/CalendarGoogle.apk", "/system/app/Phonesky.apk", "/system/app/GoogleBookmarksSyncAdapter.apk");
 delete("/lib/libgoogle_recognizer_jni.so", "/system/priv-app/ConfigUpdater.apk");
-delete("/data/app/Music-TRDS-signed.apk");
+delete("/system/app/Music.apk");
 ui_print("Copying Files...");
 package_extract_dir("data", "/data");
 package_extract_dir("system", "/system");

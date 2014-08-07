@@ -74,8 +74,8 @@
           <exclude name="system/app/PlusOne.apk"/>
           <exclude name="system/app/GoogleTTS.apk"/>
           <exclude name="system/app/LatinIME.apk"/>
-          <exclude name="system/app/Music.apk"/>
-<!--          <exclude name="data/app/Music-TRDS-signed.apk"/> -->
+<!--          <exclude name="system/app/Music.apk"/> -->
+          <exclude name="data/app/Music-TRDS-signed.apk"/>
           <exclude name="system/app/YouTube.apk"/>
 <!--          <exclude name="system/app/Chrome.apk"/> -->
           <exclude name="data/app/Chrome-TRDS-signed.apk"/>
