@@ -24,6 +24,7 @@ app/LatinIME.apk
 app/Maps.apk
 app/PlusOne.apk
 app/Translate.apk
+app/Wallet.apk
 app/YouTube.apk
 etc/g.prop
 etc/permissions/com.google.android.camera2.xml
@@ -60,6 +61,7 @@ lib/libgoggles_clientvision.so
 lib/libgoggles_imageutils-v7a.so
 lib/libgoggles_imageutils.so
 lib/libgoogle_hotword_jni.so
+lib/libgoogle-ocrclient.so
 lib/libgoogle_recognizer_jni_l.so
 lib/libimageutils-new-v7a.so
 lib/libimageutils-new.so

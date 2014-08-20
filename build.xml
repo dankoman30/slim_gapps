@@ -83,6 +83,7 @@
           <exclude name="system/app/Maps.apk"/>
           <exclude name="system/app/Drive.apk"/>
           <exclude name="system/app/Translate.apk"/>
+          <exclude name="system/app/Wallet.apk"/>
           <exclude name="system/priv-app/GoogleSearch.apk"/>
           <exclude name="system/priv-app/talkback.apk"/>
           <exclude name="system/lib/libgoogle_hotword_jni.so"/>
@@ -100,6 +101,7 @@
           <exclude name="system/lib/libgoggles_clientvision-v7a.so"/>
           <exclude name="system/lib/libgoggles_imageutils.so"/>
           <exclude name="system/lib/libgoggles_imageutils-v7a.so"/>
+          <exclude name="system/lib/libgoogle-ocrclient.so"/>
           <exclude name="system/lib/libimageutils-new.so"/>
           <exclude name="system/lib/libimageutils-new-v7a.so"/>
           <exclude name="system/lib/libmoviemaker-jni.so"/>
@@ -148,6 +150,7 @@
           <exclude name="system/app/Maps.apk"/>
           <exclude name="system/app/Drive.apk"/>
           <exclude name="system/app/Translate.apk"/>
+          <exclude name="system/app/Wallet.apk"/>
           <exclude name="system/lib/libchrome.1985.128.so"/>
           <exclude name="system/lib/libclientvision-new.so"/>
           <exclude name="system/lib/libclientvision-new-v7a.so"/>
@@ -158,6 +161,7 @@
           <exclude name="system/lib/libgoggles_clientvision-v7a.so"/>
           <exclude name="system/lib/libgoggles_imageutils.so"/>
           <exclude name="system/lib/libgoggles_imageutils-v7a.so"/>
+          <exclude name="system/lib/libgoogle-ocrclient.so"/>
           <exclude name="system/lib/libimageutils-new.so"/>
           <exclude name="system/lib/libimageutils-new-v7a.so"/>
           <exclude name="system/lib/libmoviemaker-jni.so"/>
