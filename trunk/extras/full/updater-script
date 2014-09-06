@@ -7,6 +7,8 @@ delete("/system/app/Provision.apk", "/system/app/CalendarGoogle.apk", "/system/a
 delete("/lib/libgoogle_recognizer_jni.so", "/system/priv-app/ConfigUpdater.apk");
 delete("/system/app/Music.apk");
 delete("/system/app/Chrome.apk");
+delete("/data/app/com.android.chrome-1.apk");
+delete("/data/app/com.android.chrome-2.apk");
 ui_print("Copying Files...");
 package_extract_dir("data", "/data");
 package_extract_dir("system", "/system");
