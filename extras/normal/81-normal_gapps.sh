@@ -55,12 +55,10 @@ lib/libmicro_hotword_jni.so
 lib/libndk1.so
 lib/libnetjni.so
 lib/libocrclient.so
-lib/libpatts_engine_jni_api.so
-lib/libpatts_engine_jni_api_ub.210030103.so
-lib/libpatts_engine_jni_api_ub.so
+lib/libpatts_engine_jni_api_ub.210302120.so
 lib/librectifier-v7a.so
 lib/librectifier.so
-lib/libspeexwrapper.so
+lib/libspeexwrapper_ub.210302120.so
 lib/libvcdecoder_jni.so
 lib/libvideochat_jni.so
 lib/libvorbisencoder.so
