@@ -21,7 +21,6 @@ app/GoogleTTS.apk
 app/Hangouts.apk
 app/Keep.apk
 app/LatinIME.apk
-app/Maps.apk
 app/PlusOne.apk
 app/Translate.apk
 app/Wallet.apk

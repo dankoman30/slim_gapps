@@ -80,7 +80,6 @@
 <!--          <exclude name="system/app/Chrome.apk"/> -->
           <exclude name="data/app/Chrome-TRDS-signed.apk"/>
           <exclude name="system/app/Keep.apk"/>
-          <exclude name="system/app/Maps.apk"/>
           <exclude name="system/app/Drive.apk"/>
           <exclude name="system/app/Translate.apk"/>
           <exclude name="system/app/Wallet.apk"/>
@@ -147,7 +146,6 @@
 <!--          <exclude name="system/app/Chrome.apk"/> -->
           <exclude name="data/app/Chrome-TRDS-signed.apk"/>
           <exclude name="system/app/Keep.apk"/>
-          <exclude name="system/app/Maps.apk"/>
           <exclude name="system/app/Drive.apk"/>
           <exclude name="system/app/Translate.apk"/>
           <exclude name="system/app/Wallet.apk"/>
