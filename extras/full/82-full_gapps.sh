@@ -21,7 +21,6 @@ app/GoogleTTS.apk
 app/Hangouts.apk
 app/Keep.apk
 app/LatinIME.apk
-app/PlusOne.apk
 app/Translate.apk
 app/Wallet.apk
 app/YouTube.apk
@@ -70,12 +69,10 @@ lib/libjni_t13n_shared_engine.so
 lib/liblinearalloc.so
 lib/libm2ts_player.so
 lib/libmicro_hotword_jni.so
-lib/libmoviemaker-jni.so
 lib/libndk1.so
 lib/libnetjni.so
 lib/libocrclient.so
 lib/libpatts_engine_jni_api_ub.210302120.so
-lib/libphotoeditor_native.so
 lib/librectifier-v7a.so
 lib/librectifier.so
 lib/libspeexwrapper_ub.210302120.so
