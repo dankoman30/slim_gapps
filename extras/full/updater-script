@@ -8,6 +8,7 @@ delete("/lib/libgoogle_recognizer_jni.so", "/system/priv-app/ConfigUpdater.apk")
 delete("/system/app/Music.apk");
 delete("/system/app/Chrome.apk");
 delete("/system/app/Maps.apk");
+delete("/system/app/PlusOne.apk");
 delete("/data/app/com.android.chrome-1.apk");
 delete("/data/app/com.android.chrome-2.apk");
 ui_print("Copying Files...");
