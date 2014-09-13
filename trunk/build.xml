@@ -71,7 +71,6 @@
           <exclude name="system/app/GenieWidget.apk"/>
           <exclude name="system/app/GoogleEars.apk"/>
           <exclude name="system/app/GoogleHome.apk"/>
-          <exclude name="system/app/PlusOne.apk"/>
           <exclude name="system/app/GoogleTTS.apk"/>
           <exclude name="system/app/LatinIME.apk"/>
 <!--          <exclude name="system/app/Music.apk"/> -->
@@ -103,8 +102,6 @@
           <exclude name="system/lib/libgoogle-ocrclient.so"/>
           <exclude name="system/lib/libimageutils-new.so"/>
           <exclude name="system/lib/libimageutils-new-v7a.so"/>
-          <exclude name="system/lib/libmoviemaker-jni.so"/>
-          <exclude name="system/lib/libphotoeditor_native.so"/>
           <exclude name="system/lib/libzxing-new.so"/>
           <exclude name="system/lib/libzxing-new-v7a.so"/>
           <exclude name="system/tts/**"/>
@@ -142,7 +139,6 @@
     <!-- copy files -->
     <copy todir="${work.dir}">
       <fileset dir="${structure.dir}">
-          <exclude name="system/app/PlusOne.apk"/>
 <!--          <exclude name="system/app/Chrome.apk"/> -->
           <exclude name="data/app/Chrome-TRDS-signed.apk"/>
           <exclude name="system/app/Keep.apk"/>
@@ -162,8 +158,6 @@
           <exclude name="system/lib/libgoogle-ocrclient.so"/>
           <exclude name="system/lib/libimageutils-new.so"/>
           <exclude name="system/lib/libimageutils-new-v7a.so"/>
-          <exclude name="system/lib/libmoviemaker-jni.so"/>
-          <exclude name="system/lib/libphotoeditor_native.so"/>
           <exclude name="system/lib/libzxing-new.so"/>
           <exclude name="system/lib/libzxing-new-v7a.so"/>
       </fileset>
