@@ -13,6 +13,7 @@ app/Gmail.apk
 app/GoogleCalendarSyncAdapter.apk
 app/GoogleContactsSyncAdapter.apk
 app/Hangouts.apk
+app/HangoutsDialer.apk
 etc/g.prop
 etc/permissions/com.google.android.camera2.xml
 etc/permissions/com.google.android.maps.xml
@@ -36,6 +37,7 @@ lib/libgames_rtmp_jni.so
 lib/libgcastv2_base.so
 lib/libgcastv2_support.so
 lib/libgmscore.so
+lib/libgms-ocrclient.so
 lib/libjgcastservice.so
 lib/libjni_t13n_shared_engine.so
 lib/liblinearalloc.so
@@ -53,6 +55,7 @@ lib/libvorbisencoder.so
 lib/libwebp_android.so
 lib/libwebrtc_audio_coding.so
 lib/libwebrtc_audio_preprocessing.so
+lib/libWhisper.so
 priv-app/GoogleBackupTransport.apk
 priv-app/GoogleFeedback.apk
 priv-app/GoogleLoginService.apk

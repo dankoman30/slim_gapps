@@ -19,6 +19,7 @@ app/GoogleEars.apk
 app/GoogleHome.apk
 app/GoogleTTS.apk
 app/Hangouts.apk
+app/HangoutsDialer.apk
 app/Keep.apk
 app/LatinIME.apk
 app/Translate.apk
@@ -54,6 +55,7 @@ lib/libgcastv2_base.so
 lib/libgcastv2_support.so
 lib/libgmm-jni.so
 lib/libgmscore.so
+lib/libgms-ocrclient.so
 lib/libgoggles_clientvision-v7a.so
 lib/libgoggles_clientvision.so
 lib/libgoggles_imageutils-v7a.so
@@ -82,6 +84,7 @@ lib/libvorbisencoder.so
 lib/libwebp_android.so
 lib/libwebrtc_audio_coding.so
 lib/libwebrtc_audio_preprocessing.so
+lib/libWhisper.so
 lib/libzxing-new-v7a.so
 lib/libzxing-new.so
 priv-app/GoogleBackupTransport.apk

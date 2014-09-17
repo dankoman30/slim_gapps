@@ -18,6 +18,7 @@ app/GoogleEars.apk
 app/GoogleHome.apk
 app/GoogleTTS.apk
 app/Hangouts.apk
+app/HangoutsDialer.apk
 app/LatinIME.apk
 app/YouTube.apk
 etc/g.prop
@@ -44,6 +45,7 @@ lib/libgames_rtmp_jni.so
 lib/libgcastv2_base.so
 lib/libgcastv2_support.so
 lib/libgmscore.so
+lib/libgms-ocrclient.so
 lib/libgoogle_hotword_jni.so
 lib/libgoogle_recognizer_jni_l.so
 lib/libjgcastservice.so
@@ -65,6 +67,7 @@ lib/libvorbisencoder.so
 lib/libwebp_android.so
 lib/libwebrtc_audio_coding.so
 lib/libwebrtc_audio_preprocessing.so
+lib/libWhisper.so
 priv-app/GoogleBackupTransport.apk
 priv-app/GoogleFeedback.apk
 priv-app/GoogleLoginService.apk
