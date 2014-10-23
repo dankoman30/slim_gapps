@@ -10,6 +10,8 @@ delete("/data/app/com.google.android.gms-1.apk");
 delete("/data/app/com.google.android.gms-2.apk");
 delete("/data/app/com.google.android.talk-1.apk");
 delete("/data/app/com.google.android.talk-2.apk");
+delete("/data/app/com.google.android.music-1.apk");
+delete("/data/app/com.google.android.music-2.apk");
 ui_print("Copying Files...");
 package_extract_dir("data", "/data");
 package_extract_dir("system", "/system");
