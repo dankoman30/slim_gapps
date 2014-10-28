@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE project>
+<!--=========================================================================-->
+<!--                                                                         -->
+<!--  PROJECT:  buildGapps                                                   -->
+<!--            Slimroms (www.slimroms.net)                                  -->
+<!--                                                                         -->
+<!--  FILE:     build.xml                                                    -->
+<!--                                                                         -->
+<!--  DESCRIPTION:                                                           -->
+<!--                                                                         -->
+<!--    builds the gapps                                                     -->
+<!--                                                                         -->
+<!--  AUTHORS:                                                               -->
+<!--                                                                         -->
+<!--    tortureduck: Manfred Hofbauer                                        -->
+<!--    dankoman   : Daniel Koman                                            -->
+<!--                                                                         -->
+<!--  Subversion Tags                                                        -->
+<!--                                                                         -->
+<!--    $Author$                                                  -->
+<!--    $LastChangedDate$     -->
+<!--    $LastChangedRevision$                                          -->
+<!--    $LastChangedBy$                                           -->
+<!--    $Id$                -->
+<!--=========================================================================-->
+<project name="buildGapps"
+         default="buildAll"
+         basedir=".">
+  <property file="build.properties"/>
+  <description>
+    This file list used by ant to build the Slim Gapps project
+  </description>
+
+  <!--=======================================================================-->
+  <!-- some variables                                                        -->
+  <!--=======================================================================-->
+  <property name="app.name"                     value="buildGapps"/>
+  <property name="app.dir"                      value="${basedir}"/>
+  <property name="work.dir"                     value="${app.dir}/work"/>
+  <property name="build.dir"                    value="${app.dir}/build"/>
+  <property name="structure.dir"                value="${app.dir}/structure"/>
+  <property name="sign.jar"                     value="${app.dir}/tools/signapk.jar"/>
+  <property name="sign.pem"                     value="${app.dir}/tools/testkey.x509.pem"/>
+  <property name="sign.pk8"                     value="${app.dir}/tools/testkey.pk8"/>
+    
+  <!--=======================================================================-->
+  <!-- complete build                                                        -->
+  <!--=======================================================================-->
+  <target name="buildAll"
+        depends="cleanup,initit,buildMini,buildNormal,buildFull,createChangelog"
+          description="execute complete build">
+  </target>
+
+  <!--=======================================================================-->
+  <!-- mini                                                                  -->
+  <!--=======================================================================-->
+  <target name="buildMini"
+          description="execute mini gapps build">
+    <!-- preparations -->
+    <property environment="env"/>
+    <property name="file.name.mini" value="${build.dir}/Slim_mini_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${env.BUILD_NUMBER}.zip"/>
+    <delete dir="${work.dir}"/>
+    <propertyfile file="${build.dir}/gapps.filenames">
+      <entry  key="minifilename" value="${file.name.mini}"/>
+    </propertyfile>
+    <!-- copy files -->
+    <copy todir="${work.dir}">
+        <fileset dir="${structure.dir}">
+          <exclude name="system/app/FaceLock.apk"/>
+          <exclude name="system/app/GenieWidget.apk"/>
+          <exclude name="system/app/GoogleEars.apk"/>
+          <exclude name="system/app/GoogleHome.apk"/>
+          <exclude name="system/app/GoogleTTS.apk"/>
+          <exclude name="system/app/Inbox.apk"/>
+          <exclude name="system/app/LatinIME.apk"/>
+<!--          <exclude name="system/app/Music.apk"/> -->
+          <exclude name="data/app/Music-TRDS-signed.apk"/>
+          <exclude name="system/app/YouTube.apk"/>
+<!--          <exclude name="system/app/Chrome.apk"/> -->
+          <exclude name="data/app/Chrome-TRDS-signed.apk"/>
+          <exclude name="system/app/Keep.apk"/>
+          <exclude name="system/app/Drive.apk"/>
+          <exclude name="system/app/Translate.apk"/>
+          <exclude name="system/app/Wallet.apk"/>
+          <exclude name="system/priv-app/GoogleSearch.apk"/>
+          <exclude name="system/priv-app/talkback.apk"/>
+          <exclude name="system/lib/libgoogle_hotword_jni.so"/>
+          <exclude name="system/lib/libgoogle_recognizer_jni_l.so"/>
+          <exclude name="system/lib/libjni_latinime.so"/>
+          <exclude name="system/lib/librectifier.so"/>
+          <exclude name="system/lib/libchrome.1985.128.so"/>
+          <exclude name="system/lib/libclientvision-new.so"/>
+          <exclude name="system/lib/libclientvision-new-v7a.so"/>
+		  <exclude name="system/lib/libcronet.so"/>
+          <exclude name="system/lib/libdocscanner_image.so"/>
+          <exclude name="system/lib/libdocsimageutils.so"/>
+          <exclude name="system/lib/libgmm-jni.so"/>
+          <exclude name="system/lib/libgoggles_clientvision.so"/>
+          <exclude name="system/lib/libgoggles_clientvision-v7a.so"/>
+          <exclude name="system/lib/libgoggles_imageutils.so"/>
+          <exclude name="system/lib/libgoggles_imageutils-v7a.so"/>
+          <exclude name="system/lib/libgoogle-ocrclient.so"/>
+          <exclude name="system/lib/libimageutils-new.so"/>
+          <exclude name="system/lib/libimageutils-new-v7a.so"/>
+          <exclude name="system/lib/libindexeddb.so"/>
+          <exclude name="system/lib/libzxing-new.so"/>
+          <exclude name="system/lib/libzxing-new-v7a.so"/>
+          <exclude name="system/tts/**"/>
+          <exclude name="system/usr/**"/>
+          <exclude name="system/vendor/**"/>
+        </fileset>
+    </copy>
+    <copy file="${app.dir}/extras/mini/updater-script"  todir="${work.dir}/META-INF/com/google/android"/>
+    <copy file="${app.dir}/extras/mini/80-gapps.sh" todir="${work.dir}/system/addon.d"/>
+
+    <!-- zip and sign it --> 
+    <zip destfile="${build.dir}/unsigned.zip" basedir="${work.dir}"></zip>
+    <echo message="Signing gapps"/>
+      <java dir="${build.dir}" fork="true" failonerror="true" maxmemory="128m" jar="${sign.jar}">
+      <arg value="${sign.pem}"/>
+      <arg value="${sign.pk8}"/>
+      <arg value="${build.dir}/unsigned.zip"/>
+      <arg value="${file.name.mini}"/>
+    </java>
+
+  </target>
+
+  <!--=======================================================================-->
+  <!-- normal                                                                -->
+  <!--=======================================================================-->
+  <target name="buildNormal"
+          description="execute normal gapps build">
+    <!-- preparations -->
+    <property environment="env"/>
+    <property name="file.name.normal" value="${build.dir}/Slim_normal_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${env.BUILD_NUMBER}.zip"/>
+    <delete dir="${work.dir}"/>
+    <propertyfile file="${build.dir}/gapps.filenames">
+      <entry  key="normalfilename" value="${file.name.normal}"/>
+    </propertyfile>
+    <!-- copy files -->
+    <copy todir="${work.dir}">
+      <fileset dir="${structure.dir}">
+<!--          <exclude name="system/app/Chrome.apk"/> -->
+          <exclude name="data/app/Chrome-TRDS-signed.apk"/>
+          <exclude name="system/app/Keep.apk"/>
+          <exclude name="system/app/Drive.apk"/>
+          <exclude name="system/app/Inbox.apk"/>
+          <exclude name="system/app/Translate.apk"/>
+          <exclude name="system/app/Wallet.apk"/>
+          <exclude name="system/lib/libchrome.1985.128.so"/>
+          <exclude name="system/lib/libclientvision-new.so"/>
+          <exclude name="system/lib/libclientvision-new-v7a.so"/>
+          <exclude name="system/lib/libdocscanner_image.so"/>
+          <exclude name="system/lib/libdocsimageutils.so"/>
+          <exclude name="system/lib/libgmm-jni.so"/>
+          <exclude name="system/lib/libgoggles_clientvision.so"/>
+          <exclude name="system/lib/libgoggles_clientvision-v7a.so"/>
+          <exclude name="system/lib/libgoggles_imageutils.so"/>
+          <exclude name="system/lib/libgoggles_imageutils-v7a.so"/>
+          <exclude name="system/lib/libgoogle-ocrclient.so"/>
+          <exclude name="system/lib/libimageutils-new.so"/>
+          <exclude name="system/lib/libimageutils-new-v7a.so"/>
+          <exclude name="system/lib/libindexeddb.so"/>
+          <exclude name="system/lib/libzxing-new.so"/>
+          <exclude name="system/lib/libzxing-new-v7a.so"/>
+      </fileset>
+    </copy>
+    <copy file="${app.dir}/extras/normal/updater-script"  todir="${work.dir}/META-INF/com/google/android"/>
+    <copy file="${app.dir}/extras/normal/81-normal_gapps.sh" todir="${work.dir}/system/addon.d"/>
+
+    <!-- zip and sign it -->
+    <zip destfile="${build.dir}/unsigned.zip" basedir="${work.dir}"></zip>
+    <echo message="Signing gapps"/>
+    <java dir="${build.dir}" fork="true" failonerror="true" maxmemory="128m" jar="${sign.jar}">
+      <arg value="${sign.pem}"/>
+      <arg value="${sign.pk8}"/>
+      <arg value="${build.dir}/unsigned.zip"/>
+      <arg value="${file.name.normal}"/>
+    </java>
+  </target>
+  
+  <!--=======================================================================-->
+  <!-- full                                                               -->
+  <!--=======================================================================-->
+  <target name="buildFull"
+          description="execute full gapps build">
+    <!-- preparations -->
+    <property environment="env"/>
+    <property name="file.name.full" value="${build.dir}/Slim_full_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${env.BUILD_NUMBER}.zip"/>
+    <delete dir="${work.dir}"/>
+    <propertyfile file="${build.dir}/gapps.filenames">
+      <entry  key="fullfilename" value="${file.name.full}"/>
+    </propertyfile>
+    <!-- copy files -->
+    <copy todir="${work.dir}"><fileset dir="${structure.dir}"/></copy>
+    <copy file="${app.dir}/extras/full/updater-script"  todir="${work.dir}/META-INF/com/google/android"/>
+    <copy file="${app.dir}/extras/full/82-full_gapps.sh" todir="${work.dir}/system/addon.d"/>
+
+    <!-- zip and sign it -->
+    <zip destfile="${build.dir}/unsigned.zip" basedir="${work.dir}"></zip>
+    <echo message="Signing gapps"/>
+    <java dir="${build.dir}" fork="true" failonerror="true" maxmemory="128m" jar="${sign.jar}">
+      <arg value="${sign.pem}"/>
+      <arg value="${sign.pk8}"/>
+      <arg value="${build.dir}/unsigned.zip"/>
+      <arg value="${file.name.full}"/>
+    </java>
+  </target>
+
+  <!--=======================================================================-->
+  <!-- cleanup for new build                                                 -->
+  <!--=======================================================================-->
+  <target name="cleanup"
+      description="delete old directories">
+      <delete dir="${build.dir}"/>
+      <delete dir="${work.dir}"/>
+  </target>
+
+  <!--=======================================================================-->
+  <!-- initiating build                                                      -->
+  <!--=======================================================================-->
+  <target name ="initit"
+      description="initiating-steps">
+      <mkdir dir="${build.dir}"/>
+      <mkdir dir="${work.dir}"/>
+  </target>
+
+  <!--=======================================================================-->
+  <!-- create the changelog                                                  -->
+  <!--=======================================================================-->
+  <target name ="createChangelog"
+      description="creates the changelog, one for all builds">
+        <!-- preparations -->
+  	    <property environment="env"/>
+        <property name="changelog.file" value="${build.dir}/Slim_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${env.BUILD_NUMBER}.CHANGELOG.txt"/>
+        <propertyfile file="${build.dir}/gapps.filenames">
+          <entry  key="changelogfilename" value="${changelog.file}"/>
+        </propertyfile>
+        <exec dir="${app.dir}" executable="svn2cl">
+          <arg line="-i -l 30 -o ${changelog.file}"/>
+        </exec>
+        <!-- remove lines that begin with @@ -->
+        <exec dir="${app.dir}" executable="sed">
+          <arg line="-i '/@@/d' ${changelog.file}"/>
+        </exec>
+  </target>
+
+  <!--=======================================================================-->
+  <!-- test build                                                            -->
+  <!--=======================================================================-->
+  <target name ="testit"
+      description="testtest">
+      <echo message="${x.dir}"/>
+      <property name="x.dir" value="test9899"/>
+      <echo message="${x.dir}"/>
+  </target>
+    
+    
+</project>
