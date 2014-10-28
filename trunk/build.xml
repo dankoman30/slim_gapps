@@ -72,7 +72,6 @@
           <exclude name="system/app/GoogleEars.apk"/>
           <exclude name="system/app/GoogleHome.apk"/>
           <exclude name="system/app/GoogleTTS.apk"/>
-          <exclude name="system/app/Inbox.apk"/>
           <exclude name="system/app/LatinIME.apk"/>
 <!--          <exclude name="system/app/Music.apk"/> -->
           <exclude name="data/app/Music-TRDS-signed.apk"/>
@@ -103,7 +102,6 @@
           <exclude name="system/lib/libgoogle-ocrclient.so"/>
           <exclude name="system/lib/libimageutils-new.so"/>
           <exclude name="system/lib/libimageutils-new-v7a.so"/>
-          <exclude name="system/lib/libindexeddb.so"/>
           <exclude name="system/lib/libzxing-new.so"/>
           <exclude name="system/lib/libzxing-new-v7a.so"/>
           <exclude name="system/tts/**"/>
@@ -145,7 +143,6 @@
           <exclude name="data/app/Chrome-TRDS-signed.apk"/>
           <exclude name="system/app/Keep.apk"/>
           <exclude name="system/app/Drive.apk"/>
-          <exclude name="system/app/Inbox.apk"/>
           <exclude name="system/app/Translate.apk"/>
           <exclude name="system/app/Wallet.apk"/>
           <exclude name="system/lib/libchrome.1985.128.so"/>
@@ -161,7 +158,6 @@
           <exclude name="system/lib/libgoogle-ocrclient.so"/>
           <exclude name="system/lib/libimageutils-new.so"/>
           <exclude name="system/lib/libimageutils-new-v7a.so"/>
-          <exclude name="system/lib/libindexeddb.so"/>
           <exclude name="system/lib/libzxing-new.so"/>
           <exclude name="system/lib/libzxing-new-v7a.so"/>
       </fileset>
