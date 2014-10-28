@@ -20,6 +20,7 @@ app/GoogleHome.apk
 app/GoogleTTS.apk
 app/Hangouts.apk
 app/HangoutsDialer.apk
+app/Inbox.apk
 app/Keep.apk
 app/LatinIME.apk
 app/Translate.apk
@@ -65,6 +66,7 @@ lib/libgoogle-ocrclient.so
 lib/libgoogle_recognizer_jni_l.so
 lib/libimageutils-new-v7a.so
 lib/libimageutils-new.so
+lib/libindexeddb.so
 lib/libjgcastservice.so
 lib/libjni_latinime.so
 lib/libjni_t13n_shared_engine.so
