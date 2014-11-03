@@ -10,6 +10,7 @@ addon.d/82-full_gapps.sh
 app/ChromeBookmarksSyncAdapter.apk
 app/CloudPrint2.apk
 app/Drive.apk
+app/ExchangeServices.apk
 app/FaceLock.apk
 app/GenieWidget.apk
 app/Gmail.apk
