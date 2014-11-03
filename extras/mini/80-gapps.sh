@@ -9,6 +9,7 @@ cat <<EOF
 addon.d/80-gapps.sh
 app/ChromeBookmarksSyncAdapter.apk
 app/CloudPrint2.apk
+app/ExchangeServices.apk
 app/Gmail.apk
 app/GoogleCalendarSyncAdapter.apk
 app/GoogleContactsSyncAdapter.apk
