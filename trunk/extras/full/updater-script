@@ -5,6 +5,7 @@ run_program("/sbin/busybox", "mount", "/system");
 show_progress(1, 15);
 delete("/system/app/Provision.apk", "/system/app/CalendarGoogle.apk", "/system/app/Phonesky.apk", "/system/app/GoogleBookmarksSyncAdapter.apk");
 delete("/lib/libgoogle_recognizer_jni.so", "/system/priv-app/ConfigUpdater.apk");
+delete("/system/app/Calendar.apk");
 delete("/system/app/Music.apk");
 delete("/system/app/Chrome.apk");
 delete("/system/app/Maps.apk");
