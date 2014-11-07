@@ -1,0 +1,5 @@
+# begin addon properties
+ro.addon.type=gapps
+ro.addon.platform=43
+ro.addon.slim_version=20130819
+# end addon properties
