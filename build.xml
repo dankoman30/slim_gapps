@@ -79,6 +79,7 @@
           <exclude name="system/app/YouTube.apk"/>
 <!--          <exclude name="system/app/Chrome.apk"/> -->
           <exclude name="data/app/Chrome-TRDS-signed.apk"/>
+          <exclude name="data/app/Messenger-TRDS-signed.apk"/>
           <exclude name="system/app/Keep.apk"/>
           <exclude name="system/app/Drive.apk"/>
           <exclude name="system/app/Translate.apk"/>
@@ -142,6 +143,7 @@
       <fileset dir="${structure.dir}">
 <!--          <exclude name="system/app/Chrome.apk"/> -->
           <exclude name="data/app/Chrome-TRDS-signed.apk"/>
+          <exclude name="data/app/Messenger-TRDS-signed.apk"/>
           <exclude name="system/app/CalendarGoogle.apk"/>
           <exclude name="system/app/Keep.apk"/>
           <exclude name="system/app/Drive.apk"/>
