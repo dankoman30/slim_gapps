@@ -77,7 +77,6 @@
           <exclude name="system/app/Maps/**"/>
           <exclude name="system/app/Messenger/**"/>
           <exclude name="system/app/Music2/**"/>
-          <exclude name="system/app/PlusOne/**"/>
           <exclude name="system/app/Street/**"/>
           <exclude name="system/app/Translate/**"/>
           <exclude name="system/app/Videos/**"/>
@@ -125,7 +124,6 @@
           <exclude name="system/app/Keep/**"/>
           <exclude name="system/app/Maps/**"/>
           <exclude name="system/app/Messenger/**"/>
-          <exclude name="system/app/PlusOne/**"/>
           <exclude name="system/app/Street/**"/>
           <exclude name="system/app/Translate/**"/>
           <exclude name="system/app/Videos/**"/>
