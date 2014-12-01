@@ -74,10 +74,8 @@
           <exclude name="system/app/GoogleTTS/**"/>
           <exclude name="system/app/Keep/**"/>
           <exclude name="system/app/Keyboard/**"/>
-          <exclude name="system/app/Maps/**"/>
           <exclude name="system/app/Messenger/**"/>
           <exclude name="system/app/Music2/**"/>
-          <exclude name="system/app/Street/**"/>
           <exclude name="system/app/Translate/**"/>
           <exclude name="system/app/Videos/**"/>
           <exclude name="system/app/Wallet/**"/>
@@ -122,9 +120,7 @@
           <exclude name="system/app/Chrome/**"/>
           <exclude name="system/app/Drive/**"/>
           <exclude name="system/app/Keep/**"/>
-          <exclude name="system/app/Maps/**"/>
           <exclude name="system/app/Messenger/**"/>
-          <exclude name="system/app/Street/**"/>
           <exclude name="system/app/Translate/**"/>
           <exclude name="system/app/Videos/**"/>
           <exclude name="system/app/Wallet/**"/>
