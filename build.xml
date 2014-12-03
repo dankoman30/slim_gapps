@@ -70,6 +70,7 @@
           <exclude name="system/app/CalendarGoogle/**"/>
           <exclude name="system/app/Chrome/**"/>
           <exclude name="system/app/Drive/**"/>
+          <exclude name="system/app/GenieWidget/**"/>
           <exclude name="system/app/GoogleHome/**"/>
           <exclude name="system/app/GoogleTTS/**"/>
           <exclude name="system/app/Keep/**"/>
