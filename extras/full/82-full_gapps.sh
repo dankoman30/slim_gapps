@@ -31,6 +31,7 @@ app/Drive/lib/arm/libfoxit.so
 app/Drive/lib/arm/libparcel_utils.so
 app/Drive/lib/arm/librectifier.so
 app/ExchangeServices/ExchangeServices.apk
+app/GenieWidget/GenieWidget.apk
 app/Gmail2/Gmail2.apk
 app/GoogleCalendarSyncAdapter/GoogleCalendarSyncAdapter.apk
 app/GoogleContactsSyncAdapter/GoogleContactsSyncAdapter.apk
