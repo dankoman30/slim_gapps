@@ -9,6 +9,7 @@ cat <<EOF
 addon.d/81-normal_gapps.sh
 app/ConfigUpdater/ConfigUpdater.apk
 app/ExchangeServices/ExchangeServices.apk
+app/GenieWidget/GenieWidget.apk
 app/Gmail2/Gmail2.apk
 app/GoogleCalendarSyncAdapter/GoogleCalendarSyncAdapter.apk
 app/GoogleContactsSyncAdapter/GoogleContactsSyncAdapter.apk
