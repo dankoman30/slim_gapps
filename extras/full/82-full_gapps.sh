@@ -70,8 +70,6 @@ app/Translate/lib/arm/libimageutils-new-v7a.so
 app/Translate/lib/arm/libimageutils-new.so
 app/Translate/lib/arm/libzxing-new-v7a.so
 app/Translate/lib/arm/libzxing-new.so
-app/Videos/Videos.apk
-app/Videos/lib/arm/libWVphoneAPI.so
 app/Wallet/Wallet.apk
 app/Wallet/lib/arm/libgoogle-ocrclient.so
 app/YouTube/YouTube.apk
