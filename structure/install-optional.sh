@@ -11,6 +11,12 @@ if (grep -qi "hammerhead" /proc/cpuinfo ); then
   cp -a /tmp/hammerhead/* /system/
 fi
 
+if (grep -qi "shamu" /proc/cpuinfo ); then
+  echo "Installing Shamu-specific google bits"
+  cp -a /tmp/common/* /system/
+  cp -a /tmp/shamu/* /system/
+fi
+
 if (grep -qi "manta" /proc/cpuinfo ); then
   echo "Installing Manta-specific google bits"
   cp -a /tmp/common/* /system/
