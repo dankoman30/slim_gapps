@@ -81,7 +81,6 @@
           <exclude name="system/app/PlusOne/**"/>
           <exclude name="system/app/Street/**"/>
           <exclude name="system/app/Translate/**"/>
-          <exclude name="system/app/Videos/**"/>
           <exclude name="system/app/Wallet/**"/>
           <exclude name="system/app/YouTube/**"/>
           <exclude name="system/priv-app/Velvet/**"/>
@@ -129,7 +128,6 @@
           <exclude name="system/app/PlusOne/**"/>
           <exclude name="system/app/Street/**"/>
           <exclude name="system/app/Translate/**"/>
-          <exclude name="system/app/Videos/**"/>
           <exclude name="system/app/Wallet/**"/>
       </fileset>
     </copy>
