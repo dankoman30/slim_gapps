@@ -3,17 +3,6 @@ ui_print("        SlimLP full GApps for Android 5.0");
 ui_print("***********************************************");
 
 run_program("/sbin/busybox", "mount", "/system");
-ui_print("Checking compatibility...");
-ifelse(getprop("ro.build.version.release") == "5.0",
-  (ui_print("Android 5.0 detected. Proceeding...");
-  ),
-  (ui_print("*** Incompatible Android ROM detected ***");
-  ui_print("*** This package is intended for 5.0! ***");
-  ui_print("*** Switch to lollipop and try again ***");
-  unmount("/system");
-  abort();
-  )
-);
 ui_print("Installing files...");
 show_progress(1, 15);
 delete("/system/app/Provision.apk","/system/app/QuickSearchBox.apk","/system/app/priv-app/SetupWizard.apk","/system/app/priv-app/Velvet.apk","/system/app/Vending.apk","/system/app/BrowserProviderProxy.apk","/system/app/PartnerBookmarksProvider.apk");
