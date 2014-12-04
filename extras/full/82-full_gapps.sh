@@ -20,7 +20,7 @@ app/Chrome/lib/arm/libchrome.1985.135.so
 app/Chrome/lib/arm/libchrome.2062.117.so
 app/Chrome/lib/arm/libchrome.2125.102.so
 app/Chrome/lib/arm/libchrome.2125.114.so
-app/Chrome/lib/arm/libchrome.2171.59.so
+app/Chrome/lib/arm/libchrome.2171.93.so
 app/Chrome/lib/arm/libchromeview.so
 app/Chrome/lib/arm/libchromium_android_linker.so
 app/ConfigUpdater/ConfigUpdater.apk
