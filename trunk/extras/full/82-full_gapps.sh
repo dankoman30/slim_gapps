@@ -28,7 +28,7 @@ app/Drive/Drive.apk
 app/Drive/lib/arm/libdocscanner_image.so
 app/Drive/lib/arm/libdocsimageutils.so
 app/Drive/lib/arm/libfoxit.so
-app/Drive/lib/arm/libparcel_utils.so
+app/Drive/lib/arm/libbitmap_parcel.so
 app/Drive/lib/arm/librectifier.so
 app/ExchangeServices/ExchangeServices.apk
 app/GenieWidget/GenieWidget.apk
