@@ -63,6 +63,7 @@ priv-app/PrebuiltGmsCore/lib/arm/libjgcastservice.so
 priv-app/PrebuiltGmsCore/lib/arm/libsslwrapper_jni.so
 priv-app/SetupWizard/SetupWizard.apk
 priv-app/Velvet/Velvet.apk
+priv-app/Velvet/lib/arm/libcronet.so
 priv-app/Velvet/lib/arm/libgoogle_hotword_jni.so
 priv-app/Velvet/lib/arm/libgoogle_recognizer_jni_l.so
 priv-app/Velvet/lib/arm/libvcdecoder_jni.so
