@@ -14,6 +14,7 @@ app/GoogleCalendarSyncAdapter/GoogleCalendarSyncAdapter.apk
 app/GoogleContactsSyncAdapter/GoogleContactsSyncAdapter.apk
 app/Hangouts/Hangouts.apk
 app/Hangouts/lib/arm/libcrashreporter.so
+app/Hangouts/lib/arm/libcronet.so
 app/Hangouts/lib/arm/libframesequence.so
 app/Hangouts/lib/arm/libvideochat_jni.so
 app/HangoutsDialer/HangoutsDialer.apk
