@@ -59,7 +59,7 @@
           description="execute mini gapps build">
     <!-- preparations -->
     <property environment="env"/>
-    <property name="file.name.mini" value="${build.dir}/Slim_mini_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${env.BUILD_NUMBER}.zip"/>
+    <property name="file.name.mini" value="${build.dir}/Slim_mini_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${BUILD_NUMBER}.zip"/>
     <delete dir="${work.dir}"/>
     <propertyfile file="${build.dir}/gapps.filenames">
       <entry  key="minifilename" value="${file.name.mini}"/>
@@ -111,7 +111,7 @@
           description="execute normal gapps build">
     <!-- preparations -->
     <property environment="env"/>
-    <property name="file.name.normal" value="${build.dir}/Slim_normal_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${env.BUILD_NUMBER}.zip"/>
+    <property name="file.name.normal" value="${build.dir}/Slim_normal_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${BUILD_NUMBER}.zip"/>
     <delete dir="${work.dir}"/>
     <propertyfile file="${build.dir}/gapps.filenames">
       <entry  key="normalfilename" value="${file.name.normal}"/>
@@ -152,7 +152,7 @@
           description="execute full gapps build">
     <!-- preparations -->
     <property environment="env"/>
-    <property name="file.name.full" value="${build.dir}/Slim_full_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${env.BUILD_NUMBER}.zip"/>
+    <property name="file.name.full" value="${build.dir}/Slim_full_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${BUILD_NUMBER}.zip"/>
     <delete dir="${work.dir}"/>
     <propertyfile file="${build.dir}/gapps.filenames">
       <entry  key="fullfilename" value="${file.name.full}"/>
@@ -189,26 +189,6 @@
       description="initiating-steps">
       <mkdir dir="${build.dir}"/>
       <mkdir dir="${work.dir}"/>
-  </target>
-
-  <!--=======================================================================-->
-  <!-- create the changelog                                                  -->
-  <!--=======================================================================-->
-  <target name ="createChangelog"
-      description="creates the changelog, one for all builds">
-        <!-- preparations -->
-  	    <property environment="env"/>
-        <property name="changelog.file" value="${build.dir}/Slim_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${env.BUILD_NUMBER}.CHANGELOG.txt"/>
-        <propertyfile file="${build.dir}/gapps.filenames">
-          <entry  key="changelogfilename" value="${changelog.file}"/>
-        </propertyfile>
-        <exec dir="${app.dir}" executable="svn2cl">
-          <arg line="-i -l 30 -o ${changelog.file}"/>
-        </exec>
-        <!-- remove lines that begin with @@ -->
-        <exec dir="${app.dir}" executable="sed">
-          <arg line="-i '/@@/d' ${changelog.file}"/>
-        </exec>
   </target>
 
   <!--=======================================================================-->
