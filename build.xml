@@ -48,7 +48,7 @@
   <!-- complete build                                                        -->
   <!--=======================================================================-->
   <target name="buildAll"
-        depends="cleanup,initit,buildMini,buildNormal,buildFull,createChangelog"
+        depends="cleanup,initit,buildMini,buildNormal,buildFull"
           description="execute complete build">
   </target>
 
