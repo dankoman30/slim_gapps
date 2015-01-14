@@ -48,7 +48,7 @@
   <!-- complete build                                                        -->
   <!--=======================================================================-->
   <target name="buildAll"
-        depends="cleanup,initit,buildMini,buildNormal,buildFull"
+        depends="cleanupBefore,initit,buildMini,buildNormal,buildFull,cleanupAfter"
           description="execute complete build">
   </target>
 
@@ -174,12 +174,22 @@
   </target>
 
   <!--=======================================================================-->
-  <!-- cleanup for new build                                                 -->
+  <!-- cleanupBefore new build                                               -->
   <!--=======================================================================-->
-  <target name="cleanup"
+  <target name="cleanupBefore"
       description="delete old directories">
       <delete dir="${build.dir}"/>
       <delete dir="${work.dir}"/>
+  </target>
+
+  <!--=======================================================================-->
+  <!-- cleanupAfter build is done                                            -->
+  <!--=======================================================================-->
+  <target name="cleanupAfter"
+      description="delete unnecessary build files">
+      <echo message="Cleaning up"/>
+      <delete file="${build.dir}/unsigned.zip"/>
+      <delete file="${build.dir}/gapps.filenames"/>
   </target>
 
   <!--=======================================================================-->
