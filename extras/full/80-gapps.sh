@@ -6,7 +6,7 @@
 
 list_files() {
 cat <<EOF
-addon.d/82-full_gapps.sh
+addon.d/80-gapps.sh
 app/CalendarGoogle/CalendarGoogle.apk
 app/Chrome/Chrome.apk
 app/Chrome/lib/arm/libchrome.1847.114.so

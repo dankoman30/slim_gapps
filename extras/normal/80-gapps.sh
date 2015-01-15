@@ -6,7 +6,7 @@
 
 list_files() {
 cat <<EOF
-addon.d/81-normal_gapps.sh
+addon.d/80-gapps.sh
 app/ConfigUpdater/ConfigUpdater.apk
 app/ExchangeServices/ExchangeServices.apk
 app/GenieWidget/GenieWidget.apk
