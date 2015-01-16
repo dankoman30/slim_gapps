@@ -132,7 +132,7 @@
       </fileset>
     </copy>
     <copy file="${app.dir}/extras/normal/updater-script"  todir="${work.dir}/META-INF/com/google/android"/>
-    <copy file="${app.dir}/extras/normal/81-normal_gapps.sh" todir="${work.dir}/system/addon.d"/>
+    <copy file="${app.dir}/extras/normal/80-gapps.sh" todir="${work.dir}/system/addon.d"/>
 
     <!-- zip and sign it -->
     <zip destfile="${build.dir}/unsigned.zip" basedir="${work.dir}"></zip>
@@ -160,7 +160,7 @@
     <!-- copy files -->
     <copy todir="${work.dir}"><fileset dir="${structure.dir}"/></copy>
     <copy file="${app.dir}/extras/full/updater-script"  todir="${work.dir}/META-INF/com/google/android"/>
-    <copy file="${app.dir}/extras/full/82-full_gapps.sh" todir="${work.dir}/system/addon.d"/>
+    <copy file="${app.dir}/extras/full/80-gapps.sh" todir="${work.dir}/system/addon.d"/>
 
     <!-- zip and sign it -->
     <zip destfile="${build.dir}/unsigned.zip" basedir="${work.dir}"></zip>
