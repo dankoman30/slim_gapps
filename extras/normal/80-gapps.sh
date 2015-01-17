@@ -28,6 +28,7 @@ app/Keyboard/lib/arm/libjni_unbundled_latinimegoogle.so
 app/Music2/Music2.apk
 app/YouTube/YouTube.apk
 app/YouTube/lib/arm/libcronet.so
+app/YouTube/lib/arm/libfilterframework_jni.so
 app/YouTube/lib/arm/libm2ts_player.so
 etc/g.prop
 etc/permissions/com.google.android.camera2.xml
