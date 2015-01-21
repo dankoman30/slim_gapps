@@ -54,7 +54,7 @@ app/Maps/lib/arm/libgmm-jni.so
 app/Messenger/Messenger.apk
 app/Music2/Music2.apk
 app/PlusOne/PlusOne.apk
-app/PlusOne/lib/arm/libcrashreporter.so
+app/PlusOne/lib/arm/libcrashreporterer.so
 app/PlusOne/lib/arm/libcronet.so
 app/PlusOne/lib/arm/libfilterframework_jni.so
 app/PlusOne/lib/arm/libmoviemaker-jni.so
