@@ -43,6 +43,10 @@
   <property name="sign.jar"                     value="${app.dir}/tools/signapk.jar"/>
   <property name="sign.pem"                     value="${app.dir}/tools/testkey.x509.pem"/>
   <property name="sign.pk8"                     value="${app.dir}/tools/testkey.pk8"/>
+  
+  <tstamp>  
+    <format property="build.today" pattern="yyyyMMdd" />
+  </tstamp>  
     
   <!--=======================================================================-->
   <!-- complete build                                                        -->
@@ -58,9 +62,6 @@
   <target name="buildMini"
           description="execute mini gapps build">
     <!-- preparations -->
-    <tstamp>
-      <format property="build.today" pattern="yyyyMMdd" />
-    </tstamp>
     <property environment="env"/>
     <property name="file.name.mini" value="${build.dir}/Slim_mini_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${build.today}.zip"/>
     <delete dir="${work.dir}"/>
@@ -113,9 +114,6 @@
   <target name="buildNormal"
           description="execute normal gapps build">
     <!-- preparations -->
-    <tstamp>
-      <format property="build.today" pattern="yyyyMMdd" />
-    </tstamp>    
     <property environment="env"/>
     <property name="file.name.normal" value="${build.dir}/Slim_normal_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${build.today}.zip"/>
     <delete dir="${work.dir}"/>
@@ -157,9 +155,6 @@
   <target name="buildFull"
           description="execute full gapps build">
     <!-- preparations -->
-    <tstamp>
-      <format property="build.today" pattern="yyyyMMdd" />
-    </tstamp>    
     <property environment="env"/>
     <property name="file.name.full" value="${build.dir}/Slim_full_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${build.today}.zip"/>
     <delete dir="${work.dir}"/>
