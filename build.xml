@@ -58,8 +58,11 @@
   <target name="buildMini"
           description="execute mini gapps build">
     <!-- preparations -->
+    <tstamp>
+      <format property="build.today" pattern="yyyyMMdd" />
+    </tstamp>
     <property environment="env"/>
-    <property name="file.name.mini" value="${build.dir}/Slim_mini_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${BUILD_NUMBER}.zip"/>
+    <property name="file.name.mini" value="${build.dir}/Slim_mini_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${build.today}.zip"/>
     <delete dir="${work.dir}"/>
     <propertyfile file="${build.dir}/gapps.filenames">
       <entry  key="minifilename" value="${file.name.mini}"/>
@@ -110,8 +113,11 @@
   <target name="buildNormal"
           description="execute normal gapps build">
     <!-- preparations -->
+    <tstamp>
+      <format property="build.today" pattern="yyyyMMdd" />
+    </tstamp>    
     <property environment="env"/>
-    <property name="file.name.normal" value="${build.dir}/Slim_normal_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${BUILD_NUMBER}.zip"/>
+    <property name="file.name.normal" value="${build.dir}/Slim_normal_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${build.today}.zip"/>
     <delete dir="${work.dir}"/>
     <propertyfile file="${build.dir}/gapps.filenames">
       <entry  key="normalfilename" value="${file.name.normal}"/>
@@ -151,8 +157,11 @@
   <target name="buildFull"
           description="execute full gapps build">
     <!-- preparations -->
+    <tstamp>
+      <format property="build.today" pattern="yyyyMMdd" />
+    </tstamp>    
     <property environment="env"/>
-    <property name="file.name.full" value="${build.dir}/Slim_full_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${BUILD_NUMBER}.zip"/>
+    <property name="file.name.full" value="${build.dir}/Slim_full_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${build.today}.zip"/>
     <delete dir="${work.dir}"/>
     <propertyfile file="${build.dir}/gapps.filenames">
       <entry  key="fullfilename" value="${file.name.full}"/>
