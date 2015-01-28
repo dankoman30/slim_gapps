@@ -43,12 +43,16 @@
   <property name="sign.jar"                     value="${app.dir}/tools/signapk.jar"/>
   <property name="sign.pem"                     value="${app.dir}/tools/testkey.x509.pem"/>
   <property name="sign.pk8"                     value="${app.dir}/tools/testkey.pk8"/>
+  
+  <tstamp>  
+    <format property="build.today" pattern="yyyyMMdd" />
+  </tstamp>  
     
   <!--=======================================================================-->
   <!-- complete build                                                        -->
   <!--=======================================================================-->
   <target name="buildAll"
-        depends="cleanup,initit,buildMini,buildNormal,buildFull,createChangelog"
+        depends="cleanupBefore,initit,buildMini,buildNormal,buildFull,cleanupAfter"
           description="execute complete build">
   </target>
 
@@ -59,7 +63,7 @@
           description="execute mini gapps build">
     <!-- preparations -->
     <property environment="env"/>
-    <property name="file.name.mini" value="${build.dir}/Slim_mini_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${env.BUILD_NUMBER}.zip"/>
+    <property name="file.name.mini" value="${build.dir}/Slim_mini_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${build.today}.zip"/>
     <delete dir="${work.dir}"/>
     <propertyfile file="${build.dir}/gapps.filenames">
       <entry  key="minifilename" value="${file.name.mini}"/>
@@ -111,7 +115,7 @@
           description="execute normal gapps build">
     <!-- preparations -->
     <property environment="env"/>
-    <property name="file.name.normal" value="${build.dir}/Slim_normal_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${env.BUILD_NUMBER}.zip"/>
+    <property name="file.name.normal" value="${build.dir}/Slim_normal_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${build.today}.zip"/>
     <delete dir="${work.dir}"/>
     <propertyfile file="${build.dir}/gapps.filenames">
       <entry  key="normalfilename" value="${file.name.normal}"/>
@@ -132,7 +136,7 @@
       </fileset>
     </copy>
     <copy file="${app.dir}/extras/normal/updater-script"  todir="${work.dir}/META-INF/com/google/android"/>
-    <copy file="${app.dir}/extras/normal/81-normal_gapps.sh" todir="${work.dir}/system/addon.d"/>
+    <copy file="${app.dir}/extras/normal/80-gapps.sh" todir="${work.dir}/system/addon.d"/>
 
     <!-- zip and sign it -->
     <zip destfile="${build.dir}/unsigned.zip" basedir="${work.dir}"></zip>
@@ -152,7 +156,7 @@
           description="execute full gapps build">
     <!-- preparations -->
     <property environment="env"/>
-    <property name="file.name.full" value="${build.dir}/Slim_full_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${env.BUILD_NUMBER}.zip"/>
+    <property name="file.name.full" value="${build.dir}/Slim_full_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${build.today}.zip"/>
     <delete dir="${work.dir}"/>
     <propertyfile file="${build.dir}/gapps.filenames">
       <entry  key="fullfilename" value="${file.name.full}"/>
@@ -160,7 +164,7 @@
     <!-- copy files -->
     <copy todir="${work.dir}"><fileset dir="${structure.dir}"/></copy>
     <copy file="${app.dir}/extras/full/updater-script"  todir="${work.dir}/META-INF/com/google/android"/>
-    <copy file="${app.dir}/extras/full/82-full_gapps.sh" todir="${work.dir}/system/addon.d"/>
+    <copy file="${app.dir}/extras/full/80-gapps.sh" todir="${work.dir}/system/addon.d"/>
 
     <!-- zip and sign it -->
     <zip destfile="${build.dir}/unsigned.zip" basedir="${work.dir}"></zip>
@@ -174,12 +178,22 @@
   </target>
 
   <!--=======================================================================-->
-  <!-- cleanup for new build                                                 -->
+  <!-- cleanupBefore new build                                               -->
   <!--=======================================================================-->
-  <target name="cleanup"
+  <target name="cleanupBefore"
       description="delete old directories">
       <delete dir="${build.dir}"/>
       <delete dir="${work.dir}"/>
+  </target>
+
+  <!--=======================================================================-->
+  <!-- cleanupAfter build is done                                            -->
+  <!--=======================================================================-->
+  <target name="cleanupAfter"
+      description="delete unnecessary build files">
+      <echo message="Cleaning up"/>
+      <delete file="${build.dir}/unsigned.zip"/>
+      <delete file="${build.dir}/gapps.filenames"/>
   </target>
 
   <!--=======================================================================-->
@@ -189,26 +203,6 @@
       description="initiating-steps">
       <mkdir dir="${build.dir}"/>
       <mkdir dir="${work.dir}"/>
-  </target>
-
-  <!--=======================================================================-->
-  <!-- create the changelog                                                  -->
-  <!--=======================================================================-->
-  <target name ="createChangelog"
-      description="creates the changelog, one for all builds">
-        <!-- preparations -->
-  	    <property environment="env"/>
-        <property name="changelog.file" value="${build.dir}/Slim_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${env.BUILD_NUMBER}.CHANGELOG.txt"/>
-        <propertyfile file="${build.dir}/gapps.filenames">
-          <entry  key="changelogfilename" value="${changelog.file}"/>
-        </propertyfile>
-        <exec dir="${app.dir}" executable="svn2cl">
-          <arg line="-i -l 30 -o ${changelog.file}"/>
-        </exec>
-        <!-- remove lines that begin with @@ -->
-        <exec dir="${app.dir}" executable="sed">
-          <arg line="-i '/@@/d' ${changelog.file}"/>
-        </exec>
   </target>
 
   <!--=======================================================================-->
