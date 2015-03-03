@@ -49,6 +49,7 @@ priv-app/PrebuiltGmsCore/lib/arm/libgcastv2_support.so
 priv-app/PrebuiltGmsCore/lib/arm/libgms-ocrclient.so
 priv-app/PrebuiltGmsCore/lib/arm/libgmscore.so
 priv-app/PrebuiltGmsCore/lib/arm/libjgcastservice.so
+priv-app/PrebuiltGmsCore/lib/arm/libNearbyApp.so
 priv-app/PrebuiltGmsCore/lib/arm/libsslwrapper_jni.so
 priv-app/SetupWizard/SetupWizard.apk
 priv-app/talkback/talkback.apk
