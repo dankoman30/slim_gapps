@@ -32,6 +32,7 @@ app/Drive/lib/arm/libdocsimageutils.so
 app/Drive/lib/arm/libfoxit.so
 app/Drive/lib/arm/libbitmap_parcel.so
 app/Drive/lib/arm/librectifier.so
+app/Drive/lib/arm/libwebp_android.so
 app/ExchangeServices/ExchangeServices.apk
 app/GenieWidget/GenieWidget.apk
 app/Gmail2/Gmail2.apk
