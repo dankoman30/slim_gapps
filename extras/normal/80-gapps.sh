@@ -18,7 +18,7 @@ app/GoogleTTS/GoogleTTS.apk
 app/GoogleTTS/lib/arm/libpatts_engine_jni_api_ub.210303130.so
 app/GoogleTTS/lib/arm/libspeexwrapper_ub.210303130.so
 app/Hangouts/Hangouts.apk
-app/Hangouts/lib/arm/libcrashreporter.so
+app/Hangouts/lib/arm/libcrashreporterer.so
 app/Hangouts/lib/arm/libcronet.so
 app/Hangouts/lib/arm/libframesequence.so
 app/Hangouts/lib/arm/libvideochat_jni.so
