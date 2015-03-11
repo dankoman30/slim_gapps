@@ -55,6 +55,8 @@ app/Maps/Maps.apk
 app/Maps/lib/arm/libcrashreporterer.so
 app/Maps/lib/arm/libgmm-jni.so
 app/Messenger/Messenger.apk
+app/Messenger/lib/arm/libframesequence.so
+app/Messenger/lib/arm/libgiftranscode.so
 app/Music2/Music2.apk
 app/PlusOne/PlusOne.apk
 app/PlusOne/lib/arm/libcrashreporterer.so
