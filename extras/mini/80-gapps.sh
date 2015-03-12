@@ -32,6 +32,7 @@ framework/com.google.android.maps.jar
 framework/com.google.android.media.effects.jar
 framework/com.google.widevine.software.drm.jar
 lib/libfilterpack_facedetect.so
+lib/libjni_latinime.so
 priv-app/GoogleBackupTransport/GoogleBackupTransport.apk
 priv-app/GoogleFeedback/GoogleFeedback.apk
 priv-app/GoogleLoginService/GoogleLoginService.apk
