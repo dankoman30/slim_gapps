@@ -92,9 +92,9 @@ framework/com.google.android.dialer.support.jar
 framework/com.google.android.maps.jar
 framework/com.google.android.media.effects.jar
 framework/com.google.widevine.software.drm.jar
-libfilterpack_facedetect.so
+lib/libfilterpack_facedetect.so
 lib/libjni_latinime.so
-libjni_latinimegoogle.so
+lib/libjni_latinimegoogle.so
 priv-app/GoogleBackupTransport/GoogleBackupTransport.apk
 priv-app/GoogleFeedback/GoogleFeedback.apk
 priv-app/GoogleLoginService/GoogleLoginService.apk
