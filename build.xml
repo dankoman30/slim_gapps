@@ -90,7 +90,7 @@
           <exclude name="system/priv-app/Velvet/**"/>
           <exclude name="system/tts/**"/>
           <exclude name="system/usr/**"/>
-          <exclude name="system/vendor/**"/>
+          <exclude name="optional/face/**"/>
         </fileset>
     </copy>
     <copy file="${app.dir}/extras/mini/updater-script"  todir="${work.dir}/META-INF/com/google/android"/>
