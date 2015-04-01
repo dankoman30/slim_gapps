@@ -40,8 +40,8 @@ app/GoogleCalendarSyncAdapter/GoogleCalendarSyncAdapter.apk
 app/GoogleContactsSyncAdapter/GoogleContactsSyncAdapter.apk
 app/GoogleHome/GoogleHome.apk
 app/GoogleTTS/GoogleTTS.apk
-app/GoogleTTS/lib/arm/libpatts_engine_jni_api_ub.210304050.so
-app/GoogleTTS/lib/arm/libspeexwrapper_ub.210304050.so
+app/GoogleTTS/lib/arm/libpatts_engine_jni_api_ub.210304060.so
+app/GoogleTTS/lib/arm/libspeexwrapper_ub.210304060.so
 app/Hangouts/Hangouts.apk
 app/Hangouts/lib/arm/libcrashreporterer.so
 app/Hangouts/lib/arm/libcronet.so
