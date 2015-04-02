@@ -74,6 +74,7 @@ app/Translate/lib/arm/libwordlens-neon.so
 app/Translate/lib/arm/libwordlens-slow.so
 app/Translate/lib/arm/libzxing.so
 app/Wallet/Wallet.apk
+app/Wallet/lib/arm/libbarhopper.so
 app/Wallet/lib/arm/libgoogle-ocrclient.so
 app/YouTube/YouTube.apk
 app/YouTube/lib/arm/libcronet.so
