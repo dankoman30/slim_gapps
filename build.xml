@@ -94,7 +94,17 @@
         </fileset>
     </copy>
     <copy file="${app.dir}/extras/mini/updater-script"  todir="${work.dir}/META-INF/com/google/android"/>
-    <copy file="${app.dir}/extras/mini/80-gapps.sh" todir="${work.dir}/system/addon.d"/>
+
+    <!-- generate backup script --> 
+    <fileset id="item.file" dir="${work.dir}/system" includes="**/*.*" />
+    <pathconvert refid="item.file" property="file.list" pathsep="&#10;">
+        <map from="${work.dir}/system/" to=''/>
+    </pathconvert>
+    <copy file="${app.dir}/extras/80-gapps.sh" todir="${work.dir}/system/addon.d">
+        <filterchain>
+          <replaceregex pattern="@file.list@" replace="${file.list}" flags="i"/>
+        </filterchain>
+    </copy>
 
     <!-- zip and sign it --> 
     <zip destfile="${build.dir}/unsigned.zip" basedir="${work.dir}"></zip>
@@ -136,7 +146,17 @@
       </fileset>
     </copy>
     <copy file="${app.dir}/extras/normal/updater-script"  todir="${work.dir}/META-INF/com/google/android"/>
-    <copy file="${app.dir}/extras/normal/80-gapps.sh" todir="${work.dir}/system/addon.d"/>
+
+    <!-- generate backup script --> 
+    <fileset id="item.file" dir="${work.dir}/system" includes="**/*.*" />
+    <pathconvert refid="item.file" property="file.list" pathsep="&#10;">
+        <map from="${work.dir}/system/" to=''/>
+    </pathconvert>
+    <copy file="${app.dir}/extras/80-gapps.sh" todir="${work.dir}/system/addon.d">
+        <filterchain>
+          <replaceregex pattern="@file.list@" replace="${file.list}" flags="i"/>
+        </filterchain>
+    </copy>
 
     <!-- zip and sign it -->
     <zip destfile="${build.dir}/unsigned.zip" basedir="${work.dir}"></zip>
@@ -164,7 +184,17 @@
     <!-- copy files -->
     <copy todir="${work.dir}"><fileset dir="${structure.dir}"/></copy>
     <copy file="${app.dir}/extras/full/updater-script"  todir="${work.dir}/META-INF/com/google/android"/>
-    <copy file="${app.dir}/extras/full/80-gapps.sh" todir="${work.dir}/system/addon.d"/>
+
+    <!-- generate backup script --> 
+    <fileset id="item.file" dir="${work.dir}/system" includes="**/*.*" />
+    <pathconvert refid="item.file" property="file.list" pathsep="&#10;">
+        <map from="${work.dir}/system/" to=''/>
+    </pathconvert>
+    <copy file="${app.dir}/extras/80-gapps.sh" todir="${work.dir}/system/addon.d">
+        <filterchain>
+          <replaceregex pattern="@file.list@" replace="${file.list}" flags="i"/>
+        </filterchain>
+    </copy>
 
     <!-- zip and sign it -->
     <zip destfile="${build.dir}/unsigned.zip" basedir="${work.dir}"></zip>
