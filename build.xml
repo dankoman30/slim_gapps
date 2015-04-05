@@ -97,12 +97,12 @@
 
     <!-- generate backup script --> 
     <fileset id="item.file" dir="${work.dir}/system" includes="**/*.*" />
-    <pathconvert refid="item.file" property="file.list" pathsep="&#10;">
+    <pathconvert refid="item.file" property="file.list.mini" pathsep="&#10;" dirsep="/">
         <map from="${work.dir}/system/" to=''/>
     </pathconvert>
     <copy file="${app.dir}/extras/80-gapps.sh" todir="${work.dir}/system/addon.d">
         <filterchain>
-          <replaceregex pattern="@file.list@" replace="${file.list}" flags="i"/>
+          <replaceregex pattern="@file.list@" replace="${file.list.mini}" flags="i"/>
         </filterchain>
     </copy>
 
@@ -149,12 +149,12 @@
 
     <!-- generate backup script --> 
     <fileset id="item.file" dir="${work.dir}/system" includes="**/*.*" />
-    <pathconvert refid="item.file" property="file.list" pathsep="&#10;">
+    <pathconvert refid="item.file" property="file.list.normal" pathsep="&#10;" dirsep="/">
         <map from="${work.dir}/system/" to=''/>
     </pathconvert>
     <copy file="${app.dir}/extras/80-gapps.sh" todir="${work.dir}/system/addon.d">
         <filterchain>
-          <replaceregex pattern="@file.list@" replace="${file.list}" flags="i"/>
+          <replaceregex pattern="@file.list@" replace="${file.list.normal}" flags="i"/>
         </filterchain>
     </copy>
 
@@ -187,12 +187,12 @@
 
     <!-- generate backup script --> 
     <fileset id="item.file" dir="${work.dir}/system" includes="**/*.*" />
-    <pathconvert refid="item.file" property="file.list" pathsep="&#10;">
+    <pathconvert refid="item.file" property="file.list.full" pathsep="&#10;" dirsep="/">
         <map from="${work.dir}/system/" to=''/>
     </pathconvert>
     <copy file="${app.dir}/extras/80-gapps.sh" todir="${work.dir}/system/addon.d">
         <filterchain>
-          <replaceregex pattern="@file.list@" replace="${file.list}" flags="i"/>
+          <replaceregex pattern="@file.list@" replace="${file.list.full}" flags="i"/>
         </filterchain>
     </copy>
 
