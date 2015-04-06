@@ -109,7 +109,8 @@
     <!-- zip and sign it --> 
     <zip destfile="${build.dir}/unsigned.zip" basedir="${work.dir}"></zip>
     <echo message="Signing gapps"/>
-      <java dir="${build.dir}" fork="true" failonerror="true" maxmemory="128m" jar="${sign.jar}">
+      <java dir="${build.dir}" fork="true" failonerror="true" maxmemory="1536m" jar="${sign.jar}">
+      <arg value="-w"/>
       <arg value="${sign.pem}"/>
       <arg value="${sign.pk8}"/>
       <arg value="${build.dir}/unsigned.zip"/>
@@ -161,7 +162,8 @@
     <!-- zip and sign it -->
     <zip destfile="${build.dir}/unsigned.zip" basedir="${work.dir}"></zip>
     <echo message="Signing gapps"/>
-    <java dir="${build.dir}" fork="true" failonerror="true" maxmemory="128m" jar="${sign.jar}">
+    <java dir="${build.dir}" fork="true" failonerror="true" maxmemory="1536m" jar="${sign.jar}">
+      <arg value="-w"/>
       <arg value="${sign.pem}"/>
       <arg value="${sign.pk8}"/>
       <arg value="${build.dir}/unsigned.zip"/>
@@ -199,7 +201,8 @@
     <!-- zip and sign it -->
     <zip destfile="${build.dir}/unsigned.zip" basedir="${work.dir}"></zip>
     <echo message="Signing gapps"/>
-    <java dir="${build.dir}" fork="true" failonerror="true" maxmemory="128m" jar="${sign.jar}">
+    <java dir="${build.dir}" fork="true" failonerror="true" maxmemory="1536m" jar="${sign.jar}">
+      <arg value="-w"/>
       <arg value="${sign.pem}"/>
       <arg value="${sign.pk8}"/>
       <arg value="${build.dir}/unsigned.zip"/>
