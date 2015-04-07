@@ -94,12 +94,23 @@
         </fileset>
     </copy>
     <copy file="${app.dir}/extras/mini/updater-script"  todir="${work.dir}/META-INF/com/google/android"/>
-    <copy file="${app.dir}/extras/mini/80-gapps.sh" todir="${work.dir}/system/addon.d"/>
+
+    <!-- generate backup script --> 
+    <fileset id="item.file" dir="${work.dir}/system" includes="**/*.*" />
+    <pathconvert refid="item.file" property="file.list.mini" pathsep="&#10;" dirsep="/">
+        <map from="${work.dir}/system/" to=''/>
+    </pathconvert>
+    <copy file="${app.dir}/extras/80-gapps.sh" todir="${work.dir}/system/addon.d">
+        <filterchain>
+          <replaceregex pattern="@file.list@" replace="${file.list.mini}" flags="i"/>
+        </filterchain>
+    </copy>
 
     <!-- zip and sign it --> 
     <zip destfile="${build.dir}/unsigned.zip" basedir="${work.dir}"></zip>
     <echo message="Signing gapps"/>
-      <java dir="${build.dir}" fork="true" failonerror="true" maxmemory="128m" jar="${sign.jar}">
+      <java dir="${build.dir}" fork="true" failonerror="true" maxmemory="1536m" jar="${sign.jar}">
+      <arg value="-w"/>
       <arg value="${sign.pem}"/>
       <arg value="${sign.pk8}"/>
       <arg value="${build.dir}/unsigned.zip"/>
@@ -136,12 +147,23 @@
       </fileset>
     </copy>
     <copy file="${app.dir}/extras/normal/updater-script"  todir="${work.dir}/META-INF/com/google/android"/>
-    <copy file="${app.dir}/extras/normal/80-gapps.sh" todir="${work.dir}/system/addon.d"/>
+
+    <!-- generate backup script --> 
+    <fileset id="item.file" dir="${work.dir}/system" includes="**/*.*" />
+    <pathconvert refid="item.file" property="file.list.normal" pathsep="&#10;" dirsep="/">
+        <map from="${work.dir}/system/" to=''/>
+    </pathconvert>
+    <copy file="${app.dir}/extras/80-gapps.sh" todir="${work.dir}/system/addon.d">
+        <filterchain>
+          <replaceregex pattern="@file.list@" replace="${file.list.normal}" flags="i"/>
+        </filterchain>
+    </copy>
 
     <!-- zip and sign it -->
     <zip destfile="${build.dir}/unsigned.zip" basedir="${work.dir}"></zip>
     <echo message="Signing gapps"/>
-    <java dir="${build.dir}" fork="true" failonerror="true" maxmemory="128m" jar="${sign.jar}">
+    <java dir="${build.dir}" fork="true" failonerror="true" maxmemory="1536m" jar="${sign.jar}">
+      <arg value="-w"/>
       <arg value="${sign.pem}"/>
       <arg value="${sign.pk8}"/>
       <arg value="${build.dir}/unsigned.zip"/>
@@ -164,12 +186,23 @@
     <!-- copy files -->
     <copy todir="${work.dir}"><fileset dir="${structure.dir}"/></copy>
     <copy file="${app.dir}/extras/full/updater-script"  todir="${work.dir}/META-INF/com/google/android"/>
-    <copy file="${app.dir}/extras/full/80-gapps.sh" todir="${work.dir}/system/addon.d"/>
+
+    <!-- generate backup script --> 
+    <fileset id="item.file" dir="${work.dir}/system" includes="**/*.*" />
+    <pathconvert refid="item.file" property="file.list.full" pathsep="&#10;" dirsep="/">
+        <map from="${work.dir}/system/" to=''/>
+    </pathconvert>
+    <copy file="${app.dir}/extras/80-gapps.sh" todir="${work.dir}/system/addon.d">
+        <filterchain>
+          <replaceregex pattern="@file.list@" replace="${file.list.full}" flags="i"/>
+        </filterchain>
+    </copy>
 
     <!-- zip and sign it -->
     <zip destfile="${build.dir}/unsigned.zip" basedir="${work.dir}"></zip>
     <echo message="Signing gapps"/>
-    <java dir="${build.dir}" fork="true" failonerror="true" maxmemory="128m" jar="${sign.jar}">
+    <java dir="${build.dir}" fork="true" failonerror="true" maxmemory="1536m" jar="${sign.jar}">
+      <arg value="-w"/>
       <arg value="${sign.pem}"/>
       <arg value="${sign.pk8}"/>
       <arg value="${build.dir}/unsigned.zip"/>
