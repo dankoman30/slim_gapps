@@ -53,8 +53,7 @@
   <!--=======================================================================-->
   <target name="buildAll"
         depends="cleanupBefore,initit,buildMini,buildNormal,buildFull,cleanupAfter"
-          description="execute complete build">
-  </target>
+          description="execute complete build"/>
 
   <!--=======================================================================-->
   <!-- mini                                                                  -->
@@ -106,16 +105,9 @@
         </filterchain>
     </copy>
 
-    <!-- zip and sign it --> 
-    <zip destfile="${build.dir}/unsigned.zip" basedir="${work.dir}"></zip>
-    <echo message="Signing gapps"/>
-      <java dir="${build.dir}" fork="true" failonerror="true" maxmemory="1536m" jar="${sign.jar}">
-      <arg value="-w"/>
-      <arg value="${sign.pem}"/>
-      <arg value="${sign.pk8}"/>
-      <arg value="${build.dir}/unsigned.zip"/>
-      <arg value="${file.name.mini}"/>
-    </java>
+    <antcall target="ZipAndSigning">
+        <param name="hfile.name" value="${file.name.mini}"/>
+    </antcall>
 
   </target>
 
@@ -159,16 +151,10 @@
         </filterchain>
     </copy>
 
-    <!-- zip and sign it -->
-    <zip destfile="${build.dir}/unsigned.zip" basedir="${work.dir}"></zip>
-    <echo message="Signing gapps"/>
-    <java dir="${build.dir}" fork="true" failonerror="true" maxmemory="1536m" jar="${sign.jar}">
-      <arg value="-w"/>
-      <arg value="${sign.pem}"/>
-      <arg value="${sign.pk8}"/>
-      <arg value="${build.dir}/unsigned.zip"/>
-      <arg value="${file.name.normal}"/>
-    </java>
+    <antcall target="ZipAndSigning">
+        <param name="hfile.name" value="${file.name.normal}"/>
+    </antcall>
+
   </target>
   
   <!--=======================================================================-->
@@ -198,16 +184,24 @@
         </filterchain>
     </copy>
 
-    <!-- zip and sign it -->
-    <zip destfile="${build.dir}/unsigned.zip" basedir="${work.dir}"></zip>
-    <echo message="Signing gapps"/>
-    <java dir="${build.dir}" fork="true" failonerror="true" maxmemory="1536m" jar="${sign.jar}">
+    <antcall target="ZipAndSigning">
+        <param name="hfile.name" value="${file.name.full}"/>
+    </antcall>
+
+  </target>
+  <!--=======================================================================-->
+  <!-- zip and sign it                                                       -->
+  <!--=======================================================================-->
+  <target name="ZipAndSigning">
+     <zip destfile="${build.dir}/unsigned.zip" basedir="${work.dir}"></zip>
+     <echo message="Signing gapps"/>
+     <java dir="${build.dir}" fork="true" failonerror="true" maxmemory="1536m" jar="${sign.jar}">
       <arg value="-w"/>
       <arg value="${sign.pem}"/>
       <arg value="${sign.pk8}"/>
       <arg value="${build.dir}/unsigned.zip"/>
-      <arg value="${file.name.full}"/>
-    </java>
+      <arg value="${hfile.name}"/>
+     </java>
   </target>
 
   <!--=======================================================================-->
