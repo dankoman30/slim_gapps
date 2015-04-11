@@ -52,8 +52,66 @@
   <!-- complete build                                                        -->
   <!--=======================================================================-->
   <target name="buildAll"
-        depends="cleanupBefore,initit,buildMini,buildNormal,buildFull,cleanupAfter"
+        depends="cleanupBefore,initit,buildZero,buildMini,buildNormal,buildFull,cleanupAfter"
           description="execute complete build"/>
+
+  <!--=======================================================================-->
+  <!-- zero                                                                  -->
+  <!--=======================================================================-->
+  <target name="buildZero"
+          description="execute zero gapps build">
+    <!-- preparations -->
+    <property environment="env"/>
+    <property name="file.name.zero" value="${build.dir}/Slim_zero_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${build.today}.zip"/>
+    <delete dir="${work.dir}"/>
+    <propertyfile file="${build.dir}/gapps.filenames">
+      <entry  key="zerofilename" value="${file.name.zero}"/>
+    </propertyfile>
+    <!-- copy files -->
+    <copy todir="${work.dir}">
+        <fileset dir="${structure.dir}">
+          <include name="META-INF/**" />
+          <include name="system/app/ConfigUpdater/**" />
+		  <include name="system/app/ExchangeServices/**" />
+		  <include name="system/app/GoogleCalendarSyncAdapter/**" />
+		  <include name="system/app/GoogleContactsSyncAdapter/**" />
+		  <include name="system/etc/**" />
+		  <include name="system/framework/**" />
+		  <include name="system/lib/**" />
+		  <include name="system/priv-app/GoogleBackupTransport/**" />
+		  <include name="system/priv-app/GoogleFeedback/**" />
+		  <include name="system/priv-app/GoogleLoginService/**" />
+		  <include name="system/priv-app/GoogleOneTimeInitializer/**" />
+		  <include name="system/priv-app/GooglePartnerSetup/**" />
+		  <include name="system/priv-app/GoogleServicesFramework/**" />
+		  <include name="system/priv-app/Phonesky/**" />
+		  <include name="system/priv-app/PrebuiltGmsCore/**" />
+		  <include name="system/priv-app/SetupWizard/**" />
+        </fileset>
+    </copy>
+	<copy file="${app.dir}/extras/updater-script" todir="${work.dir}/META-INF/com/google/android">
+        <filterchain>
+          <replaceregex pattern="@package@" replace="zero" flags="i"/>
+        </filterchain>
+    </copy>
+
+    <!-- generate backup script --> 
+    <fileset id="item.file" dir="${work.dir}/system" includes="**/*.*" />
+    <pathconvert refid="item.file" property="file.list.zero" pathsep="&#10;" dirsep="/">
+        <map from="${work.dir}/system/" to=''/>
+    </pathconvert>
+    <copy file="${app.dir}/extras/80-gapps.sh" todir="${work.dir}/system/addon.d">
+        <filterchain>
+          <replaceregex pattern="@file.list@" replace="${file.list.zero}" flags="i"/>
+        </filterchain>
+    </copy>
+
+    <!-- zip and sign it --> 
+    <antcall target="ZipAndSigning">
+        <param name="hfile.name" value="${file.name.zero}"/>
+    </antcall>
+
+  </target>
 
   <!--=======================================================================-->
   <!-- mini                                                                  -->
@@ -97,7 +155,11 @@
           <exclude name="optional/face/**"/>
         </fileset>
     </copy>
-    <copy file="${app.dir}/extras/mini/updater-script"  todir="${work.dir}/META-INF/com/google/android"/>
+	<copy file="${app.dir}/extras/updater-script" todir="${work.dir}/META-INF/com/google/android">
+        <filterchain>
+          <replaceregex pattern="@package@" replace="mini" flags="i"/>
+        </filterchain>
+    </copy>
 
     <!-- generate backup script --> 
     <fileset id="item.file" dir="${work.dir}/system" includes="**/*.*" />
@@ -140,7 +202,11 @@
           <exclude name="system/app/Slides/**"/>
       </fileset>
     </copy>
-    <copy file="${app.dir}/extras/normal/updater-script"  todir="${work.dir}/META-INF/com/google/android"/>
+	<copy file="${app.dir}/extras/updater-script" todir="${work.dir}/META-INF/com/google/android">
+        <filterchain>
+          <replaceregex pattern="@package@" replace="normal" flags="i"/>
+        </filterchain>
+    </copy>
 
     <!-- generate backup script --> 
     <fileset id="item.file" dir="${work.dir}/system" includes="**/*.*" />
@@ -173,7 +239,11 @@
     </propertyfile>
     <!-- copy files -->
     <copy todir="${work.dir}"><fileset dir="${structure.dir}"/></copy>
-    <copy file="${app.dir}/extras/full/updater-script"  todir="${work.dir}/META-INF/com/google/android"/>
+	<copy file="${app.dir}/extras/updater-script" todir="${work.dir}/META-INF/com/google/android">
+        <filterchain>
+          <replaceregex pattern="@package@" replace="full" flags="i"/>
+        </filterchain>
+    </copy>
 
     <!-- generate backup script --> 
     <fileset id="item.file" dir="${work.dir}/system" includes="**/*.*" />
