@@ -1,5 +1,5 @@
 ui_print("***********************************************");
-ui_print("        SlimLP full GApps for Android 5.0");
+ui_print("        SlimLP @package@ GApps for Android 5.0");
 ui_print("***********************************************");
 
 run_program("/sbin/busybox", "mount", "/system");
