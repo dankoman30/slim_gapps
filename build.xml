@@ -29,7 +29,7 @@
          basedir=".">
   <property file="build.properties"/>
   <description>
-    This file list used by ant to build the Slim Gapps project
+    This file list is used by ant to build the Slim Gapps project
   </description>
 
   <!--=======================================================================-->
@@ -70,9 +70,14 @@
     <!-- copy files -->
     <copy todir="${work.dir}">
         <fileset dir="${structure.dir}">
+          <exclude name="system/app/Books/**"/>
           <exclude name="system/app/CalendarGoogle/**"/>
+          <exclude name="system/app/CameraGoogle/**"/>
           <exclude name="system/app/Chrome/**"/>
+          <exclude name="system/app/CloudPrint/**"/>
+          <exclude name="system/app/Docs/**"/>
           <exclude name="system/app/Drive/**"/>
+          <exclude name="system/app/Games/**"/>
           <exclude name="system/app/GenieWidget/**"/>
           <exclude name="system/app/GoogleHome/**"/>
           <exclude name="system/app/GoogleTTS/**"/>
@@ -80,13 +85,13 @@
           <exclude name="system/app/Keyboard/**"/>
           <exclude name="system/app/Maps/**"/>
           <exclude name="system/app/Messenger/**"/>
-          <exclude name="system/app/Music2/**"/>
-          <exclude name="system/app/PlusOne/**"/>
+          <exclude name="system/app/Movies/**"/>
+          <exclude name="system/app/Newsstand/**"/>
+          <exclude name="system/app/Sheets/**"/>
+          <exclude name="system/app/Slides/**"/>
           <exclude name="system/app/Street/**"/>
           <exclude name="system/app/Translate/**"/>
           <exclude name="system/app/Wallet/**"/>
-          <exclude name="system/app/YouTube/**"/>
-          <exclude name="system/priv-app/Velvet/**"/>
           <exclude name="system/tts/**"/>
           <exclude name="system/usr/**"/>
           <exclude name="optional/face/**"/>
@@ -126,16 +131,13 @@
     <!-- copy files -->
     <copy todir="${work.dir}">
       <fileset dir="${structure.dir}">
-          <exclude name="system/app/CalendarGoogle/**"/>
-          <exclude name="system/app/Chrome/**"/>
-          <exclude name="system/app/Drive/**"/>
-          <exclude name="system/app/Keep/**"/>
-          <exclude name="system/app/Maps/**"/>
-          <exclude name="system/app/Messenger/**"/>
-          <exclude name="system/app/PlusOne/**"/>
-          <exclude name="system/app/Street/**"/>
-          <exclude name="system/app/Translate/**"/>
-          <exclude name="system/app/Wallet/**"/>
+          <exclude name="system/app/Books/**"/>
+          <exclude name="system/app/Docs/**"/>
+          <exclude name="system/app/Games/**"/>
+          <exclude name="system/app/Movies/**"/>
+          <exclude name="system/app/Newsstand/**"/>
+          <exclude name="system/app/Sheets/**"/>
+          <exclude name="system/app/Slides/**"/>
       </fileset>
     </copy>
     <copy file="${app.dir}/extras/normal/updater-script"  todir="${work.dir}/META-INF/com/google/android"/>
