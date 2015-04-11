@@ -92,6 +92,9 @@
 	<copy file="${app.dir}/extras/updater-script" todir="${work.dir}/META-INF/com/google/android">
         <filterchain>
           <replaceregex pattern="@package@" replace="zero" flags="i"/>
+	  <linecontains negate="true">
+          	<contains value="optional"/>
+          </linecontains>
         </filterchain>
     </copy>
 
