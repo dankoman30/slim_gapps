@@ -19,13 +19,6 @@
 <!--    raulx222   : Raul Petrutzky                                          -->
 <!--    uzen  	   : Dmitry Popov                                            -->
 <!--                                                                         -->
-<!--  Subversion Tags                                                        -->
-<!--                                                                         -->
-<!--    $Author$                                                  -->
-<!--    $LastChangedDate$     -->
-<!--    $LastChangedRevision$                                          -->
-<!--    $LastChangedBy$                                           -->
-<!--    $Id$                -->
 <!--=========================================================================-->
 <project name="buildGapps"
          default="buildAll"
