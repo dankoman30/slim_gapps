@@ -52,7 +52,7 @@
   <!-- complete build                                                        -->
   <!--=======================================================================-->
   <target name="buildAll"
-        depends="cleanupBefore,initit,buildZero,buildMini,buildNormal,buildFull,cleanupAfter"
+        depends="cleanupBefore,initit,generateCleanUpList,buildZero,buildMini,buildNormal,buildFull,cleanupAfter"
           description="execute complete build"/>
 
   <!--=======================================================================-->
@@ -92,8 +92,9 @@
 	<copy file="${app.dir}/extras/updater-script" todir="${work.dir}/META-INF/com/google/android">
         <filterchain>
           <replaceregex pattern="@package@" replace="zero" flags="i"/>
-	  <linecontains negate="true">
-          	<contains value="optional"/>
+          <replaceregex pattern="@cleanup.list@" replace="${cleanup.list}" flags="i"/>
+          <linecontains negate="true">
+				<contains value="#zero"/>
           </linecontains>
         </filterchain>
     </copy>
@@ -161,6 +162,7 @@
 	<copy file="${app.dir}/extras/updater-script" todir="${work.dir}/META-INF/com/google/android">
         <filterchain>
           <replaceregex pattern="@package@" replace="mini" flags="i"/>
+		  <replaceregex pattern="@cleanup.list@" replace="${cleanup.list}" flags="i"/>
         </filterchain>
     </copy>
 
@@ -208,6 +210,7 @@
 	<copy file="${app.dir}/extras/updater-script" todir="${work.dir}/META-INF/com/google/android">
         <filterchain>
           <replaceregex pattern="@package@" replace="normal" flags="i"/>
+		  <replaceregex pattern="@cleanup.list@" replace="${cleanup.list}" flags="i"/>
         </filterchain>
     </copy>
 
@@ -245,6 +248,7 @@
 	<copy file="${app.dir}/extras/updater-script" todir="${work.dir}/META-INF/com/google/android">
         <filterchain>
           <replaceregex pattern="@package@" replace="full" flags="i"/>
+		  <replaceregex pattern="@cleanup.list@" replace="${cleanup.list}" flags="i"/>
         </filterchain>
     </copy>
 
@@ -264,6 +268,17 @@
     </antcall>
 
   </target>
+  
+  <!--=======================================================================-->
+  <!-- generate clean up list                                                     -->
+  <!--=======================================================================-->
+  <target name="generateCleanUpList">
+    <fileset id="cleanup.file" dir="${structure.dir}/system" includes="**/*.*" />
+	<pathconvert refid="cleanup.file" property="cleanup.list" pathsep="&quot;,&#10;&quot;" dirsep="/">
+		<map from="${structure.dir}/system/" to="/system/"/>
+    </pathconvert>
+  </target>
+
   <!--=======================================================================-->
   <!-- zip and sign it                                                       -->
   <!--=======================================================================-->
