@@ -3,15 +3,45 @@ ui_print("        SlimLP @package@ GApps for Android 5.1");
 ui_print("***********************************************");
 
 run_program("/sbin/busybox", "mount", "/system");
+ui_print("Removing old GApps...");
+delete(
+"/system/addon.d/82-full_gapps.sh",
+"/system/addon.d/81-normal_gapps.sh",
+"/system/addon.d/80-gapps.sh",
+"/system/addon.d/71-gapps-faceunlock.sh",
+"/system/app/FaceLock/FaceLock.apk",
+"/system/app/FaceLock/lib/arm/libfacelock_jni.so",
+"/system/etc/permissions/com.google.android.camera2.xml",
+"/system/framework/com.google.android.camera2.jar",
+"/system/lib/libgcam.so",
+"/system/lib/libgcam_swig_jni.so",
+"/system/lib/libjni_eglfence.so",
+"/system/lib/libjni_filtershow_filters.so",
+"/system/lib/libjni_mosaic.so",
+"/system/lib/liblightcycle.so",
+"/system/lib/libnativehelper_compat.so",
+"/system/vendor/pittpatt/models/detection/multi_pose_face_landmark_detectors.8/landmark_group_meta_data.bin",
+"/system/vendor/pittpatt/models/detection/multi_pose_face_landmark_detectors.8/left_eye-y0-yi45-p0-pi45-r0-ri20.lg_32-tree7-wmd.bin",
+"/system/vendor/pittpatt/models/detection/multi_pose_face_landmark_detectors.8/nose_base-y0-yi45-p0-pi45-r0-ri20.lg_32-tree7-wmd.bin",
+"/system/vendor/pittpatt/models/detection/multi_pose_face_landmark_detectors.8/right_eye-y0-yi45-p0-pi45-r0-ri20.lg_32-3-tree7-wmd.bin",
+"/system/vendor/pittpatt/models/detection/yaw_roll_face_detectors.7.1/head-y0-yi45-p0-pi45-r0-ri30.4a-v24-tree7-2-wmd.bin",
+"/system/vendor/pittpatt/models/detection/yaw_roll_face_detectors.7.1/head-y0-yi45-p0-pi45-rn30-ri30.5-v24-tree7-2-wmd.bin",
+"/system/vendor/pittpatt/models/detection/yaw_roll_face_detectors.7.1/head-y0-yi45-p0-pi45-rp30-ri30.5-v24-tree7-2-wmd.bin",
+"/system/vendor/pittpatt/models/detection/yaw_roll_face_detectors.7.1/pose-r.8.1.bin",
+"/system/vendor/pittpatt/models/detection/yaw_roll_face_detectors.7.1/pose-y-r.8.1.bin",
+"/system/vendor/pittpatt/models/recognition/face.face.y0-y0-71-N-tree_7-wmd.bin",
+"@cleanup.list@"
+);
+
 ui_print("Installing files...");
 show_progress(1, 15);
 package_extract_dir("system", "/system");
 delete("/system/addon.d/82-full_gapps.sh","/system/addon.d/81-normal_gapps.sh");
 set_perm(0, 0, 0755, "/system/addon.d/80-gapps.sh");
-package_extract_dir("optional", "/tmp");
-package_extract_file("install-optional.sh", "/tmp/install-optional.sh");
-set_perm(0, 0, 0777, "/tmp/install-optional.sh");
-run_program("/tmp/install-optional.sh", "");
+package_extract_dir("optional", "/tmp"); #zero
+package_extract_file("install-optional.sh", "/tmp/install-optional.sh"); #zero
+set_perm(0, 0, 0777, "/tmp/install-optional.sh"); #zero
+run_program("/tmp/install-optional.sh", ""); #zero
 show_progress(1, 15);
 ui_print("Cleaning up and setting metadata...");
 set_metadata_recursive("/system/addon.d", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
