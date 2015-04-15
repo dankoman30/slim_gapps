@@ -1,17 +1,23 @@
-ui_print("***********************************************");
-ui_print("        SlimLP @package@ GApps for Android 5.0");
-ui_print("***********************************************");
+ui_print("****************************************************************");
+ui_print("SlimLP By MOHIT310 @package@ GApps for Android 5.1");
+ui_print("****************************************************************");
 
 run_program("/sbin/busybox", "mount", "/system");
 ui_print("Removing old GApps...");
+delete_recursive("/system/app/AudioFX", "/system/app/DSPManager");
+delete_recursive("/system/priv-app/PrebuiltGmsCore");
 delete(
 "/system/addon.d/82-full_gapps.sh",
 "/system/addon.d/81-normal_gapps.sh",
 "/system/addon.d/80-gapps.sh",
+"/system/addon.d/80-maxxaudio.sh",
+"/system/addon.d/90-CamSettings.sh",
 "/system/addon.d/71-gapps-faceunlock.sh",
 "/system/app/FaceLock/FaceLock.apk",
 "/system/app/FaceLock/lib/arm/libfacelock_jni.so",
 "/system/etc/permissions/com.google.android.camera2.xml",
+"/system/etc/waves/default.mps",
+"/system/etc/media_profiles.xml",
 "/system/framework/com.google.android.camera2.jar",
 "/system/lib/libgcam.so",
 "/system/lib/libgcam_swig_jni.so",
@@ -30,6 +36,13 @@ delete(
 "/system/vendor/pittpatt/models/detection/yaw_roll_face_detectors.7.1/pose-r.8.1.bin",
 "/system/vendor/pittpatt/models/detection/yaw_roll_face_detectors.7.1/pose-y-r.8.1.bin",
 "/system/vendor/pittpatt/models/recognition/face.face.y0-y0-71-N-tree_7-wmd.bin",
+"/system/vendor/etc/audio_effects.conf",
+"/system/vendor/lib/soundfx/libmaxxeffect-cembedded.so",
+"/system/vendor/lib/soundfx/libqcbassboost.so",
+"/system/vendor/lib/soundfx/libqcreverb.so",
+"/system/vendor/lib/soundfx/libqcvirt.so",
+"/system/vendor/lib/libMA3-processcode-Coretex_A9.so",
+"/system/vendor/lib/libMA3-processcode-Qualcomm.so",
 "@cleanup.list@"
 );
 
@@ -49,10 +62,14 @@ set_metadata_recursive("/system/app", "uid", 0, "gid", 0, "dmode", 0755, "fmode"
 set_metadata_recursive("/system/priv-app", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
 set_metadata_recursive("/system/etc/permissions", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
 set_metadata_recursive("/system/etc/preferred-apps", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata_recursive("/system/etc/waves", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/etc/media_profiles.xml", "uid", 0, "gid", 0, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
 set_metadata("/system/etc/g.prop", "uid", 0, "gid", 0, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
 set_metadata_recursive("/system/framework", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
 set_metadata_recursive("/system/lib", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
 set_metadata_recursive("/system/usr/srec/en-US", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
 set_metadata_recursive("/system/vendor/pittpatt", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata_recursive("/system/vendor/etc", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata_recursive("/system/vendor/soundfx", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
 run_program("/sbin/busybox", "umount", "/system");
 ui_print("Installation complete!");
