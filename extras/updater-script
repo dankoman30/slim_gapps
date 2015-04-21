@@ -3,7 +3,6 @@ ui_print("        SlimLP @package@ GApps for Android 5.1");
 ui_print("***********************************************");
 
 run_program("/sbin/busybox", "mount", "/system");
-assert(getprop("ro.build.version.sdk") == "22" || abort("This package is for version: 5.1.x"););
 ui_print("Removing old GApps...");
 delete(
 "/system/addon.d/82-full_gapps.sh",
