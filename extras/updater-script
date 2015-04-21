@@ -39,10 +39,10 @@ show_progress(1, 15);
 package_extract_dir("system", "/system");
 delete("/system/addon.d/82-full_gapps.sh","/system/addon.d/81-normal_gapps.sh");
 set_perm(0, 0, 0755, "/system/addon.d/80-gapps.sh");
-package_extract_dir("optional", "/tmp"); #zero
-package_extract_file("install-optional.sh", "/tmp/install-optional.sh"); #zero
-set_perm(0, 0, 0777, "/tmp/install-optional.sh"); #zero
-run_program("/tmp/install-optional.sh", ""); #zero
+package_extract_dir("optional", "/tmp");
+package_extract_file("install-optional.sh", "/tmp/install-optional.sh");
+set_perm(0, 0, 0777, "/tmp/install-optional.sh");
+run_program("/tmp/install-optional.sh", "");
 show_progress(1, 15);
 ui_print("Cleaning up and setting metadata...");
 set_metadata_recursive("/system/addon.d", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");

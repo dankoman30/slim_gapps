@@ -83,12 +83,18 @@
 		  <include name="system/priv-app/Phonesky/**" />
 		  <include name="system/priv-app/PrebuiltGmsCore/**" />
 		  <include name="system/priv-app/SetupWizard/**" />
+          <include name="optional/**"/>
+          <exclude name="optional/face/**"/>
         </fileset>
     </copy>
 	<copy file="${app.dir}/extras/updater-script" todir="${work.dir}/META-INF/com/google/android">
         <filterchain>
           <replaceregex pattern="@package@" replace="zero" flags="i"/>
           <replaceregex pattern="@cleanup.list@" replace="${cleanup.list}" flags="i"/>
+        </filterchain>
+    </copy>
+	<copy file="${app.dir}/structure/install-optional.sh" todir="${work.dir}">
+        <filterchain>
           <linecontains negate="true">
 				<contains value="#zero"/>
           </linecontains>
