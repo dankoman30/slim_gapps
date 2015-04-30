@@ -6,7 +6,6 @@
 
 run <b>ant</b> from the root directory
 
-<a href="https://github.com/dankoman30/slimlp_gapps">Download Slim GApps</a>
 
 <b>Gapps packages can be downloaded here:</b>
 
