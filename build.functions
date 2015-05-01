@@ -18,12 +18,21 @@
   <target name="ZipAndSigning">
      <zip destfile="${build.dir}/unsigned.zip" basedir="${work.dir}"></zip>
      <echo message="Signing gapps"/>
-     <java dir="${build.dir}" fork="true" failonerror="true" maxmemory="128m" jar="${sign.jar}">
+     <java dir="${build.dir}" fork="true" failonerror="true" maxmemory="1536m" jar="${sign.jar}">
+      <arg value="-w"/>
       <arg value="${sign.pem}"/>
       <arg value="${sign.pk8}"/>
       <arg value="${build.dir}/unsigned.zip"/>
       <arg value="${hfile.name}"/>
      </java>
+  </target>
+  <!--=======================================================================-->
+  <!-- cleanupBefore new build                                               -->
+  <!--=======================================================================-->
+  <target name="cleanupBeforeBase"
+      description="delete old directories">
+      <delete dir="${build.dir}"/>
+      <delete dir="${work.dir}"/>
   </target>
   
   <!--=======================================================================-->

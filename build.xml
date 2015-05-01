@@ -48,7 +48,8 @@
         depends="std.cleanupBefore,std.initit,buildBase,std.cleanupAfter"
           description="execute complete build">
   </target>
-
+  <!--std.cleanupBefore replace a std.cleanupBeforeBase if necessary to clean the folder build-->
+  
   <!--=======================================================================-->
   <!-- full                                                                  -->
   <!--=======================================================================-->
@@ -79,6 +80,7 @@
     </filterchain>
     </copy>
     
+    <!-- faceunlock and additional files -->
     <ant antfile="${optional.dir}/face-prebuild.xml"/>
     
     <!-- zip and sign it --> 
