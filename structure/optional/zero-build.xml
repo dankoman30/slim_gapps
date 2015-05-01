@@ -44,6 +44,12 @@
 	          <include name="system/priv-app/SetupWizard/**" />
 	        </fileset>
 	    </copy>
+	    
+	    <fileset id="item.file" dir="${work.dir}/system" />
+	    <pathconvert refid="item.file" property="file.list" pathsep="&#10;">
+	     <map from="${work.dir}/system/" to=''/>
+	    </pathconvert>
+	    
 	    <copy file="${basedir}/extras/updater-script" todir="${work.dir}/META-INF/com/google/android"/>
 	    <copy file="${basedir}/extras/gapps.sh" tofile="${work.dir}/system/addon.d/80-gapps.sh">
 	    <filterchain>
