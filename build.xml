@@ -45,7 +45,7 @@
   <!-- complete build                                                        -->
   <!--=======================================================================-->
   <target name="buildAll"
-        depends="std.cleanupBefore,std.initit,buildBase,std.cleanupAfter"
+        depends="std.cleanupBefore,std.initit,buildBase,std.cleanupAfter,buildPlugins"
           description="execute complete build">
   </target>
   <!--std.cleanupBefore replace a std.cleanupBeforeBase if necessary to clean the folder build-->
@@ -87,7 +87,6 @@
     <antcall target="std.ZipAndSigning">
         <param name="hfile.name" value="${file.name.base}"/>
     </antcall>
-    <antcall target="buildPlugins"/>
   </target>
   
   <!--=======================================================================-->
