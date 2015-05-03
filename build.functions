@@ -11,6 +11,24 @@
   <property name="sign.jar"                     value="${basedir}/tools/signapk.jar"/>
   <property name="sign.pem"                     value="${basedir}/tools/testkey.x509.pem"/>
   <property name="sign.pk8"                     value="${basedir}/tools/testkey.pk8"/>
+    
+  <tstamp>  
+    <format property="build.today" pattern="yyyyMMdd" />
+  </tstamp>  
+ 
+  <!--=======================================================================-->
+  <!-- update etc/g.prop                                                     -->
+  <!--=======================================================================--> 
+  
+  <target name="edit.gapps.prop" depends="gprop.check" if="pgprop">
+     <propertyfile file="${work.dir}/system/etc/g.prop">
+        <entry key="ro.addon.version" value="gapps-lp-${build.today}"/>
+     </propertyfile>
+  </target>
+  
+  <target name="gprop.check">
+     <available file="${structure.dir}/system/etc/g.prop" type="file" property="pgprop"/>
+  </target>  
   
   <!--=======================================================================-->
   <!-- zip and sign it                                                       -->
