@@ -7,8 +7,12 @@ run_program("/sbin/busybox", "mount", "/system");
 ui_print("Cleaning system...");
 package_extract_file("backuptool.functions", "/tmp/backuptool.functions");
 set_perm(0, 0, 0777, "/tmp/backuptool.functions");
+if	file_getprop("/system/etc/g.prop", "ro.addon.custom") == "1"
+then
+ui_print("Removing the previous installation.");
 run_program("/system/addon.d/80-gapps.sh", "remove");
 #optional-rm
+endif;
 ui_print("Installing files...");
 show_progress(1, 15);
 package_extract_dir("system", "/system");
