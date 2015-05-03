@@ -4,8 +4,10 @@
 <project name="buildFace" default="compile" basedir=".">
   <property name="face.dir" value="${optional.dir}/faceunlock"/>
   <property name="upd.scr" value="${work.dir}/META-INF/com/google/android/updater-script"/>
+  
   <target name="compile" depends="file.faseunlock,update-script" description="execute complete build">
   </target>
+  
   <target name="file.faseunlock">
     <copy file="${face.dir}/install-face.sh" todir="${work.dir}/install"/>
     <copy todir="${work.dir}/optional">

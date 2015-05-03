@@ -35,7 +35,6 @@ fi
 if (grep -qi "tuna" /proc/cpuinfo ); then
   echo "Installing Tuna-specific google bits"
   cp -a /tmp/common/* /system/
-  cp -a /tmp/tuna/* /system/
 fi
 
 good_ffc_device() {

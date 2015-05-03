@@ -36,16 +36,12 @@
   <!-- some variables                                                        -->
   <!--=======================================================================-->
   <property name="app.name"                     value="buildGapps"/>
-
-  <tstamp>  
-    <format property="build.today" pattern="yyyyMMdd" />
-  </tstamp>  
     
   <!--=======================================================================-->
   <!-- complete build                                                        -->
   <!--=======================================================================-->
   <target name="buildAll"
-        depends="checkFiles,std.cleanupBefore,std.initit,buildBase,std.cleanupAfter,buildPlugins"
+        depends="std.initit,std.cleanupBefore,buildBase,std.cleanupAfter,buildPlugins"
           description="execute complete build">
   </target>
   <!--std.cleanupBefore replace a std.cleanupBeforeBase if necessary to clean the folder build-->
@@ -61,8 +57,6 @@
     <propertyfile file="${build.dir}/gapps.filenames">
       <entry  key="basefilename" value="${file.name.base}"/>
     </propertyfile>
-        
-    <antcall target="edit.build.prop"/>
     
     <!-- copy files -->
     <copy todir="${work.dir}">
@@ -70,7 +64,11 @@
         <exclude name="optional/"/>
       </fileset>
     </copy>
+    
+    <!-- update etc/g.prop -->        
+    <antcall target="std.edit.gapps.prop"/>
 
+    <!-- create a list of files -->
     <fileset id="item.file" dir="${work.dir}/system" />
     <pathconvert refid="item.file" property="file.list" pathsep="&#10;">
     <map from="${work.dir}/system/" to=''/>
@@ -90,16 +88,6 @@
     <antcall target="std.ZipAndSigning">
         <param name="hfile.name" value="${file.name.base}"/>
     </antcall>
-  </target>
-  
-  <target name="checkFiles">
-     <available file="${structure.dir}/system/etc/g.prop" type="file" property="pg.prop"/>
-  </target>
-    
-  <target name="edit.build.prop" if="pg.prop">
-     <propertyfile file="${structure.dir}/system/etc/g.prop">
-        <entry key="ro.addon.version" value="gapps-lp-${build.today}"/>
-     </propertyfile>
   </target>
   
   <!--=======================================================================-->
