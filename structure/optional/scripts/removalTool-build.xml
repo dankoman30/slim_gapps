@@ -5,11 +5,11 @@
 
     <import file="${basedir}/build.functions" as="std"/>
 
-    <target name="compile" depends="checkRemove,std.cleanupBefore,removalTool,std.cleanupAfter"
+    <target name="compile" depends="checkFiles,std.cleanupBefore,removalTool,std.cleanupAfter"
           description="package for removal all gapps">
     </target>
       
-    <target name="checkRemove">
+    <target name="checkFiles">
       <available file="${build.dir}/gapps_removal_tool.5.x.x.build.000.zip" type="file" property="premovalTool"/>
     </target>
     
