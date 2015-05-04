@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE project>
+  
+<!--=======================================================================-->
+<!-- normal                                                                -->
+<!--=======================================================================-->
+  
+<project name="GappsNormal" default="compile" basedir=".">
+
+ <import file="${basedir}/build.functions" as="std"/>
+
+ <target name="compile" depends="std.cleanupBefore,buildNormal,std.cleanupAfter"
+       description="execute normal gapps build">
+ </target>
+ 
+ <target name="buildNormal">
+   <!-- preparations -->
+   <property environment="env"/>
+   <property name="file.name.normal" value="${build.dir}/Slim_normal_gapps.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${build.today}.zip"/>
+   
+   <propertyfile file="${build.dir}/gapps.filenames">
+      <entry  key="normalfilename" value="${file.name.normal}"/>
+   </propertyfile>
+   
+   <!-- copy files -->
+    <copy todir="${work.dir}">
+        <fileset dir="${structure.dir}">
+          <exclude name="system/app/Books/**"/>
+          <exclude name="system/app/Docs/**"/>
+          <exclude name="system/app/Games/**"/>
+          <exclude name="system/app/Movies/**"/>
+          <exclude name="system/app/Newsstand/**"/>
+          <exclude name="system/app/Sheets/**"/>
+          <exclude name="system/app/Slides/**"/>
+          <exclude name="optional/"/>
+        </fileset>
+    </copy>
+
+    <!-- update etc/g.prop -->        
+    <antcall target="std.edit.gapps.prop"/>    
+	        
+    <!-- create a list of files -->
+    <fileset id="item.file" dir="${work.dir}/system" />
+    <pathconvert refid="item.file" property="file.list" pathsep="&#10;">
+     <map from="${work.dir}/system/" to=''/>
+    </pathconvert>
+    
+    <copy file="${basedir}/extras/updater-script" todir="${work.dir}/META-INF/com/google/android"/>
+    <copy file="${basedir}/extras/gapps.sh" tofile="${work.dir}/system/addon.d/80-gapps.sh">
+    <filterchain>
+      <replaceregex pattern="(&lt;&lt;EOF).*" replace="\1&#10;${file.list}" flags="i"/>
+    </filterchain>
+    </copy>
+ 
+    <!-- faceunlock and additional files -->
+    <ant antfile="${optional.dir}/face-prebuild.xml"/>
+    
+    <!-- zip and sign it --> 
+   <antcall target="std.ZipAndSigning">
+        <param name="hfile.name" value="${file.name.normal}"/>
+   </antcall>
+ </target> 
+    
+</project>

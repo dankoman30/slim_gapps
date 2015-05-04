@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE project>
+
+<project name="removalTool" default="compile" basedir=".">
+
+    <import file="${basedir}/build.functions" as="std"/>
+
+    <target name="compile" depends="checkFiles,std.cleanupBefore,removalTool,std.cleanupAfter"
+          description="package for removal all gapps">
+    </target>
+      
+    <target name="checkFiles">
+      <available file="${build.dir}/gapps_removal_tool.5.x.x.build.000.zip" type="file" property="premovalTool"/>
+    </target>
+    
+    <target name="removalTool" unless="premovalTool">
+	   <!-- preparations -->
+	   <property environment="env"/>
+	   <property name="file.name.rmvTool" value="${build.dir}/gapps_removal_tool.5.x.x.build.000.zip"/>
+	   <propertyfile file="${build.dir}/gapps.filenames">
+	      <entry  key="basefilename" value="${file.name.rmvTool}"/>
+	   </propertyfile>
+	    <!-- copy files -->
+	   <copy todir="${work.dir}">
+	      <fileset dir="${structure.dir}">
+	        <include name="META-INF/"/>
+	        <include name="backuptool.functions"/>
+	      </fileset>
+	   </copy>
+	   <copy file="${optional.dir}/removalTool/updater-script"  todir="${work.dir}/META-INF/com/google/android"/>
+	   <copy file="${optional.dir}/removalTool/full-cleaning.sh"  todir="${work.dir}"/>
+
+	   <antcall target="std.ZipAndSigning">
+	        <param name="hfile.name" value="${file.name.rmvTool}"/>
+	   </antcall>
+    </target> 
+</project>
