@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE project>
+  
+<!--=======================================================================-->
+<!-- mini                                                                  -->
+<!--=======================================================================-->
+  
+<project name="GappsMini" default="compile" basedir=".">
+
+	<import file="${basedir}/build.functions" as="std"/>
+	
+	<target name="compile" depends="std.cleanupBefore,buildMini,std.cleanupAfter"
+	      description="execute mini gapps build">
+	</target>
+	
+	<target name="buildMini">
+   <!-- preparations -->
+   <property environment="env"/>
+   <property name="file.name.mini" value="${build.dir}/Slim_mini_gapps.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${build.today}.zip"/>
+   
+   <propertyfile file="${build.dir}/gapps.filenames">
+      <entry  key="minifilename" value="${file.name.mini}"/>
+   </propertyfile>
+   
+   <!-- copy files -->
+    <copy todir="${work.dir}">
+        <fileset dir="${structure.dir}">
+          <include name="META-INF/**" />
+          <include name="backuptool.functions"/>
+          <include name="system/app/ConfigUpdater/**" />
+          <include name="system/app/ExchangeServices/**" />
+          <include name="system/app/GoogleCalendarSyncAdapter/**" />
+          <include name="system/app/GoogleContactsSyncAdapter/**" />
+          <include name="system/app/Gmail2/**" />
+          <include name="system/app/Hangouts/**" />
+          <include name="system/app/HangoutsDialer/**" />
+          <include name="system/app/Music2/**" />
+          <include name="system/app/PlusOne/**" />
+          <include name="system/app/YouTube/**" />
+          <include name="system/etc/**" />
+          <include name="system/framework/**" />
+          <include name="system/lib/**" />
+          <include name="system/priv-app/GoogleBackupTransport/**" />
+          <include name="system/priv-app/GoogleFeedback/**" />
+          <include name="system/priv-app/GoogleLoginService/**" />
+          <include name="system/priv-app/GoogleOneTimeInitializer/**" />
+          <include name="system/priv-app/GooglePartnerSetup/**" />
+          <include name="system/priv-app/GoogleServicesFramework/**" />
+          <include name="system/priv-app/Phonesky/**" />
+          <include name="system/priv-app/PrebuiltGmsCore/**" />
+          <include name="system/priv-app/SetupWizard/**" />
+          <include name="system/priv-app/Velvet/**" />
+          <include name="system/priv-app/talkback/**" />
+        </fileset>
+    </copy>
+	    
+    <!-- update etc/g.prop -->        
+    <antcall target="std.edit.gapps.prop"/>    
+	    
+    <!-- create a list of files -->
+    <fileset id="item.file" dir="${work.dir}/system" />
+    <pathconvert refid="item.file" property="file.list" pathsep="&#10;">
+     <map from="${work.dir}/system/" to=''/>
+    </pathconvert>
+    
+    <copy file="${basedir}/extras/updater-script" todir="${work.dir}/META-INF/com/google/android"/>
+    <copy file="${basedir}/extras/gapps.sh" tofile="${work.dir}/system/addon.d/80-gapps.sh">
+    <filterchain>
+      <replaceregex pattern="(&lt;&lt;EOF).*" replace="\1&#10;${file.list}" flags="i"/>
+    </filterchain>
+    </copy>
+ 
+    <!-- faceunlock and additional files -->
+    <ant antfile="${optional.dir}/face-prebuild.xml"/>
+    
+    <!-- zip and sign it --> 
+    <antcall target="std.ZipAndSigning">
+        <param name="hfile.name" value="${file.name.mini}"/>
+    </antcall>
+  </target> 
+    
+</project>
