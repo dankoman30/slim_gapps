@@ -15,8 +15,6 @@ framework/com.google.android.camera2.jar
 lib/libgcam.so
 lib/libgcam_swig_jni.so
 lib/libjni_eglfence.so
-lib/libjni_filtershow_filters.so
-lib/libjni_mosaic.so
 lib/liblightcycle.so
 lib/libnativehelper_compat.so
 vendor/pittpatt/models/detection/multi_pose_face_landmark_detectors.8/landmark_group_meta_data.bin
