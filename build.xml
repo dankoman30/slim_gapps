@@ -85,7 +85,6 @@
                 <include name="system/priv-app/PrebuiltGmsCore/**"/>
                 <include name="system/priv-app/SetupWizard/**"/>
                 <include name="optional/**"/>
-                <exclude name="optional/face/**"/>
             </fileset>
         </copy>
         <copy file="${app.dir}/extras/g.prop" todir="${work.dir}/system/etc">
