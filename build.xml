@@ -67,9 +67,12 @@
         <!-- copy files -->
         <copy todir="${work.dir}">
             <fileset dir="${structure.dir}">
+                <include name="install-optional.sh"/>
                 <include name="META-INF/**"/>
+                <include name="optional/**"/>
                 <include name="system/app/ConfigUpdater/**"/>
                 <include name="system/app/ExchangeServices/**"/>
+                <include name="system/app/FaceLock/**"/>
                 <include name="system/app/GoogleCalendarSyncAdapter/**"/>
                 <include name="system/app/GoogleContactsSyncAdapter/**"/>
                 <include name="system/etc/**"/>
@@ -84,8 +87,7 @@
                 <include name="system/priv-app/Phonesky/**"/>
                 <include name="system/priv-app/PrebuiltGmsCore/**"/>
                 <include name="system/priv-app/SetupWizard/**"/>
-                <include name="optional/**"/>
-                <exclude name="optional/face/**"/>
+                <include name="system/vendor/**"/>
             </fileset>
         </copy>
         <copy file="${app.dir}/extras/g.prop" todir="${work.dir}/system/etc">
@@ -98,13 +100,6 @@
             <filterchain>
                 <replaceregex pattern="@package@" replace="zero" flags="i"/>
                 <replaceregex pattern="@cleanup.list@" replace="${cleanup.list}" flags="i"/>
-            </filterchain>
-        </copy>
-        <copy file="${app.dir}/structure/install-optional.sh" todir="${work.dir}">
-            <filterchain>
-                <linecontains negate="true">
-                    <contains value="#zero"/>
-                </linecontains>
             </filterchain>
         </copy>
 

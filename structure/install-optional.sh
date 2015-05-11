@@ -38,31 +38,3 @@ if (grep -qi "tuna" /proc/cpuinfo ); then
   cp -a /tmp/common/* /system/
   cp -a /tmp/tuna/* /system/
 fi
- #zero
-good_ffc_device() { #zero
-  if [ -f /sdcard/.forcefaceunlock ]; then #zero
-    return 0 #zero
-  fi #zero
-  if cat /proc/cpuinfo |grep -q Victory; then #zero
-    return 1 #zero
-  fi #zero
-  if cat /proc/cpuinfo |grep -q herring; then #zero
-    return 1 #zero
-  fi #zero
-  if cat /proc/cpuinfo |grep -q sun4i; then #zero
-    return 1 #zero
-  fi #zero
-  return 0 #zero
-} #zero
- #zero
-if good_ffc_device && [ -e /system/etc/permissions/android.hardware.camera.front.xml ]; then #zero
-  echo "Installing face detection support" #zero
-  cp -a /tmp/face/* /system/ #zero
-  chmod 755 /system/addon.d/71-gapps-faceunlock.sh #zero
-elif  [ -d /system/vendor/pittpatt/ ]; then #zero
-  rm -rf /system/vendor/pittpatt/ #zero
-  rm  -f /system/app/FaceLock.apk #zero
-  rm  -f /system/lib/libfacelock_jni.so #zero
-  rm  -f /system/addon.d/71-gapps-faceunlock.sh #zero
-fi #zero
-rm -rf /tmp/face #zero
