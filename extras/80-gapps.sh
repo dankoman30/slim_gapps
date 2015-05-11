@@ -6,8 +6,6 @@
 
 list_files() {
 cat <<EOF
-addon.d/80-gapps.sh
-addon.d/71-gapps-faceunlock.sh
 app/FaceLock/FaceLock.apk
 app/FaceLock/lib/arm/libfacelock_jni.so
 etc/permissions/com.google.android.camera2.xml
