@@ -3,4 +3,5 @@ ro.addon.type=gapps
 ro.addon.platform=lp
 ro.addon.version=@build.version@
 ro.addon.minimumversion=@min.version@
+ro.addon.kilobytes=@kilobytes@
 # end addon properties
