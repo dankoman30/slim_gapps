@@ -32,9 +32,3 @@ if (grep -qi "deb" /proc/cpuinfo ); then
   echo "Installing Razor-specific google bits"
   cp -a /tmp/common/* /system/
 fi
-
-if (grep -qi "tuna" /proc/cpuinfo ); then
-  echo "Installing Tuna-specific google bits"
-  cp -a /tmp/common/* /system/
-  cp -a /tmp/tuna/* /system/
-fi
