@@ -90,12 +90,6 @@
                 <include name="system/vendor/**"/>
             </fileset>
         </copy>
-        <copy file="${app.dir}/extras/g.prop" todir="${work.dir}/system/etc">
-            <filterchain>
-                <replaceregex pattern="@build.version@" replace="slim.zero.${build.today}" flags="i"/>
-                <replaceregex pattern="@min.version@" replace="${PRODUCT_VERSION_MAJOR}" flags="i"/>
-            </filterchain>
-        </copy>
         <copy file="${app.dir}/extras/updater-script" todir="${work.dir}/META-INF/com/google/android">
             <filterchain>
                 <replaceregex pattern="@package@" replace="zero" flags="i"/>
@@ -111,6 +105,18 @@
         <copy file="${app.dir}/extras/80-gapps.sh" todir="${work.dir}/system/addon.d">
             <filterchain>
                 <replaceregex pattern="@file.list@" replace="${file.list.zero}" flags="i"/>
+            </filterchain>
+        </copy>
+
+        <!-- fill in g.prop values -->
+        <length property="length.zero" mode="all">
+            <fileset dir="${work.dir}"/>
+        </length>
+        <copy file="${app.dir}/extras/g.prop" todir="${work.dir}/system/etc">
+            <filterchain>
+                <replaceregex pattern="@build.version@" replace="slim.zero.${build.today}" flags="i"/>
+                <replaceregex pattern="@min.version@" replace="${PRODUCT_VERSION_MAJOR}" flags="i"/>
+                <replaceregex pattern="@size@" replace="${length.zero}" flags="i"/>
             </filterchain>
         </copy>
 
@@ -162,12 +168,6 @@
                 <exclude name="system/usr/**"/>
             </fileset>
         </copy>
-        <copy file="${app.dir}/extras/g.prop" todir="${work.dir}/system/etc">
-            <filterchain>
-                <replaceregex pattern="@build.version@" replace="slim.mini.${build.today}" flags="i"/>
-                <replaceregex pattern="@min.version@" replace="${PRODUCT_VERSION_MAJOR}" flags="i"/>
-            </filterchain>
-        </copy>
         <copy file="${app.dir}/extras/updater-script" todir="${work.dir}/META-INF/com/google/android">
             <filterchain>
                 <replaceregex pattern="@package@" replace="mini" flags="i"/>
@@ -186,6 +186,19 @@
             </filterchain>
         </copy>
 
+        <!-- fill in g.prop values -->
+        <length property="length.mini" mode="all">
+            <fileset dir="${work.dir}"/>
+        </length>
+        <copy file="${app.dir}/extras/g.prop" todir="${work.dir}/system/etc">
+            <filterchain>
+                <replaceregex pattern="@build.version@" replace="slim.mini.${build.today}" flags="i"/>
+                <replaceregex pattern="@min.version@" replace="${PRODUCT_VERSION_MAJOR}" flags="i"/>
+                <replaceregex pattern="@size@" replace="${length.mini}" flags="i"/>
+            </filterchain>
+        </copy>
+
+        <!-- zip and sign it -->
         <antcall target="ZipAndSigning">
             <param name="hfile.name" value="${file.name.mini}"/>
         </antcall>
@@ -216,12 +229,6 @@
                 <exclude name="system/app/Slides/**"/>
             </fileset>
         </copy>
-        <copy file="${app.dir}/extras/g.prop" todir="${work.dir}/system/etc">
-            <filterchain>
-                <replaceregex pattern="@build.version@" replace="slim.normal.${build.today}" flags="i"/>
-                <replaceregex pattern="@min.version@" replace="${PRODUCT_VERSION_MAJOR}" flags="i"/>
-            </filterchain>
-        </copy>
         <copy file="${app.dir}/extras/updater-script" todir="${work.dir}/META-INF/com/google/android">
             <filterchain>
                 <replaceregex pattern="@package@" replace="normal" flags="i"/>
@@ -240,6 +247,19 @@
             </filterchain>
         </copy>
 
+        <!-- fill in g.prop values -->
+        <length property="length.normal" mode="all">
+            <fileset dir="${work.dir}"/>
+        </length>
+        <copy file="${app.dir}/extras/g.prop" todir="${work.dir}/system/etc">
+            <filterchain>
+                <replaceregex pattern="@build.version@" replace="slim.normal.${build.today}" flags="i"/>
+                <replaceregex pattern="@min.version@" replace="${PRODUCT_VERSION_MAJOR}" flags="i"/>
+                <replaceregex pattern="@size@" replace="${length.normal}" flags="i"/>
+            </filterchain>
+        </copy>
+
+        <!-- zip and sign it -->
         <antcall target="ZipAndSigning">
             <param name="hfile.name" value="${file.name.normal}"/>
         </antcall>
@@ -260,12 +280,6 @@
         </propertyfile>
         <!-- copy files -->
         <copy todir="${work.dir}"><fileset dir="${structure.dir}"/></copy>
-        <copy file="${app.dir}/extras/g.prop" todir="${work.dir}/system/etc">
-            <filterchain>
-                <replaceregex pattern="@build.version@" replace="slim.full.${build.today}" flags="i"/>
-                <replaceregex pattern="@min.version@" replace="${PRODUCT_VERSION_MAJOR}" flags="i"/>
-            </filterchain>
-        </copy>
         <copy file="${app.dir}/extras/updater-script" todir="${work.dir}/META-INF/com/google/android">
             <filterchain>
                 <replaceregex pattern="@package@" replace="full" flags="i"/>
@@ -284,6 +298,19 @@
             </filterchain>
         </copy>
 
+        <!-- fill in g.prop values -->
+        <length property="length.full" mode="all">
+            <fileset dir="${work.dir}"/>
+        </length>
+        <copy file="${app.dir}/extras/g.prop" todir="${work.dir}/system/etc">
+            <filterchain>
+                <replaceregex pattern="@build.version@" replace="slim.full.${build.today}" flags="i"/>
+                <replaceregex pattern="@min.version@" replace="${PRODUCT_VERSION_MAJOR}" flags="i"/>
+                <replaceregex pattern="@size@" replace="${length.full}" flags="i"/>
+            </filterchain>
+        </copy>
+
+        <!-- zip and sign it -->
         <antcall target="ZipAndSigning">
             <param name="hfile.name" value="${file.name.full}"/>
         </antcall>

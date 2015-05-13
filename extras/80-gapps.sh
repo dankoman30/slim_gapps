@@ -7,6 +7,7 @@
 list_files() {
 cat <<EOF
 addon.d/80-gapps.sh
+etc/g.prop
 etc/permissions/com.google.android.camera2.xml
 framework/com.google.android.camera2.jar
 lib/libgcam.so
