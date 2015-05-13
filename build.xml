@@ -120,6 +120,13 @@
             </filterchain>
         </copy>
 
+        <!-- copy space.sh and fill in values -->
+        <copy file="${app.dir}/extras/space.sh" todir="${work.dir}">
+            <filterchain>
+                <replaceregex pattern="@space_needed@" replace="${length.zero}" flags="i"/>
+            </filterchain>
+        </copy>
+
         <!-- zip and sign it --> 
         <antcall target="ZipAndSigning">
             <param name="hfile.name" value="${file.name.zero}"/>
@@ -198,6 +205,13 @@
             </filterchain>
         </copy>
 
+        <!-- copy space.sh and fill in values -->
+        <copy file="${app.dir}/extras/space.sh" todir="${work.dir}">
+            <filterchain>
+                <replaceregex pattern="@space_needed@" replace="${length.mini}" flags="i"/>
+            </filterchain>
+        </copy>
+
         <!-- zip and sign it -->
         <antcall target="ZipAndSigning">
             <param name="hfile.name" value="${file.name.mini}"/>
@@ -259,6 +273,13 @@
             </filterchain>
         </copy>
 
+        <!-- copy space.sh and fill in values -->
+        <copy file="${app.dir}/extras/space.sh" todir="${work.dir}">
+            <filterchain>
+                <replaceregex pattern="@space_needed@" replace="${length.normal}" flags="i"/>
+            </filterchain>
+        </copy>
+
         <!-- zip and sign it -->
         <antcall target="ZipAndSigning">
             <param name="hfile.name" value="${file.name.normal}"/>
@@ -307,6 +328,13 @@
                 <replaceregex pattern="@build.version@" replace="slim.full.${build.today}" flags="i"/>
                 <replaceregex pattern="@min.version@" replace="${PRODUCT_VERSION_MAJOR}" flags="i"/>
                 <replaceregex pattern="@size@" replace="${length.full}" flags="i"/>
+            </filterchain>
+        </copy>
+
+        <!-- copy space.sh and fill in values -->
+        <copy file="${app.dir}/extras/space.sh" todir="${work.dir}">
+            <filterchain>
+                <replaceregex pattern="@space_needed@" replace="${length.full}" flags="i"/>
             </filterchain>
         </copy>
 
