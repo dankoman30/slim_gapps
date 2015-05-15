@@ -4,6 +4,7 @@
 g_prop=/system/etc/g.prop
 current_gapps_size=0
 buffer=100000000
+force_install=0
 # FAILED for use in edify (1=not enough space, 2=non-slim gapps installed)
 FAILED=0
 
@@ -76,7 +77,7 @@ then
         else
             # (size property does not exist yet, but we do not want gapps installation to fail because of it.
             #  so we set the current_gapps_size to an astronomically high value.)
-            current_gapps_size=700000000
+            force_install=1
         fi
     else
         abort 2
@@ -107,7 +108,10 @@ then
     # CONTINUE TO INSTALL GAPPS
     ui_print "gapps installation will now proceed..."
 else
-    abort 1
+    if [ "$force_install" != 1 ]
+    then
+        abort 1
+    fi
 fi
 
 echo "ro.gapps.install.failed=$FAILED" >> /tmp/build.prop
