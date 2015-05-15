@@ -76,7 +76,7 @@ then
         else
             # (size property does not exist yet, but we do not want gapps installation to fail because of it.
             #  so we set the current_gapps_size to an astronomically high value.)
-            current_gapps_size=9999999999
+            current_gapps_size=700000000
         fi
     else
         abort 2
