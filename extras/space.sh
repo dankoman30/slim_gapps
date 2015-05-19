@@ -5,8 +5,8 @@ g_prop=/system/etc/g.prop
 current_gapps_size=0
 buffer=100000000
 force_install=0
-# STATUS for use in edify (1=not enough space, 2=non-slim gapps installed),
-# 3=rom not installed, 10=force install
+# STATUS for use in edify (1=not enough space, 2=non-slim gapps installed,
+# 3=rom not installed, 10=force install)
 STATUS=0
 
 # functions
@@ -93,7 +93,7 @@ else
 fi
 
 # check to see if force_install has been triggered
-if [ "$force_install" != 0 ]
+if [ "$force_install" == 1 ]
 then
     special_status 10
 fi
