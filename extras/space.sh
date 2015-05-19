@@ -41,7 +41,7 @@ file_getprop() {
 if [ -e /system/priv-app/GoogleServicesFramework/GoogleServicesFramework.apk -a -e /system/priv-app/GoogleLoginService/GoogleLoginService.apk ]
 then
     # gapps are installed
-    if [ -n "$(grep slim $g_prop)" -a -n "$(grep ro.addon.size $g_prop)" ]
+    if [ -e /system/etc/g.prop -a -n "$(grep slim $g_prop)" -a -n "$(grep ro.addon.size $g_prop)" ]
     then
         # and it is a recent slim gapps package
         ui_print "  found existing slim gapps package"
