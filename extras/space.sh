@@ -47,7 +47,7 @@ then
     then
         # and it is a recent slim gapps package
         ui_print "  found existing slim gapps package"
-        current_gapps_size_kb=$(((file_getprop $g_prop ro.addon.size) / 1024))
+        current_gapps_size_kb=$(($(file_getprop $g_prop ro.addon.size) / 1024))
     else
         special_status 2
     fi
