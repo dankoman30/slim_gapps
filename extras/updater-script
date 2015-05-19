@@ -10,7 +10,7 @@ set_perm(0, 0, 0777, "/tmp/space.sh");
 run_program("/tmp/space.sh");
 
 ifelse(
-    file_getprop("/tmp/build.prop", "ro.gapps.install.failed") == "10",
+    file_getprop("/tmp/build.prop", "ro.gapps.install.status") == "10",
         (
             ui_print("WARNING - GAPPS ARE BEING FORCIBLY INSTALLED");
             ui_print("DUE TO CERTAIN MET CRITERIA IN YOUR BUILD.PROP!");
@@ -42,7 +42,7 @@ ifelse(
 );
 
 ifelse(
-    file_getprop("/tmp/build.prop", "ro.gapps.install.failed") == "0",
+    file_getprop("/tmp/build.prop", "ro.gapps.install.status") == "0",
         (
             ui_print("free space check passed!");
             ui_print("gapps installation will now proceed...");
@@ -77,7 +77,7 @@ ifelse(
 );
 
 ifelse(
-    file_getprop("/tmp/build.prop", "ro.gapps.install.failed") == "1",
+    file_getprop("/tmp/build.prop", "ro.gapps.install.status") == "1",
         (
             ui_print("* not enough free space on system *");
             ui_print("plz try a smaller package.");
@@ -94,7 +94,7 @@ ifelse(
 );
 
 ifelse(
-    file_getprop("/tmp/build.prop", "ro.gapps.install.failed") == "2",
+    file_getprop("/tmp/build.prop", "ro.gapps.install.status") == "2",
         (
             ui_print("* old or incompatible gapps currently installed *");
             ui_print("please wipe your system partition in recovery,");
@@ -113,7 +113,7 @@ ifelse(
 );
 
 ifelse(
-    file_getprop("/tmp/build.prop", "ro.gapps.install.failed") == "3",
+    file_getprop("/tmp/build.prop", "ro.gapps.install.status") == "3",
         (
             ui_print("no rom installed. please flash rom before gapps.");
             ui_print("******* gapps Installation failed *******");

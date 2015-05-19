@@ -5,13 +5,13 @@ g_prop=/system/etc/g.prop
 current_gapps_size=0
 buffer=100000000
 force_install=0
-# FAILED for use in edify (1=not enough space, 2=non-slim gapps installed),
+# STATUS for use in edify (1=not enough space, 2=non-slim gapps installed),
 # 3=rom not installed, 10=force install
-FAILED=0
+STATUS=0
 
 # functions
-abort() {
-    FAILED=${1}
+special_status() {
+    STATUS=${1}
 }
 
 # get file descriptor for output
@@ -49,7 +49,7 @@ then
         ui_print "  found existing slim gapps package"
         current_gapps_size=$(file_getprop $g_prop ro.addon.size)
     else
-        abort 2
+        special_status 2
     fi
 fi
 
@@ -61,8 +61,8 @@ then
         force_install=1
     fi
 else
-    # rom is not installed - abort code 3
-    abort 3
+    # rom is not installed - special_status code 3
+    special_status 3
 fi
 
 # Read and save system partition size details
@@ -89,13 +89,13 @@ then
     # CONTINUE TO INSTALL GAPPS
     ui_print "gapps installation will now proceed..."
 else
-    abort 1
+    special_status 1
 fi
 
 # check to see if force_install has been triggered
 if [ "$force_install" != 0 ]
 then
-    abort 10
+    special_status 10
 fi
 
-echo "ro.gapps.install.failed=$FAILED" > /tmp/build.prop
+echo "ro.gapps.install.status=$STATUS" > /tmp/build.prop
