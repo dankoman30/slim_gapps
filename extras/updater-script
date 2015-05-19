@@ -10,6 +10,38 @@ set_perm(0, 0, 0777, "/tmp/space.sh");
 run_program("/tmp/space.sh");
 
 ifelse(
+    file_getprop("/tmp/build.prop", "ro.gapps.install.failed") == "10",
+        (
+            ui_print("WARNING - GAPPS ARE BEING FORCIBLY INSTALLED");
+            ui_print("DUE TO CERTAIN MET CRITERIA IN YOUR BUILD.PROP!");
+            ui_print("gapps installation will now proceed...");
+
+            ui_print("Installing files...");
+            show_progress(1, 15);
+            package_extract_dir("system", "/system");
+            set_perm(0, 0, 0755, "/system/addon.d/80-gapps.sh");
+            package_extract_dir("optional", "/tmp");
+            package_extract_file("install-optional.sh", "/tmp/install-optional.sh");
+            set_perm(0, 0, 0777, "/tmp/install-optional.sh");
+            run_program("/tmp/install-optional.sh", "");
+            show_progress(1, 15);
+            ui_print("Cleaning up and setting metadata...");
+            set_metadata_recursive("/system/addon.d", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+            set_metadata_recursive("/system/app", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+            set_metadata_recursive("/system/priv-app", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+            set_metadata_recursive("/system/etc/permissions", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+            set_metadata_recursive("/system/etc/preferred-apps", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+            set_metadata("/system/etc/g.prop", "uid", 0, "gid", 0, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+            set_metadata_recursive("/system/framework", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+            set_metadata_recursive("/system/lib", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+            set_metadata_recursive("/system/usr/srec/en-US", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+            set_metadata_recursive("/system/vendor/pittpatt", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+            run_program("/sbin/busybox", "umount", "/system");
+            ui_print("Installation complete!");
+        )
+);
+
+ifelse(
     file_getprop("/tmp/build.prop", "ro.gapps.install.failed") == "0",
         (
             ui_print("free space check passed!");
@@ -22,7 +54,6 @@ ifelse(
             ui_print("Installing files...");
             show_progress(1, 15);
             package_extract_dir("system", "/system");
-            delete("/system/addon.d/82-full_gapps.sh","/system/addon.d/81-normal_gapps.sh");
             set_perm(0, 0, 0755, "/system/addon.d/80-gapps.sh");
             package_extract_dir("optional", "/tmp");
             package_extract_file("install-optional.sh", "/tmp/install-optional.sh");
@@ -69,6 +100,22 @@ ifelse(
             ui_print("please wipe your system partition in recovery,");
             ui_print("re-flash rom, and then flash gapps again.");
             ui_print("you'll only have to do this once.");
+            ui_print("******* gapps Installation failed *******");
+            ui_print("no changes were made to your device");
+            ui_print(" ");
+            ui_print("now exiting...");
+            ui_print("if you believe this to be a mistake, submit");
+            ui_print("recovery.log from your root storage after choosing");
+            ui_print("Advanced > Copy log to SD");
+            ui_print("from TWRP.");
+            run_program("/sbin/busybox", "umount", "/system");
+        )
+);
+
+ifelse(
+    file_getprop("/tmp/build.prop", "ro.gapps.install.failed") == "3",
+        (
+            ui_print("no rom installed. please flash rom before gapps.");
             ui_print("******* gapps Installation failed *******");
             ui_print("no changes were made to your device");
             ui_print(" ");

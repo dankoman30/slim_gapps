@@ -4,7 +4,9 @@
 g_prop=/system/etc/g.prop
 current_gapps_size=0
 buffer=100000000
-# FAILED for use in edify (1=not enough space, 2=non-slim gapps installed)
+force_install=0
+# FAILED for use in edify (1=not enough space, 2=non-slim gapps installed),
+# 3=rom not installed, 10=force install
 FAILED=0
 
 # functions
@@ -51,6 +53,18 @@ then
     fi
 fi
 
+if [ -e /system/build.prop ]
+then
+    # conditions in rom's build.prop that should force installation
+    if [ -n "$(grep ArchiDroid /system/build.prop)" ]
+    then
+        force_install=1
+    fi
+else
+    # rom is not installed - abort code 3
+    abort 3
+fi
+
 # Read and save system partition size details
 #df=$(busybox df /system | tail -n 1)
 df=$(df /system | tail -n 1)
@@ -76,6 +90,12 @@ then
     ui_print "gapps installation will now proceed..."
 else
     abort 1
+fi
+
+# check to see if force_install has been triggered
+if [ "$force_install" != 0 ]
+then
+    abort 10
 fi
 
 echo "ro.gapps.install.failed=$FAILED" > /tmp/build.prop
