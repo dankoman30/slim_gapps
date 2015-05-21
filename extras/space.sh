@@ -3,7 +3,7 @@
 # vars
 g_prop=/system/etc/g.prop
 current_gapps_size_kb=0
-buffer_kb=100000
+buffer_kb=50000
 force_install=0
 # STATUS for use in edify (1=not enough space, 2=non-slim gapps installed,
 # 3=rom not installed, 10=force install)
