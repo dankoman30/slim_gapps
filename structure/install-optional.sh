@@ -1,34 +1,23 @@
 #!/sbin/sh
 
-if (grep -qi "mako" /proc/cpuinfo ); then
-  echo "Installing Mako-specific google bits"
-  cp -a /tmp/common/* /system/
-fi
+device=$(grep -io '\(mako\|hammerhead\|shamu\|manta\|flo\|deb\)' /proc/cpuinfo)
 
-if (grep -qi "hammerhead" /proc/cpuinfo ); then
+if [ $device ]; then
+echo "Installing specific google bits"
+cp -a /tmp/common/* /system/
+
+if [ $device = "hammerhead" ]; then
   echo "Installing Hammerhead-specific google bits"
-  cp -a /tmp/common/* /system/
   cp -a /tmp/hammerhead/* /system/
 fi
 
-if (grep -qi "shamu" /proc/cpuinfo ); then
+if [ $device = "shamu" ]; then
   echo "Installing Shamu-specific google bits"
-  cp -a /tmp/common/* /system/
   cp -a /tmp/shamu/* /system/
 fi
 
-if (grep -qi "manta" /proc/cpuinfo ); then
+if [ $device = "manta" ]; then
   echo "Installing Manta-specific google bits"
-  cp -a /tmp/common/* /system/
   cp -a /tmp/manta/* /system/
 fi
-
-if (grep -qi "flo" /proc/cpuinfo ); then
-  echo "Installing Razor-specific google bits"
-  cp -a /tmp/common/* /system/
-fi
-
-if (grep -qi "deb" /proc/cpuinfo ); then
-  echo "Installing Razor-specific google bits"
-  cp -a /tmp/common/* /system/
 fi
