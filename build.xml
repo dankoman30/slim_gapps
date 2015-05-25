@@ -49,7 +49,7 @@
     <!-- complete build                                                        -->
     <!--=======================================================================-->
     <target name="buildAll"
-            depends="cleanupBefore,initit,generateCleanUpList,buildZero,buildMini,buildNormal,buildFull,cleanupAfter"
+            depends="cleanupBefore,initit,generateCleanUpList,buildZero,buildMini,cleanupAfter"
             description="execute complete build"/>
 
     <!--=======================================================================-->
@@ -67,27 +67,14 @@
         <!-- copy files -->
         <copy todir="${work.dir}">
             <fileset dir="${structure.dir}">
-                <include name="install-optional.sh"/>
-                <include name="META-INF/**"/>
-                <include name="optional/**"/>
-                <include name="system/app/ConfigUpdater/**"/>
-                <include name="system/app/ExchangeServices/**"/>
-                <include name="system/app/FaceLock/**"/>
-                <include name="system/app/GoogleCalendarSyncAdapter/**"/>
-                <include name="system/app/GoogleContactsSyncAdapter/**"/>
-                <include name="system/etc/**"/>
-                <include name="system/framework/**"/>
-                <include name="system/lib/**"/>
-                <include name="system/priv-app/GoogleBackupTransport/**"/>
-                <include name="system/priv-app/GoogleFeedback/**"/>
-                <include name="system/priv-app/GoogleLoginService/**"/>
-                <include name="system/priv-app/GoogleOneTimeInitializer/**"/>
-                <include name="system/priv-app/GooglePartnerSetup/**"/>
-                <include name="system/priv-app/GoogleServicesFramework/**"/>
-                <include name="system/priv-app/Phonesky/**"/>
-                <include name="system/priv-app/PrebuiltGmsCore/**"/>
-                <include name="system/priv-app/SetupWizard/**"/>
-                <include name="system/vendor/**"/>
+                <exclude name="system/app/ConfigUpdater/**"/>
+                <exclude name="system/app/ExchangeServices/**"/>
+                <exclude name="system/app/FaceLock/**"/>
+                <exclude name="system/app/GoogleCalendarSyncAdapter/**"/>
+                <exclude name="system/priv-app/talkback/**"/>
+                <exclude name="system/priv-app/Velvet/**"/>
+                <exclude name="system/tts/**"/>
+                <exclude name="system/vendor/**"/>
             </fileset>
         </copy>
         <copy file="${app.dir}/extras/updater-script" todir="${work.dir}/META-INF/com/google/android">
@@ -148,32 +135,7 @@
         </propertyfile>
         <!-- copy files -->
         <copy todir="${work.dir}">
-            <fileset dir="${structure.dir}">
-                <exclude name="system/app/Books/**"/>
-                <exclude name="system/app/CalendarGoogle/**"/>
-                <exclude name="system/app/CameraGoogle/**"/>
-                <exclude name="system/app/Chrome/**"/>
-                <exclude name="system/app/CloudPrint/**"/>
-                <exclude name="system/app/Docs/**"/>
-                <exclude name="system/app/Drive/**"/>
-                <exclude name="system/app/Games/**"/>
-                <exclude name="system/app/GenieWidget/**"/>
-                <exclude name="system/app/GoogleHome/**"/>
-                <exclude name="system/app/GoogleTTS/**"/>
-                <exclude name="system/app/Keep/**"/>
-                <exclude name="system/app/Keyboard/**"/>
-                <exclude name="system/app/Maps/**"/>
-                <exclude name="system/app/Messenger/**"/>
-                <exclude name="system/app/Movies/**"/>
-                <exclude name="system/app/Newsstand/**"/>
-                <exclude name="system/app/Sheets/**"/>
-                <exclude name="system/app/Slides/**"/>
-                <exclude name="system/app/Street/**"/>
-                <exclude name="system/app/Translate/**"/>
-                <exclude name="system/app/Wallet/**"/>
-                <exclude name="system/tts/**"/>
-                <exclude name="system/usr/**"/>
-            </fileset>
+            <fileset dir="${structure.dir}"/>
         </copy>
         <copy file="${app.dir}/extras/updater-script" todir="${work.dir}/META-INF/com/google/android">
             <filterchain>
@@ -215,132 +177,6 @@
         <!-- zip and sign it -->
         <antcall target="ZipAndSigning">
             <param name="hfile.name" value="${file.name.mini}"/>
-        </antcall>
-
-    </target>
-
-    <!--=======================================================================-->
-    <!-- normal                                                                -->
-    <!--=======================================================================-->
-    <target name="buildNormal"
-            description="execute normal gapps build">
-        <!-- preparations -->
-        <property environment="env"/>
-        <property name="file.name.normal" value="${build.dir}/Slim_normal_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${build.today}.zip"/>
-        <delete dir="${work.dir}"/>
-        <propertyfile file="${build.dir}/gapps.filenames">
-            <entry key="normalfilename" value="${file.name.normal}"/>
-        </propertyfile>
-        <!-- copy files -->
-        <copy todir="${work.dir}">
-            <fileset dir="${structure.dir}">
-                <exclude name="system/app/Books/**"/>
-                <exclude name="system/app/Docs/**"/>
-                <exclude name="system/app/Games/**"/>
-                <exclude name="system/app/Movies/**"/>
-                <exclude name="system/app/Newsstand/**"/>
-                <exclude name="system/app/Sheets/**"/>
-                <exclude name="system/app/Slides/**"/>
-            </fileset>
-        </copy>
-        <copy file="${app.dir}/extras/updater-script" todir="${work.dir}/META-INF/com/google/android">
-            <filterchain>
-                <replaceregex pattern="@package@" replace="normal" flags="i"/>
-                <replaceregex pattern="@cleanup.list@" replace="${cleanup.list}" flags="i"/>
-            </filterchain>
-        </copy>
-
-        <!-- generate backup script --> 
-        <fileset id="item.file" dir="${work.dir}/system" includes="**/*"/>
-        <pathconvert refid="item.file" property="file.list.normal" pathsep="&#10;" dirsep="/">
-            <map from="${work.dir}/system/" to=''/>
-        </pathconvert>
-        <copy file="${app.dir}/extras/80-gapps.sh" todir="${work.dir}/system/addon.d">
-            <filterchain>
-                <replaceregex pattern="@file.list@" replace="${file.list.normal}" flags="i"/>
-            </filterchain>
-        </copy>
-
-        <!-- fill in g.prop values -->
-        <length property="length.normal" mode="all">
-            <fileset dir="${work.dir}"/>
-        </length>
-        <copy file="${app.dir}/extras/g.prop" todir="${work.dir}/system/etc">
-            <filterchain>
-                <replaceregex pattern="@build.version@" replace="slim.normal.${build.today}" flags="i"/>
-                <replaceregex pattern="@min.version@" replace="${PRODUCT_VERSION_MAJOR}" flags="i"/>
-                <replaceregex pattern="@size@" replace="${length.normal}" flags="i"/>
-            </filterchain>
-        </copy>
-
-        <!-- copy space.sh and fill in values -->
-        <copy file="${app.dir}/extras/space.sh" todir="${work.dir}">
-            <filterchain>
-                <replaceregex pattern="@space_needed@" replace="${length.normal}" flags="i"/>
-            </filterchain>
-        </copy>
-
-        <!-- zip and sign it -->
-        <antcall target="ZipAndSigning">
-            <param name="hfile.name" value="${file.name.normal}"/>
-        </antcall>
-
-    </target>
-  
-    <!--=======================================================================-->
-    <!-- full                                                                  -->
-    <!--=======================================================================-->
-    <target name="buildFull"
-            description="execute full gapps build">
-        <!-- preparations -->
-        <property environment="env"/>
-        <property name="file.name.full" value="${build.dir}/Slim_full_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${build.today}.zip"/>
-        <delete dir="${work.dir}"/>
-        <propertyfile file="${build.dir}/gapps.filenames">
-            <entry key="fullfilename" value="${file.name.full}"/>
-        </propertyfile>
-        <!-- copy files -->
-        <copy todir="${work.dir}"><fileset dir="${structure.dir}"/></copy>
-        <copy file="${app.dir}/extras/updater-script" todir="${work.dir}/META-INF/com/google/android">
-            <filterchain>
-                <replaceregex pattern="@package@" replace="full" flags="i"/>
-                <replaceregex pattern="@cleanup.list@" replace="${cleanup.list}" flags="i"/>
-            </filterchain>
-        </copy>
-
-        <!-- generate backup script --> 
-        <fileset id="item.file" dir="${work.dir}/system" includes="**/*"/>
-        <pathconvert refid="item.file" property="file.list.full" pathsep="&#10;" dirsep="/">
-            <map from="${work.dir}/system/" to=''/>
-        </pathconvert>
-        <copy file="${app.dir}/extras/80-gapps.sh" todir="${work.dir}/system/addon.d">
-            <filterchain>
-                <replaceregex pattern="@file.list@" replace="${file.list.full}" flags="i"/>
-            </filterchain>
-        </copy>
-
-        <!-- fill in g.prop values -->
-        <length property="length.full" mode="all">
-            <fileset dir="${work.dir}"/>
-        </length>
-        <copy file="${app.dir}/extras/g.prop" todir="${work.dir}/system/etc">
-            <filterchain>
-                <replaceregex pattern="@build.version@" replace="slim.full.${build.today}" flags="i"/>
-                <replaceregex pattern="@min.version@" replace="${PRODUCT_VERSION_MAJOR}" flags="i"/>
-                <replaceregex pattern="@size@" replace="${length.full}" flags="i"/>
-            </filterchain>
-        </copy>
-
-        <!-- copy space.sh and fill in values -->
-        <copy file="${app.dir}/extras/space.sh" todir="${work.dir}">
-            <filterchain>
-                <replaceregex pattern="@space_needed@" replace="${length.full}" flags="i"/>
-            </filterchain>
-        </copy>
-
-        <!-- zip and sign it -->
-        <antcall target="ZipAndSigning">
-            <param name="hfile.name" value="${file.name.full}"/>
         </antcall>
 
     </target>
