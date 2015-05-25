@@ -70,7 +70,6 @@
                 <exclude name="system/app/ConfigUpdater/**"/>
                 <exclude name="system/app/ExchangeServices/**"/>
                 <exclude name="system/app/FaceLock/**"/>
-                <exclude name="system/app/GoogleCalendarSyncAdapter/**"/>
                 <exclude name="system/priv-app/talkback/**"/>
                 <exclude name="system/priv-app/Velvet/**"/>
                 <exclude name="system/tts/**"/>
