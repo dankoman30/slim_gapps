@@ -25,6 +25,11 @@ ifelse(
             set_perm(0, 0, 0777, "/tmp/install-optional.sh");
             run_program("/tmp/install-optional.sh", "");
             show_progress(1, 15);
+            package_extract_dir("dynamic", "/tmp");
+            package_extract_file("dynamic.sh", "/tmp/dynamic.sh");
+            set_perm(0, 0, 0777, "/tmp/dynamic.sh");
+            run_program("/tmp/dynamic.sh", "");
+            show_progress(1, 15);
             ui_print("Cleaning up and setting metadata...");
             set_metadata_recursive("/system/addon.d", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
             set_metadata_recursive("/system/app", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
@@ -59,6 +64,11 @@ ifelse(
             package_extract_file("install-optional.sh", "/tmp/install-optional.sh");
             set_perm(0, 0, 0777, "/tmp/install-optional.sh");
             run_program("/tmp/install-optional.sh", "");
+            show_progress(1, 15);
+            package_extract_dir("dynamic", "/tmp");
+            package_extract_file("dynamic.sh", "/tmp/dynamic.sh");
+            set_perm(0, 0, 0777, "/tmp/dynamic.sh");
+            run_program("/tmp/dynamic.sh", "");
             show_progress(1, 15);
             ui_print("Cleaning up and setting metadata...");
             set_metadata_recursive("/system/addon.d", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");

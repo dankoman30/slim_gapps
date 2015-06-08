@@ -69,17 +69,25 @@
             <fileset dir="${structure.dir}">
                 <exclude name="system/app/ConfigUpdater/**"/>
                 <exclude name="system/app/ExchangeServices/**"/>
-                <exclude name="system/app/FaceLock/**"/>
                 <exclude name="system/priv-app/talkback/**"/>
-                <exclude name="system/priv-app/Velvet/**"/>
                 <exclude name="system/tts/**"/>
                 <exclude name="system/vendor/**"/>
+                <exclude name="dynamic/FaceLock/**"/>
+                <exclude name="dynamic/Velvet/**"/>
+                <exclude name="dynamic.sh"/>
             </fileset>
         </copy>
         <copy file="${app.dir}/extras/updater-script" todir="${work.dir}/META-INF/com/google/android">
             <filterchain>
                 <replaceregex pattern="@package@" replace="zero" flags="i"/>
                 <replaceregex pattern="@cleanup.list@" replace="${cleanup.list}" flags="i"/>
+            </filterchain>
+        </copy>
+        <copy file="${app.dir}/structure/dynamic.sh" todir="${work.dir}">
+            <filterchain>
+                <linecontains negate="true">
+                    <contains value="#mini"/>
+                </linecontains>
             </filterchain>
         </copy>
 
