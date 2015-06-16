@@ -106,13 +106,14 @@
         <length property="length.zero" mode="all">
             <fileset dir="${work.dir}"/>
         </length>
-        <copy file="${app.dir}/extras/g.prop" todir="${work.dir}/system/etc">
-            <filterchain>
-                <replaceregex pattern="@build.version@" replace="slim.zero.${build.today}" flags="i"/>
-                <replaceregex pattern="@min.version@" replace="${PRODUCT_VERSION_MAJOR}" flags="i"/>
-                <replaceregex pattern="@size@" replace="${length.zero}" flags="i"/>
-            </filterchain>
-        </copy>
+        
+        <propertyfile file="${work.dir}/system/etc/g.prop">
+  	    <entry key="ro.addon.type" value="gapps"/>
+  	    <entry key="ro.addon.platform" value="lp"/>
+      	    <entry key="ro.addon.version" value="slim.zero.${build.today}"/>
+      	    <entry key="ro.addon.minimumversion" value="${PRODUCT_VERSION_MAJOR}"/>
+      	    <entry key="ro.addon.size" value="${length.zero}"/>
+	</propertyfile>
 
         <!-- copy space.sh and fill in values -->
         <copy file="${app.dir}/extras/space.sh" todir="${work.dir}">
@@ -166,13 +167,14 @@
         <length property="length.mini" mode="all">
             <fileset dir="${work.dir}"/>
         </length>
-        <copy file="${app.dir}/extras/g.prop" todir="${work.dir}/system/etc">
-            <filterchain>
-                <replaceregex pattern="@build.version@" replace="slim.mini.${build.today}" flags="i"/>
-                <replaceregex pattern="@min.version@" replace="${PRODUCT_VERSION_MAJOR}" flags="i"/>
-                <replaceregex pattern="@size@" replace="${length.mini}" flags="i"/>
-            </filterchain>
-        </copy>
+        
+        <propertyfile file="${work.dir}/system/etc/g.prop">
+  	    <entry key="ro.addon.type" value="gapps"/>
+  	    <entry key="ro.addon.platform" value="lp"/>
+      	    <entry key="ro.addon.version" value="slim.mini.${build.today}"/>
+      	    <entry key="ro.addon.minimumversion" value="${PRODUCT_VERSION_MAJOR}"/>
+      	    <entry key="ro.addon.size" value="${length.mini}"/>
+	</propertyfile>
 
         <!-- copy space.sh and fill in values -->
         <copy file="${app.dir}/extras/space.sh" todir="${work.dir}">
