@@ -108,12 +108,12 @@
         </length>
         
         <propertyfile file="${work.dir}/system/etc/g.prop">
-  	    <entry key="ro.addon.type" value="gapps"/>
-  	    <entry key="ro.addon.platform" value="lp"/>
-      	    <entry key="ro.addon.version" value="slim.zero.${build.today}"/>
-      	    <entry key="ro.addon.minimumversion" value="${PRODUCT_VERSION_MAJOR}"/>
-      	    <entry key="ro.addon.size" value="${length.zero}"/>
-	</propertyfile>
+            <entry key="ro.addon.type" value="gapps"/>
+            <entry key="ro.addon.platform" value="lp"/>
+            <entry key="ro.addon.version" value="slim.zero.${build.today}"/>
+            <entry key="ro.addon.minimumversion" value="${PRODUCT_VERSION_MAJOR}"/>
+            <entry key="ro.addon.size" value="${length.zero}"/>
+        </propertyfile>
 
         <!-- copy space.sh and fill in values -->
         <copy file="${app.dir}/extras/space.sh" todir="${work.dir}">
@@ -169,12 +169,12 @@
         </length>
         
         <propertyfile file="${work.dir}/system/etc/g.prop">
-  	    <entry key="ro.addon.type" value="gapps"/>
-  	    <entry key="ro.addon.platform" value="lp"/>
-      	    <entry key="ro.addon.version" value="slim.mini.${build.today}"/>
-      	    <entry key="ro.addon.minimumversion" value="${PRODUCT_VERSION_MAJOR}"/>
-      	    <entry key="ro.addon.size" value="${length.mini}"/>
-	</propertyfile>
+            <entry key="ro.addon.type" value="gapps"/>
+            <entry key="ro.addon.platform" value="lp"/>
+            <entry key="ro.addon.version" value="slim.mini.${build.today}"/>
+            <entry key="ro.addon.minimumversion" value="${PRODUCT_VERSION_MAJOR}"/>
+            <entry key="ro.addon.size" value="${length.mini}"/>
+        </propertyfile>
 
         <!-- copy space.sh and fill in values -->
         <copy file="${app.dir}/extras/space.sh" todir="${work.dir}">
