@@ -91,14 +91,14 @@ ifelse(
         (
             ui_print("* not enough free space on system *");
             ui_print("plz try a smaller package.");
-            ui_print("******* gapps Installation failed *******");
-            ui_print("no changes were made to your device");
-            ui_print(" ");
-            ui_print("now exiting...");
             ui_print("if you believe this to be a mistake, submit");
             ui_print("recovery.log from your root storage after choosing");
             ui_print("Advanced > Copy log to SD");
             ui_print("from TWRP.");
+            ui_print("******* gapps Installation failed *******");
+            ui_print("no changes were made to your device");
+            ui_print(" ");
+            ui_print("now exiting...");
             run_program("/sbin/busybox", "umount", "/system");
         )
 );
@@ -110,14 +110,14 @@ ifelse(
             ui_print("please wipe your system partition in recovery,");
             ui_print("re-flash rom, and then flash gapps again.");
             ui_print("you'll only have to do this once.");
-            ui_print("******* gapps Installation failed *******");
-            ui_print("no changes were made to your device");
-            ui_print(" ");
-            ui_print("now exiting...");
             ui_print("if you believe this to be a mistake, submit");
             ui_print("recovery.log from your root storage after choosing");
             ui_print("Advanced > Copy log to SD");
             ui_print("from TWRP.");
+            ui_print("******* gapps Installation failed *******");
+            ui_print("no changes were made to your device");
+            ui_print(" ");
+            ui_print("now exiting...");
             run_program("/sbin/busybox", "umount", "/system");
         )
 );
@@ -126,14 +126,14 @@ ifelse(
     file_getprop("/tmp/build.prop", "ro.gapps.install.status") == "3",
         (
             ui_print("no rom installed. please flash rom before gapps.");
-            ui_print("******* gapps Installation failed *******");
-            ui_print("no changes were made to your device");
-            ui_print(" ");
-            ui_print("now exiting...");
             ui_print("if you believe this to be a mistake, submit");
             ui_print("recovery.log from your root storage after choosing");
             ui_print("Advanced > Copy log to SD");
             ui_print("from TWRP.");
+            ui_print("******* gapps Installation failed *******");
+            ui_print("no changes were made to your device");
+            ui_print(" ");
+            ui_print("now exiting...");
             run_program("/sbin/busybox", "umount", "/system");
         )
 );
