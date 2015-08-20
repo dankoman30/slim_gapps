@@ -137,3 +137,19 @@ ifelse(
             run_program("/sbin/busybox", "umount", "/system");
         )
 );
+
+ifelse(
+    file_getprop("/tmp/build.prop", "ro.gapps.install.status") == "4",
+        (
+            ui_print("rom and gapps versions do not match.");
+            ui_print("if you believe this to be a mistake, submit");
+            ui_print("recovery.log from your root storage after choosing");
+            ui_print("Advanced > Copy log to SD");
+            ui_print("from TWRP.");
+            ui_print("******* gapps Installation failed *******");
+            ui_print("no changes were made to your device");
+            ui_print(" ");
+            ui_print("now exiting...");
+            run_program("/sbin/busybox", "umount", "/system");
+        )
+);
