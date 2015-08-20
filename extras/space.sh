@@ -2,11 +2,12 @@
 
 # vars
 g_prop=/system/etc/g.prop
+rom_build_prop=/system/build.prop
 current_gapps_size_kb=0
 buffer_kb=50000
 force_install=0
 # STATUS for use in edify (1=not enough space, 2=non-slim gapps installed,
-# 3=rom not installed, 10=force install)
+# 3=rom not installed, 4=rom and gapps versions don't match, 10=force install)
 STATUS=0
 
 # functions
@@ -53,10 +54,22 @@ then
     fi
 fi
 
-if [ -e /system/build.prop ]
+if [ -e $rom_build_prop ]
 then
+    # prevent installation of incorrect gapps version
+    rom_version_required=$(file_getprop $g_prop ro.addon.minimumversion)
+    rom_version_installed=$(file_getprop $rom_build_prop ro.build.version.release)
+    ui_print "rom version required: $rom_version_required"
+    ui_print "rom version installed: $rom_version_installed"
+    if [ -z "${rom_version_installed##*$rom_version_required*}" ]
+    then
+        ui_print "ROM and GAPPS versions match! Proceeding...";
+    else
+        special_status 4
+    fi
+
     # conditions in rom's build.prop that should force installation
-    if [ -n "$(grep ArchiDroid /system/build.prop)" ]
+    if [ -n "$(grep ArchiDroid $rom_build_prop)" ]
     then
         force_install=1
     fi
@@ -84,7 +97,7 @@ ui_print "current gapps size: $current_gapps_size_kb KB"
 if [ "$post_free_system_size_kb" -ge $needed_system_size_kb ]
 then
     # CONTINUE TO INSTALL GAPPS
-    ui_print "gapps installation will now proceed..."
+    ui_print "size check passed..."
 else
     special_status 1
 fi
