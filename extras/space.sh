@@ -57,7 +57,7 @@ fi
 if [ -e $rom_build_prop ]
 then
     # prevent installation of incorrect gapps version
-    rom_version_required=$(file_getprop $g_prop ro.addon.minimumversion)
+    rom_version_required=@version@
     rom_version_installed=$(file_getprop $rom_build_prop ro.build.version.release)
     ui_print "rom version required: $rom_version_required"
     ui_print "rom version installed: $rom_version_installed"
