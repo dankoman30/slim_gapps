@@ -56,6 +56,8 @@ fi
 
 if [ -e $rom_build_prop ]
 then
+    rom_build_name=$(file_getprop $rom_build_prop ro.build.display.id)
+    ui_print "rom build: $rom_build_name"
     # prevent installation of incorrect gapps version
     rom_version_required=@version@
     rom_version_installed=$(file_getprop $rom_build_prop ro.build.version.release)
@@ -99,6 +101,9 @@ then
     # CONTINUE TO INSTALL GAPPS
     ui_print "size check passed..."
 else
+    short_by_kb=$((needed_system_size_kb - post_free_system_size_kb))
+    ui_print "you need to increase the size of your system partition"
+    ui_print "by at least $short_by_kb KB for this package to fit."
     special_status 1
 fi
 
