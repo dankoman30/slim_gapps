@@ -43,7 +43,7 @@
     <property name="sign.pk8"                     value="${app.dir}/tools/testkey.pk8"/>
     <property name="extra.dir"                    value="${app.dir}/extras"/>
     <property name="apkmirror.dir"                value="${app.dir}/apkmirror"/>
-    <property name="pattern.apk"                  value="\\.([^\\.]+)(.?)\\-"/>
+    <property name="pattern.apk"                  value="\.([^\.]+)(.?)\-"/>
     <tstamp>  
         <format property="build.today" pattern="yyyyMMdd"/>
     </tstamp>  
