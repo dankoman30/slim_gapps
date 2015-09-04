@@ -43,7 +43,7 @@
     <property name="sign.pk8"                     value="${app.dir}/tools/testkey.pk8"/>
     <property name="extra.dir"                    value="${app.dir}/extras"/>
     <property name="apkmirror.dir"                value="${app.dir}/apkmirror"/>
-    <property name="pattern.apk"                  value="\.([^\.]+)(.?)\-"/>
+    <!-- <property name="pattern.apk"                value="\.([^\.]+)(.?)\-"/>-->
     <tstamp>  
         <format property="build.today" pattern="yyyyMMdd"/>
     </tstamp>  
@@ -240,8 +240,8 @@
     <target name="SlimApk">
         <java dir="${build.dir}" fork="true" failonerror="true" maxmemory="1536m" jar="${slimapk.jar}">
             <arg value="-k"/>
-            <arg value="-p"/>
-            <arg value="${pattern.apk}"/>
+            <!--<arg value="-p"/>-->
+            <!--<arg value="${pattern.apk}"/>-->
             <arg value="-i"/>
             <arg value="${apkmirror.dir}/arm"/>
             <arg value="-o"/>
