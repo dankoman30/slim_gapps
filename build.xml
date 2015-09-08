@@ -242,9 +242,7 @@
             <arg value="-k"/>
             <!--<arg value="-p"/>-->
             <!--<arg value="${pattern.apk}"/>-->
-            <arg value="-i"/>
             <arg value="${originalapk.dir}/arm"/>
-            <arg value="-o"/>
             <arg value="${structure.dir}/system/"/>
         </java>
     </target>
