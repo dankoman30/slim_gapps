@@ -14,15 +14,14 @@ if [ $DEVICE == Flounder ]; then
 fi
 
 # PrebuiltGmsCore
-# COPY 230 (ARM VERSION) TO SYSTEM
-cp -af /tmp/PrebuiltGmsCore/230/* /system
-cp -af /tmp/PrebuiltGmsCore/arm/* /system
-
-# IF 64-BIT ARCHITECTURE, REMOVE 230 AND INSTALL 240
+# IF 64-BIT ARCHITECTURE INSTALL 240
 if [ $ARCH == arm64-v8a ]; then
- rm -rf /system/priv-app/PrebuiltGmsCore
  cp -af /tmp/PrebuiltGmsCore/240/* /system
  cp -af /tmp/PrebuiltGmsCore/arm64/* /system
+else
+# COPY 230 (ARM VERSION) TO SYSTEM
+ cp -af /tmp/PrebuiltGmsCore/230/* /system
+ cp -af /tmp/PrebuiltGmsCore/arm/* /system
 fi
 
 # Swypelib
