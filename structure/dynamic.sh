@@ -34,6 +34,7 @@ else
 fi
 
 # FaceLock #mini
+cp -af /tmp/FaceLock/vendor/* /system/vendor #mini
 if [ $ARCH == armeabi-v7a ]; then #mini
  cp -af /tmp/FaceLock/arm/* /system #mini
 elif [ $ARCH == arm64-v8a ]; then #mini
@@ -43,6 +44,7 @@ else #mini
 fi #mini
 #mini
 # Velvet #mini
+cp -af /tmp/Velvet/usr/* /system/usr #mini
 if [ $ARCH == armeabi-v7a ]; then #mini
  cp -af /tmp/Velvet/arm/* /system #mini
 elif [ $ARCH == arm64-v8a ]; then #mini
