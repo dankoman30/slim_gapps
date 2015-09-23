@@ -37,10 +37,13 @@
     <property name="work.dir"                     value="${app.dir}/work"/>
     <property name="build.dir"                    value="${app.dir}/build"/>
     <property name="structure.dir"                value="${app.dir}/structure"/>
+    <property name="slimapk.jar"                  value="${app.dir}/tools/slimapk.jar"/>
     <property name="sign.jar"                     value="${app.dir}/tools/signapk.jar"/>
     <property name="sign.pem"                     value="${app.dir}/tools/testkey.x509.pem"/>
     <property name="sign.pk8"                     value="${app.dir}/tools/testkey.pk8"/>
     <property name="extra.dir"                    value="${app.dir}/extras"/>
+    <property name="original_apk.dir"             value="${app.dir}/original_apk"/>
+    <property name="tmp.dir"                      value="${app.dir}/.tmp"/>
     <tstamp>  
         <format property="build.today" pattern="yyyyMMdd"/>
     </tstamp>  
@@ -49,7 +52,7 @@
     <!-- complete build                                                        -->
     <!--=======================================================================-->
     <target name="buildAll"
-            depends="cleanupBefore,initit,generateCleanUpList,buildZero,buildMini,cleanupAfter"
+            depends="cleanupBefore,initit,generateCleanUpList,SlimApk,buildZero,buildMini,cleanupAfter"
             description="execute complete build"/>
 
     <!--=======================================================================-->
@@ -144,6 +147,10 @@
         <!-- copy files -->
         <copy todir="${work.dir}">
             <fileset dir="${structure.dir}"/>
+            <fileset dir="${tmp.dir}">
+                <include name="system/app/**"/>
+                <include name="system/priv-app/**"/>
+            </fileset>
         </copy>
         <copy file="${app.dir}/extras/updater-script" todir="${work.dir}/META-INF/com/google/android">
             <filterchain>
@@ -228,6 +235,22 @@
             <arg value="${hfile.name}"/>
         </java>
     </target>
+    
+    <!--=======================================================================-->
+    <!-- slimapk                                                               -->   
+    <!--=======================================================================--> 
+    <target name="SlimApk">
+        <java dir="${build.dir}" fork="true" failonerror="true" maxmemory="1536m" jar="${slimapk.jar}">
+            <arg value="-k"/>
+            <!--
+            <arg value="-a64"/> arm64
+            <arg value="-d"/> info messages
+            <arg value="-l='${tmp.dir}/list.txt'"/>  app_name #version 
+                bash: https://goo.gl/kPrasa -->
+            <arg value="${original_apk.dir}/arm/"/>
+            <arg value="${tmp.dir}/system/"/>
+        </java>
+    </target>
 
     <!--=======================================================================-->
     <!-- cleanupBefore new build                                               -->
@@ -246,6 +269,7 @@
         <echo message="Cleaning up"/>
         <delete file="${build.dir}/unsigned.zip"/>
         <delete file="${build.dir}/gapps.filenames"/>
+        <delete dir="${tmp.dir}"/>
     </target>
 
     <!--=======================================================================-->
@@ -255,6 +279,7 @@
             description="initiating-steps">
         <mkdir dir="${build.dir}"/>
         <mkdir dir="${work.dir}"/>
+        <mkdir dir="${tmp.dir}"/>
     </target>
 
     <!--=======================================================================-->
