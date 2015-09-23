@@ -240,15 +240,31 @@
     <!-- slimapk                                                               -->   
     <!--=======================================================================--> 
     <target name="SlimApk">
+        <antcall target="SAExtract">
+            <param name="arch.type" value="arm"/>
+            <param name="save.path" value="system/"/>
+        </antcall>
+        <antcall target="SAExtract">
+            <param name="arch.type" value="arm64"/>
+            <param name="save.path" value="system/"/>
+        </antcall>
+        <antcall target="SAExtract">
+            <param name="arch.type" value="any"/>
+            <param name="save.path" value="dynamic/"/>
+        </antcall>
+    </target>
+    
+    <target name="SAExtract">  
+        <echo message="${arch.type}"/>
         <java dir="${build.dir}" fork="true" failonerror="true" maxmemory="1536m" jar="${slimapk.jar}">
             <arg value="-k"/>
+            <arg value="--${arch.type}"/>
             <!--
-            <arg value="-a64"/> arm64
             <arg value="-d"/> info messages
             <arg value="-l='${tmp.dir}/list.txt'"/>  app_name #version 
                 bash: https://goo.gl/kPrasa -->
-            <arg value="${original_apk.dir}/arm/"/>
-            <arg value="${tmp.dir}/system/"/>
+            <arg value="${original_apk.dir}/${arch.type}/"/>
+            <arg value="${tmp.dir}/${save.path}"/>
         </java>
     </target>
 
