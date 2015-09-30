@@ -8,19 +8,22 @@ DEVICE=$(grep ro.product.device= /system/build.prop | cut -d "=" -f 2);
 if [ $DEVICE == flounder ]; then
  cp -af /tmp/HotwordEnrollment/arm64/* /system
 fi
-
 if [ $DEVICE == Flounder ]; then
+ cp -af /tmp/HotwordEnrollment/arm64/* /system
+fi
+if [ $DEVICE == volantis ]; then
+ cp -af /tmp/HotwordEnrollment/arm64/* /system
+fi
+if [ $DEVICE == Volantis ]; then
  cp -af /tmp/HotwordEnrollment/arm64/* /system
 fi
 
 # PrebuiltGmsCore
-# IF 64-BIT ARCHITECTURE INSTALL 240
-if [ $ARCH == arm64-v8a ]; then
- cp -af /tmp/PrebuiltGmsCore/240/* /system
+if [ $ARCH == armeabi-v7a ]; then
+ cp -af /tmp/PrebuiltGmsCore/arm/* /system
+elif [ $ARCH == arm64-v8a ]; then
  cp -af /tmp/PrebuiltGmsCore/arm64/* /system
 else
-# COPY 230 (ARM VERSION) TO SYSTEM
- cp -af /tmp/PrebuiltGmsCore/230/* /system
  cp -af /tmp/PrebuiltGmsCore/arm/* /system
 fi
 
