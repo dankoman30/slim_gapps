@@ -1,6 +1,6 @@
 #!/sbin/sh
 
-device=$(grep -io '\(mako\|hammerhead\|shamu\|manta\|flo\|deb\)' /proc/cpuinfo)
+device=$((grep -io '\( mako$\| hammerhead$\| shamu$\| manta$\| flo$\| deb$\)' /proc/cpuinfo)|awk '{print tolower($0)}')
 
 if [ $device ]; then
 echo "Installing specific google bits"
