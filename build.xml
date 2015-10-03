@@ -37,10 +37,13 @@
     <property name="work.dir"                     value="${app.dir}/work"/>
     <property name="build.dir"                    value="${app.dir}/build"/>
     <property name="structure.dir"                value="${app.dir}/structure"/>
+    <property name="slimapk.jar"                  value="${app.dir}/tools/slimapk.jar"/>
     <property name="sign.jar"                     value="${app.dir}/tools/signapk.jar"/>
     <property name="sign.pem"                     value="${app.dir}/tools/testkey.x509.pem"/>
     <property name="sign.pk8"                     value="${app.dir}/tools/testkey.pk8"/>
     <property name="extra.dir"                    value="${app.dir}/extras"/>
+    <property name="original_apk.dir"             value="${app.dir}/original_apk"/>
+    <property name="dynamic.dir"                  value="${structure.dir}/dynamic"/>
     <tstamp>  
         <format property="build.today" pattern="yyyyMMdd"/>
     </tstamp>  
@@ -49,7 +52,7 @@
     <!-- complete build                                                        -->
     <!--=======================================================================-->
     <target name="buildAll"
-            depends="cleanupBefore,initit,generateCleanUpList,buildZero,buildMini,cleanupAfter"
+            depends="cleanupBefore,initit,generateCleanUpList,SlimApk,buildZero,buildMini,cleanupAfter"
             description="execute complete build"/>
 
     <!--=======================================================================-->
@@ -71,9 +74,12 @@
                 <exclude name="system/app/ExchangeServices/**"/>
                 <exclude name="system/priv-app/talkback/**"/>
                 <exclude name="system/tts/**"/>
-                <exclude name="dynamic/FaceLock/**"/>
-                <exclude name="dynamic/Velvet/**"/>
-                <exclude name="dynamic.sh"/>
+                <exclude name="dynamic/**"/>
+            </fileset>
+            <fileset dir="${structure.dir}">
+                <include name="dynamic/arm/priv-app/GooglePlayservices/**"/>
+                <include name="dynamic/arm64/priv-app/GooglePlayservices/**"/>
+                <include name="dynamic/storage/Swypelib/**"/>
             </fileset>
         </copy>
         <copy file="${app.dir}/extras/updater-script" todir="${work.dir}/META-INF/com/google/android">
@@ -82,14 +88,7 @@
                 <replaceregex pattern="@cleanup.list@" replace="${cleanup.list}" flags="i"/>
             </filterchain>
         </copy>
-        <copy file="${app.dir}/structure/dynamic.sh" todir="${work.dir}">
-            <filterchain>
-                <linecontains negate="true">
-                    <contains value="#mini"/>
-                </linecontains>
-            </filterchain>
-        </copy>
-
+        
         <!-- generate backup script --> 
         <fileset id="item.file" dir="${work.dir}/system" includes="**/*"/>
         <pathconvert refid="item.file" property="file.list.zero" pathsep="&#10;" dirsep="/">
@@ -229,6 +228,33 @@
         </java>
     </target>
 
+    <!--=======================================================================-->
+    <!-- slimapk                                                               -->   
+    <!--=======================================================================--> 
+    <target name="SlimApk">
+        <antcall target="SAExtract">
+            <param name="arch.type" value="arm"/>                     
+            <param name="input.path" value="arm/"/>
+            <param name="output.path" value="arm/"/>
+        </antcall>
+        <antcall target="SAExtract">
+            <param name="arch.type" value="arm64"/>            
+            <param name="input.path" value="arm64/"/>
+            <param name="output.path" value="arm64/"/>
+        </antcall>
+    </target>
+    
+    <target name="SAExtract">  
+        <echo message="${arch.type}"/>
+        
+        <java dir="${build.dir}" fork="true" failonerror="true" maxmemory="1536m" jar="${slimapk.jar}">
+            <arg value="-k"/>
+            <arg value="--${arch.type}"/>
+            <arg value="${original_apk.dir}/${input.path}/"/>
+            <arg value="${dynamic.dir}/${output.path}"/>
+        </java>
+    </target>
+    
     <!--=======================================================================-->
     <!-- cleanupBefore new build                                               -->
     <!--=======================================================================-->
