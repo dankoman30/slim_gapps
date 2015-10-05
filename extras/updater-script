@@ -20,10 +20,6 @@ ifelse(
             show_progress(1, 15);
             package_extract_dir("system", "/system");
             set_perm(0, 0, 0755, "/system/addon.d/80-gapps.sh");
-            package_extract_dir("optional", "/tmp");
-            package_extract_file("install-optional.sh", "/tmp/install-optional.sh");
-            set_perm(0, 0, 0777, "/tmp/install-optional.sh");
-            run_program("/tmp/install-optional.sh", "");
             show_progress(1, 15);
             package_extract_dir("dynamic", "/tmp");
             package_extract_file("dynamic.sh", "/tmp/dynamic.sh");
@@ -60,10 +56,6 @@ ifelse(
             show_progress(1, 15);
             package_extract_dir("system", "/system");
             set_perm(0, 0, 0755, "/system/addon.d/80-gapps.sh");
-            package_extract_dir("optional", "/tmp");
-            package_extract_file("install-optional.sh", "/tmp/install-optional.sh");
-            set_perm(0, 0, 0777, "/tmp/install-optional.sh");
-            run_program("/tmp/install-optional.sh", "");
             show_progress(1, 15);
             package_extract_dir("dynamic", "/tmp");
             package_extract_file("dynamic.sh", "/tmp/dynamic.sh");
