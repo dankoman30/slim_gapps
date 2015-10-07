@@ -200,17 +200,10 @@
                 <include name="*.sh"/>
             </fileset>
             <fileset dir="${structure.dir}/system"/>
-            <fileset dir="${structure.dir}/optional/"/>
         </path>
         <pathconvert refid="cleanup.file" property="cleanup.list" pathsep="&quot;,&#10;&quot;" dirsep="/">
             <map from="${extra.dir}" to="/system/addon.d"/>
             <map from="${structure.dir}/system/" to="/system/"/>
-            <map from="${structure.dir}/optional/common/" to="/system/"/>
-            <map from="${structure.dir}/optional/face/" to="/system/"/>
-            <map from="${structure.dir}/optional/hammerhead/" to="/system/"/>
-            <map from="${structure.dir}/optional/manta/" to="/system/"/>
-            <map from="${structure.dir}/optional/shamu/" to="/system/"/>
-            <map from="${structure.dir}/optional/tuna/" to="/system/"/>
         </pathconvert>
     </target>
 
