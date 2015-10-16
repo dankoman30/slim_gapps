@@ -24,7 +24,6 @@
 <project name="buildGapps"
         default="buildAll"
         basedir=".">
-    <property file="build.properties"/>
     <description>
         This file list is used by ant to build the Slim Gapps project
     </description>
@@ -40,7 +39,6 @@
     <property name="sign.jar"                     value="${app.dir}/tools/signapk.jar"/>
     <property name="sign.pem"                     value="${app.dir}/tools/testkey.x509.pem"/>
     <property name="sign.pk8"                     value="${app.dir}/tools/testkey.pk8"/>
-    <property name="extra.dir"                    value="${app.dir}/extras"/>
     <tstamp>  
         <format property="build.today" pattern="yyyyMMdd"/>
     </tstamp>  
@@ -49,162 +47,36 @@
     <!-- complete build                                                        -->
     <!--=======================================================================-->
     <target name="buildAll"
-            depends="cleanupBefore,initit,generateCleanUpList,buildZero,buildMini,cleanupAfter"
+            depends="cleanupBefore,initit,buildMulti,cleanupAfter"
             description="execute complete build"/>
 
     <!--=======================================================================-->
-    <!-- zero                                                                  -->
+    <!-- multi-dpi add-on                                                      -->
     <!--=======================================================================-->
-    <target name="buildZero"
-            description="execute zero gapps build">
+    <target name="buildMulti"
+            description="execute multi-dpi add-on build">
         <!-- preparations -->
         <property environment="env"/>
-        <property name="file.name.zero" value="${build.dir}/Slim_zero_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${build.today}.zip"/>
+        <property name="file.name.multi" value="${build.dir}/Slim_ADD-ON-5.1-MULTI_DPI-${build.today}.zip"/>
         <delete dir="${work.dir}"/>
         <propertyfile file="${build.dir}/gapps.filenames">
-            <entry key="zerofilename" value="${file.name.zero}"/>
+            <entry key="multifilename" value="${file.name.multi}"/>
         </propertyfile>
         <!-- copy files -->
         <copy todir="${work.dir}">
             <fileset dir="${structure.dir}">
-                <exclude name="system/app/ConfigUpdater/**"/>
-                <exclude name="system/app/ExchangeServices/**"/>
-                <exclude name="system/priv-app/talkback/**"/>
-                <exclude name="system/tts/**"/>
-                <exclude name="dynamic/FaceLock/**"/>
-                <exclude name="dynamic/Velvet/**"/>
-                <exclude name="dynamic.sh"/>
+                <include name="META-INF/**"/>
+                <include name="dynamic/**"/>
+                <include name="dynamic.sh"/>
+                <include name="system/**"/>
             </fileset>
-        </copy>
-        <copy file="${app.dir}/extras/updater-script" todir="${work.dir}/META-INF/com/google/android">
-            <filterchain>
-                <replaceregex pattern="@package@" replace="zero" flags="i"/>
-                <replaceregex pattern="@cleanup.list@" replace="${cleanup.list}" flags="i"/>
-            </filterchain>
-        </copy>
-        <copy file="${app.dir}/structure/dynamic.sh" todir="${work.dir}">
-            <filterchain>
-                <linecontains negate="true">
-                    <contains value="#mini"/>
-                </linecontains>
-            </filterchain>
-        </copy>
-
-        <!-- generate backup script --> 
-        <fileset id="item.file" dir="${work.dir}/system" includes="**/*"/>
-        <pathconvert refid="item.file" property="file.list.zero" pathsep="&#10;" dirsep="/">
-            <map from="${work.dir}/system/" to=''/>
-        </pathconvert>
-        <copy file="${app.dir}/extras/80-gapps.sh" todir="${work.dir}/system/addon.d">
-            <filterchain>
-                <replaceregex pattern="@file.list@" replace="${file.list.zero}" flags="i"/>
-            </filterchain>
-        </copy>
-
-        <!-- fill in g.prop values -->
-        <length property="length.zero" mode="all">
-            <fileset dir="${work.dir}"/>
-        </length>
-        
-        <propertyfile file="${work.dir}/system/etc/g.prop">
-            <entry key="ro.addon.type" value="gapps"/>
-            <entry key="ro.addon.platform" value="lp"/>
-            <entry key="ro.addon.version" value="slim.zero.${build.today}"/>
-            <entry key="ro.addon.minimumversion" value="${PRODUCT_VERSION_MAJOR}"/>
-            <entry key="ro.addon.size" value="${length.zero}"/>
-        </propertyfile>
-
-        <!-- copy space.sh and fill in values -->
-        <copy file="${app.dir}/extras/space.sh" todir="${work.dir}">
-            <filterchain>
-                <replaceregex pattern="@version@" replace="${PRODUCT_VERSION_MAJOR}" flags="i"/>
-                <replaceregex pattern="@space_needed@" replace="${length.zero}" flags="i"/>
-            </filterchain>
         </copy>
 
         <!-- zip and sign it --> 
         <antcall target="ZipAndSigning">
-            <param name="hfile.name" value="${file.name.zero}"/>
+            <param name="hfile.name" value="${file.name.multi}"/>
         </antcall>
 
-    </target>
-
-    <!--=======================================================================-->
-    <!-- mini                                                                  -->
-    <!--=======================================================================-->
-    <target name="buildMini"
-            description="execute mini gapps build">
-        <!-- preparations -->
-        <property environment="env"/>
-        <property name="file.name.mini" value="${build.dir}/Slim_mini_gapps.BETA.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${build.today}.zip"/>
-        <delete dir="${work.dir}"/>
-        <propertyfile file="${build.dir}/gapps.filenames">
-            <entry key="minifilename" value="${file.name.mini}"/>
-        </propertyfile>
-        <!-- copy files -->
-        <copy todir="${work.dir}">
-            <fileset dir="${structure.dir}"/>
-        </copy>
-        <copy file="${app.dir}/extras/updater-script" todir="${work.dir}/META-INF/com/google/android">
-            <filterchain>
-                <replaceregex pattern="@package@" replace="mini" flags="i"/>
-                <replaceregex pattern="@cleanup.list@" replace="${cleanup.list}" flags="i"/>
-            </filterchain>
-        </copy>
-
-        <!-- generate backup script --> 
-        <fileset id="item.file" dir="${work.dir}/system" includes="**/*"/>
-        <pathconvert refid="item.file" property="file.list.mini" pathsep="&#10;" dirsep="/">
-            <map from="${work.dir}/system/" to=''/>
-        </pathconvert>
-        <copy file="${app.dir}/extras/80-gapps.sh" todir="${work.dir}/system/addon.d">
-            <filterchain>
-                <replaceregex pattern="@file.list@" replace="${file.list.mini}" flags="i"/>
-            </filterchain>
-        </copy>
-
-        <!-- fill in g.prop values -->
-        <length property="length.mini" mode="all">
-            <fileset dir="${work.dir}"/>
-        </length>
-        
-        <propertyfile file="${work.dir}/system/etc/g.prop">
-            <entry key="ro.addon.type" value="gapps"/>
-            <entry key="ro.addon.platform" value="lp"/>
-            <entry key="ro.addon.version" value="slim.mini.${build.today}"/>
-            <entry key="ro.addon.minimumversion" value="${PRODUCT_VERSION_MAJOR}"/>
-            <entry key="ro.addon.size" value="${length.mini}"/>
-        </propertyfile>
-
-        <!-- copy space.sh and fill in values -->
-        <copy file="${app.dir}/extras/space.sh" todir="${work.dir}">
-            <filterchain>
-                <replaceregex pattern="@version@" replace="${PRODUCT_VERSION_MAJOR}" flags="i"/>
-                <replaceregex pattern="@space_needed@" replace="${length.mini}" flags="i"/>
-            </filterchain>
-        </copy>
-
-        <!-- zip and sign it -->
-        <antcall target="ZipAndSigning">
-            <param name="hfile.name" value="${file.name.mini}"/>
-        </antcall>
-
-    </target>
-  
-    <!--=======================================================================-->
-    <!-- generate clean up list                                                -->
-    <!--=======================================================================-->
-    <target name="generateCleanUpList">
-        <path id="cleanup.file">
-            <fileset dir="${extra.dir}">
-                <include name="*.sh"/>
-            </fileset>
-            <fileset dir="${structure.dir}/system"/>
-        </path>
-        <pathconvert refid="cleanup.file" property="cleanup.list" pathsep="&quot;,&#10;&quot;" dirsep="/">
-            <map from="${extra.dir}" to="/system/addon.d"/>
-            <map from="${structure.dir}/system/" to="/system/"/>
-        </pathconvert>
     </target>
 
     <!--=======================================================================-->

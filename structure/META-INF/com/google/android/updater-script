@@ -1,0 +1,19 @@
+ui_print("***********************************************");
+ui_print("        SlimLP MULTI_DPI ADD-ON for Android 5.1");
+ui_print("***********************************************");
+
+run_program("/sbin/busybox", "mount", "/system");
+
+ui_print("Installing files...");
+show_progress(1, 15);
+package_extract_dir("system", "/system");
+show_progress(1, 15);
+package_extract_dir("dynamic", "/tmp");
+package_extract_file("dynamic.sh", "/tmp/dynamic.sh");
+set_perm(0, 0, 0777, "/tmp/dynamic.sh");
+run_program("/tmp/dynamic.sh", "");
+show_progress(1, 15);
+ui_print("Cleaning up and setting metadata...");
+set_metadata_recursive("/system/priv-app", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+run_program("/sbin/busybox", "umount", "/system");
+ui_print("Installation complete!");
