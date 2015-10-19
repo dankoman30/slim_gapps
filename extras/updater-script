@@ -1,5 +1,5 @@
 ui_print("***********************************************");
-ui_print("        SlimLP @package@ GApps for Android 6.0");
+ui_print("        Slim @package@ GApps for Android 6.0");
 ui_print("***********************************************");
 
 run_program("/sbin/busybox", "mount", "/system");
@@ -17,6 +17,8 @@ ifelse(
             ui_print("gapps installation will now proceed...");
 
             ui_print("Installing files...");
+            delete_recursive("/system/app/BrowserProviderProxy","/system/app/PartnerBookmarksProvider","/system/app/Provision","/system/app/QuickSearchBox","/system/app/Vending");
+            delete_recursive("/system/priv-app/BrowserProviderProxy","/system/priv-app/PartnerBookmarksProvider","/system/priv-app/Provision","/system/priv-app/QuickSearchBox","/system/priv-app/Vending");
             show_progress(1, 15);
             package_extract_dir("system", "/system");
             set_perm(0, 0, 0755, "/system/addon.d/80-gapps.sh");
@@ -29,14 +31,15 @@ ifelse(
             ui_print("Cleaning up and setting metadata...");
             set_metadata_recursive("/system/addon.d", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
             set_metadata_recursive("/system/app", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
-            set_metadata_recursive("/system/priv-app", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
             set_metadata_recursive("/system/etc/permissions", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
             set_metadata_recursive("/system/etc/preferred-apps", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
-            set_metadata("/system/etc/g.prop", "uid", 0, "gid", 0, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
             set_metadata_recursive("/system/framework", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
             set_metadata_recursive("/system/lib", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+            set_metadata_recursive("/system/lib64", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+            set_metadata_recursive("/system/priv-app", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
             set_metadata_recursive("/system/usr/srec/en-US", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
             set_metadata_recursive("/system/vendor/pittpatt", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+            set_metadata("/system/etc/g.prop", "uid", 0, "gid", 0, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
             run_program("/sbin/busybox", "umount", "/system");
             ui_print("Installation complete!");
         )
@@ -53,6 +56,8 @@ ifelse(
             );
 
             ui_print("Installing files...");
+            delete_recursive("/system/app/BrowserProviderProxy","/system/app/PartnerBookmarksProvider","/system/app/Provision","/system/app/QuickSearchBox","/system/app/Vending");
+            delete_recursive("/system/priv-app/BrowserProviderProxy","/system/priv-app/PartnerBookmarksProvider","/system/priv-app/Provision","/system/priv-app/QuickSearchBox","/system/priv-app/Vending");
             show_progress(1, 15);
             package_extract_dir("system", "/system");
             set_perm(0, 0, 0755, "/system/addon.d/80-gapps.sh");
@@ -65,14 +70,15 @@ ifelse(
             ui_print("Cleaning up and setting metadata...");
             set_metadata_recursive("/system/addon.d", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
             set_metadata_recursive("/system/app", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
-            set_metadata_recursive("/system/priv-app", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
             set_metadata_recursive("/system/etc/permissions", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
             set_metadata_recursive("/system/etc/preferred-apps", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
-            set_metadata("/system/etc/g.prop", "uid", 0, "gid", 0, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
             set_metadata_recursive("/system/framework", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
             set_metadata_recursive("/system/lib", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+            set_metadata_recursive("/system/lib64", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+            set_metadata_recursive("/system/priv-app", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
             set_metadata_recursive("/system/usr/srec/en-US", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
             set_metadata_recursive("/system/vendor/pittpatt", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+            set_metadata("/system/etc/g.prop", "uid", 0, "gid", 0, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
             run_program("/sbin/busybox", "umount", "/system");
             ui_print("Installation complete!");
         )
