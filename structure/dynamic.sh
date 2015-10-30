@@ -2,7 +2,6 @@
 
 # Variables
 ARCH=`grep ro.product.cpu.abi= /system/build.prop | cut -d "=" -f 2`
-DEVICE=`grep ro.product.device= /system/build.prop | cut -d "=" -f 2`
 SETUPWIZARD=`grep ro.build.characteristics /system/build.prop | grep tablet`
 
 # Cleanup
@@ -14,17 +13,6 @@ elif ls /data/app/com.google.android.googlequicksearchbox* 1> /dev/null 2>&1; th
  rm -rf /data/app/com.google.android.googlequicksearchbox*
 elif ls /data/app/com.google.android.tts* 1> /dev/null 2>&1; then
  rm -rf /data/app/com.google.android.tts*
-fi
-
-# HotwordEnrollment
-if [ $DEVICE == flounder ]; then
- cp -rf /tmp/HotwordEnrollment/arm64/* /system
-elif [ $DEVICE == Flounder ]; then
- cp -rf /tmp/HotwordEnrollment/arm64/* /system
-elif [ $DEVICE == volantis ]; then
- cp -rf /tmp/HotwordEnrollment/arm64/* /system
-elif [ $DEVICE == Volantis ]; then
- cp -rf /tmp/HotwordEnrollment/arm64/* /system
 fi
 
 # PrebuiltGmsCore
