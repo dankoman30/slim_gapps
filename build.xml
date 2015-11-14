@@ -71,6 +71,8 @@
                 <exclude name="system/app/ExchangeServices/**"/>
                 <exclude name="system/priv-app/talkback/**"/>
                 <exclude name="system/tts/**"/>
+                <exclude name="system/usr/**"/>
+                <exclude name="system/vendor/**"/>
                 <exclude name="dynamic/FaceLock/**"/>
                 <exclude name="dynamic/Velvet/**"/>
                 <exclude name="dynamic.sh"/>
