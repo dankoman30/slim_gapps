@@ -44,3 +44,5 @@ elif [ $ARCH == arm64-v8a ]; then #mini
 else #mini
  cp -rf /tmp/Velvet/arm/* /system #mini
 fi #mini
+
+exit 0
