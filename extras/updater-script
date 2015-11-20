@@ -1,13 +1,14 @@
 ui_print("***********************************************");
 ui_print("        Slim @package@ GApps for Android 6.0");
 ui_print("***********************************************");
+show_progress("1", 0);
 
+ui_print("mounting system...");
 ifelse(is_mounted("/system"), unmount("/system"));
 run_program("/sbin/busybox", "mount", "/system");
-ui_print("performing space calculations...");
-show_progress(1, 15);
 
-ui_print("extracting scripts...");
+ui_print("1. extracting scripts...");
+set_progress("0.1");
 package_extract_file("space.sh", "/tmp/space.sh");
 package_extract_file("dynamic.sh", "/tmp/dynamic.sh");
 package_extract_file("permissions.sh", "/tmp/permissions.sh");
@@ -15,6 +16,8 @@ set_perm(0, 0, 0777, "/tmp/space.sh");
 set_perm(0, 0, 0777, "/tmp/dynamic.sh");
 set_perm(0, 0, 0777, "/tmp/permissions.sh");
 
+ui_print("2. performing space calculations...");
+set_progress("0.2");
 run_program("/tmp/space.sh");
 
 ifelse(
@@ -24,20 +27,24 @@ ifelse(
             ui_print("DUE TO CERTAIN MET CRITERIA IN YOUR BUILD.PROP!");
             ui_print("gapps installation will now proceed...");
 
-            ui_print("installing files...");
-            show_progress(1, 15);
+            ui_print("3. removing old files...");
+            set_progress("0.3");
             delete_recursive("/system/app/Provision","/system/app/QuickSearchBox","/system/priv-app/Provision","/system/priv-app/QuickSearchBox");
+            
+            ui_print("4. installing new files...");
+            set_progress("0.4");
             package_extract_dir("system", "/system");
             set_perm(0, 0, 0755, "/system/addon.d/80-gapps.sh");
-            show_progress(1, 15);
+
+            ui_print("5. running dynamic installation...");
+            set_progress("0.5");
             package_extract_dir("dynamic", "/tmp");
             run_program("/tmp/dynamic.sh", "");
 
-            ui_print("fixing permissions...");
-            show_progress(1, 15);
+            ui_print("6. fixing permissions...");
+            set_progress("0.6");
             set_metadata("/system/etc/g.prop", "uid", 0, "gid", 0, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
             run_program("/tmp/permissions.sh", "");
-            run_program("/sbin/busybox", "umount", "/system");
             ui_print("installation complete!");
         )
 );
@@ -48,25 +55,27 @@ ifelse(
             ui_print("FREE SPACE CHECK PASSED!");
             ui_print("gapps installation will now proceed...");
 
-            ui_print("removing old gapps...");
+            ui_print("3. removing old files...");
+            set_progress("0.3");
+            delete_recursive("/system/app/Provision","/system/app/QuickSearchBox","/system/priv-app/Provision","/system/priv-app/QuickSearchBox");
             delete(
             "@cleanup.list@"
             );
 
-            ui_print("installing files...");
-            show_progress(1, 15);
-            delete_recursive("/system/app/Provision","/system/app/QuickSearchBox","/system/priv-app/Provision","/system/priv-app/QuickSearchBox");
+            ui_print("4. installing new files...");
+            set_progress("0.4");
             package_extract_dir("system", "/system");
             set_perm(0, 0, 0755, "/system/addon.d/80-gapps.sh");
-            show_progress(1, 15);
+
+            ui_print("5. running dynamic installation...");
+            set_progress("0.5");
             package_extract_dir("dynamic", "/tmp");
             run_program("/tmp/dynamic.sh", "");
 
-            ui_print("fixing permissions...");
-            show_progress(1, 15);
+            ui_print("6. fixing permissions...");
+            set_progress("0.6");
             set_metadata("/system/etc/g.prop", "uid", 0, "gid", 0, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
             run_program("/tmp/permissions.sh", "");
-            run_program("/sbin/busybox", "umount", "/system");
             ui_print("installation complete!");
         )
 );
@@ -78,11 +87,12 @@ ifelse(
             ui_print("please try a smaller package or resize");
             ui_print("your system partition to make room for gapps.");
 
+            set_progress("0.6");
+
             ui_print("******* GAPPS INSTALLATION FAILED *******");
             ui_print("no changes were made to your device");
             ui_print(" ");
             ui_print("now exiting...");
-            run_program("/sbin/busybox", "umount", "/system");
 
             ui_print("NEED HELP?");
             ui_print("1. in TWRP: Advanced > Copy log to SD");
@@ -98,11 +108,13 @@ ifelse(
             ui_print("have you been cheating on me? at least destroy");
             ui_print("the evidence. wipe your system partition in");
             ui_print("recovery, re-flash rom, and then flash gapps again.");
+
+            set_progress("0.6");
+
             ui_print("******* GAPPS INSTALLATION FAILED *******");
             ui_print("no changes were made to your device");
             ui_print(" ");
             ui_print("now exiting...");
-            run_program("/sbin/busybox", "umount", "/system");
 
             ui_print("NEED HELP?");
             ui_print("1. in TWRP: Advanced > Copy log to SD");
@@ -117,11 +129,13 @@ ifelse(
             ui_print("* NO ROM INSTALLED *");
             ui_print("no rom installed. please flash rom before gapps.");
             ui_print(".......you should be slapped.");
+
+            set_progress("0.6");
+
             ui_print("******* GAPPS INSTALLATION FAILED *******");
             ui_print("no changes were made to your device");
             ui_print(" ");
             ui_print("now exiting...");
-            run_program("/sbin/busybox", "umount", "/system");
 
             ui_print("NEED HELP?");
             ui_print("1. in TWRP: Advanced > Copy log to SD");
@@ -136,11 +150,13 @@ ifelse(
             ui_print("* ROM-GAPPS ANDROID VERSION MISMATCH *");
             ui_print("this gapps package is not intended");
             ui_print("for the installed version of android.");
+
+            set_progress("0.6");
+
             ui_print("******* GAPPS INSTALLATION FAILED *******");
             ui_print("no changes were made to your device");
             ui_print(" ");
             ui_print("now exiting...");
-            run_program("/sbin/busybox", "umount", "/system");
 
             ui_print("NEED HELP?");
             ui_print("1. in TWRP: Advanced > Copy log to SD");
@@ -148,3 +164,9 @@ ifelse(
             ui_print("       to slim gapps thread on xda");
         )
 );
+
+ui_print("unmounting system...");
+set_progress("0.9");
+
+run_program("/sbin/busybox", "umount", "/system");
+set_progress("1");
