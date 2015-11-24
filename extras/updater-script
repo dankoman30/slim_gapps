@@ -23,9 +23,9 @@ run_program("/tmp/space.sh");
 ifelse(
     file_getprop("/tmp/build.prop", "ro.gapps.install.status") == "10",
         (
-            ui_print("WARNING - GAPPS ARE BEING FORCIBLY INSTALLED");
-            ui_print("DUE TO CERTAIN MET CRITERIA IN YOUR BUILD.PROP!");
-            ui_print("gapps installation will now proceed...");
+            ui_print("  WARNING - GAPPS ARE BEING FORCIBLY INSTALLED");
+            ui_print("  DUE TO CERTAIN MET CRITERIA IN YOUR BUILD.PROP!");
+            ui_print("  gapps installation will now proceed...");
 
             ui_print("3. removing old files...");
             set_progress("0.3");
@@ -52,8 +52,8 @@ ifelse(
 ifelse(
     file_getprop("/tmp/build.prop", "ro.gapps.install.status") == "0",
         (
-            ui_print("FREE SPACE CHECK PASSED!");
-            ui_print("gapps installation will now proceed...");
+            ui_print("  FREE SPACE CHECK PASSED!");
+            ui_print("  gapps installation will now proceed...");
 
             ui_print("3. removing old files...");
             set_progress("0.3");
