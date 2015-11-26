@@ -37,6 +37,7 @@
     <property name="work.dir"                     value="${app.dir}/work"/>
     <property name="build.dir"                    value="${app.dir}/build"/>
     <property name="structure.dir"                value="${app.dir}/structure"/>
+    <property name="tools.dir"                    value="${app.dir}/tools"/>
     <property name="sign.jar"                     value="${app.dir}/tools/signapk.jar"/>
     <property name="sign.pem"                     value="${app.dir}/tools/testkey.x509.pem"/>
     <property name="sign.pk8"                     value="${app.dir}/tools/testkey.pk8"/>
@@ -57,6 +58,7 @@
     <!--=======================================================================-->
     <target name="buildZero"
             description="execute zero gapps build">
+
         <!-- preparations -->
         <property environment="env"/>
         <property name="file.name.zero" value="${build.dir}/Slim_zero_gapps.${PRODUCT_VERSION_RELEASE_TYPE}.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${build.today}.zip"/>
@@ -64,12 +66,12 @@
         <propertyfile file="${build.dir}/gapps.filenames">
             <entry key="zerofilename" value="${file.name.zero}"/>
         </propertyfile>
+
         <!-- copy files -->
         <copy todir="${work.dir}">
             <fileset dir="${structure.dir}">
                 <exclude name="system/app/ConfigUpdater/**"/>
                 <exclude name="system/app/ExchangeServices/**"/>
-                <exclude name="system/priv-app/talkback/**"/>
                 <exclude name="system/tts/**"/>
                 <exclude name="system/usr/**"/>
                 <exclude name="system/vendor/**"/>
@@ -92,6 +94,17 @@
             </filterchain>
         </copy>
 
+        <!-- repackage libs and zipalign -->
+        <antcall target="fixLibs">
+            <param name="apk.dir" value="${work.dir}/dynamic/PrebuiltGmsCore/arm/priv-app/PrebuiltGmsCore"/>
+        </antcall>
+        <antcall target="fixLibs">
+            <param name="apk.dir" value="${work.dir}/dynamic/PrebuiltGmsCore/arm64/priv-app/PrebuiltGmsCore"/>
+        </antcall>
+        <antcall target="fixLibs">
+            <param name="apk.dir" value="${work.dir}/system/app/GoogleTTS"/>
+        </antcall>
+
         <!-- generate backup script --> 
         <fileset id="item.file" dir="${work.dir}/system" includes="**/*"/>
         <pathconvert refid="item.file" property="file.list.zero" pathsep="&#10;" dirsep="/">
@@ -107,7 +120,6 @@
         <length property="length.zero" mode="all">
             <fileset dir="${work.dir}"/>
         </length>
-        
         <propertyfile file="${work.dir}/system/etc/g.prop">
             <entry key="ro.addon.type" value="gapps"/>
             <entry key="ro.addon.platform" value="lp"/>
@@ -136,6 +148,7 @@
     <!--=======================================================================-->
     <target name="buildMini"
             description="execute mini gapps build">
+
         <!-- preparations -->
         <property environment="env"/>
         <property name="file.name.mini" value="${build.dir}/Slim_mini_gapps.${PRODUCT_VERSION_RELEASE_TYPE}.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${build.today}.zip"/>
@@ -143,6 +156,7 @@
         <propertyfile file="${build.dir}/gapps.filenames">
             <entry key="minifilename" value="${file.name.mini}"/>
         </propertyfile>
+
         <!-- copy files -->
         <copy todir="${work.dir}">
             <fileset dir="${structure.dir}"/>
@@ -153,6 +167,23 @@
                 <replaceregex pattern="@cleanup.list@" replace="${cleanup.list}" flags="i"/>
             </filterchain>
         </copy>
+
+        <!-- repackage libs and zipalign -->
+        <antcall target="fixLibs">
+            <param name="apk.dir" value="${work.dir}/dynamic/PrebuiltGmsCore/arm/priv-app/PrebuiltGmsCore"/>
+        </antcall>
+        <antcall target="fixLibs">
+            <param name="apk.dir" value="${work.dir}/dynamic/PrebuiltGmsCore/arm64/priv-app/PrebuiltGmsCore"/>
+        </antcall>
+        <antcall target="fixLibs">
+            <param name="apk.dir" value="${work.dir}/dynamic/Velvet/arm/priv-app/Velvet"/>
+        </antcall>
+        <antcall target="fixLibs">
+            <param name="apk.dir" value="${work.dir}/dynamic/Velvet/arm64/priv-app/Velvet"/>
+        </antcall>
+        <antcall target="fixLibs">
+            <param name="apk.dir" value="${work.dir}/system/app/GoogleTTS"/>
+        </antcall>
 
         <!-- generate backup script --> 
         <fileset id="item.file" dir="${work.dir}/system" includes="**/*"/>
@@ -169,7 +200,6 @@
         <length property="length.mini" mode="all">
             <fileset dir="${work.dir}"/>
         </length>
-        
         <propertyfile file="${work.dir}/system/etc/g.prop">
             <entry key="ro.addon.type" value="gapps"/>
             <entry key="ro.addon.platform" value="lp"/>
@@ -207,6 +237,17 @@
             <map from="${extra.dir}" to="/system/addon.d"/>
             <map from="${structure.dir}/system/" to="/system/"/>
         </pathconvert>
+    </target>
+
+    <!--=======================================================================-->
+    <!-- repackage libs and zipalign                                           -->
+    <!--=======================================================================-->
+    <target name="fixLibs">
+        <echo message="Decompressing and repackaging libs, zipaligning"/>
+        <exec executable="/bin/bash" dir="${tools.dir}" failonerror="true" >
+            <arg value="libWork.sh"/>
+            <arg value="${apk.dir}"/>
+        </exec>
     </target>
 
     <!--=======================================================================-->
