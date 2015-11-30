@@ -42,6 +42,13 @@
     <property name="sign.pem"                     value="${app.dir}/tools/testkey.x509.pem"/>
     <property name="sign.pk8"                     value="${app.dir}/tools/testkey.pk8"/>
     <property name="extra.dir"                    value="${app.dir}/extras"/>
+
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+        <classpath>
+            <pathelement location="${tools.dir}/ant-contrib.jar"/>
+        </classpath>
+    </taskdef>
+
     <tstamp>  
         <format property="build.today" pattern="yyyyMMdd"/>
     </tstamp>  
@@ -95,15 +102,13 @@
         </copy>
 
         <!-- repackage libs and zipalign -->
-        <antcall target="fixLibs">
-            <param name="apk.dir" value="${work.dir}/dynamic/PrebuiltGmsCore/arm/priv-app/PrebuiltGmsCore"/>
-        </antcall>
-        <antcall target="fixLibs">
-            <param name="apk.dir" value="${work.dir}/dynamic/PrebuiltGmsCore/arm64/priv-app/PrebuiltGmsCore"/>
-        </antcall>
-        <antcall target="fixLibs">
-            <param name="apk.dir" value="${work.dir}/system/app/GoogleTTS"/>
-        </antcall>
+        <foreach target="fixLibs" param="apk.dir">
+            <fileset dir="${work.dir}">
+                <include name="dynamic/PrebuiltGmsCore/arm/priv-app/PrebuiltGmsCore"/>
+                <include name="dynamic/PrebuiltGmsCore/arm64/priv-app/PrebuiltGmsCore"/>
+                <include name="system/app/GoogleTTS"/>
+            </fileset>
+        </foreach>
 
         <!-- generate backup script --> 
         <fileset id="item.file" dir="${work.dir}/system" includes="**/*"/>
@@ -169,21 +174,15 @@
         </copy>
 
         <!-- repackage libs and zipalign -->
-        <antcall target="fixLibs">
-            <param name="apk.dir" value="${work.dir}/dynamic/PrebuiltGmsCore/arm/priv-app/PrebuiltGmsCore"/>
-        </antcall>
-        <antcall target="fixLibs">
-            <param name="apk.dir" value="${work.dir}/dynamic/PrebuiltGmsCore/arm64/priv-app/PrebuiltGmsCore"/>
-        </antcall>
-        <antcall target="fixLibs">
-            <param name="apk.dir" value="${work.dir}/dynamic/Velvet/arm/priv-app/Velvet"/>
-        </antcall>
-        <antcall target="fixLibs">
-            <param name="apk.dir" value="${work.dir}/dynamic/Velvet/arm64/priv-app/Velvet"/>
-        </antcall>
-        <antcall target="fixLibs">
-            <param name="apk.dir" value="${work.dir}/system/app/GoogleTTS"/>
-        </antcall>
+        <foreach target="fixLibs" param="apk.dir">
+            <fileset dir="${work.dir}">
+                <include name="dynamic/PrebuiltGmsCore/arm/priv-app/PrebuiltGmsCore"/>
+                <include name="dynamic/PrebuiltGmsCore/arm64/priv-app/PrebuiltGmsCore"/>
+                <include name="dynamic/Velvet/arm/priv-app/Velvet"/>
+                <include name="dynamic/Velvet/arm64/priv-app/Velvet"/>
+                <include name="system/app/GoogleTTS"/>
+            </fileset>
+        </foreach>
 
         <!-- generate backup script --> 
         <fileset id="item.file" dir="${work.dir}/system" includes="**/*"/>
