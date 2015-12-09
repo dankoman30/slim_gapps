@@ -70,8 +70,6 @@
         <!-- copy files -->
         <copy todir="${work.dir}">
             <fileset dir="${structure.dir}">
-                <exclude name="system/app/ConfigUpdater/**"/>
-                <exclude name="system/app/ExchangeServices/**"/>
                 <exclude name="system/tts/**"/>
                 <exclude name="system/usr/**"/>
                 <exclude name="system/vendor/**"/>
