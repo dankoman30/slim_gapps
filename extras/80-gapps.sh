@@ -95,6 +95,7 @@ case "$1" in
     rm -rf /system/priv-app/QuickSearchBox
 
     # Make required symbolic links
+    ARCH=`grep ro.product.cpu.abi= /system/build.prop | cut -d "=" -f 2`
     if [ $ARCH == armeabi-v7a ]; then
       mkdir -p /system/app/FaceLock/lib/arm #mini
       ln -s /system/lib/libfacelock_jni.so /system/app/FaceLock/lib/arm/libfacelock_jni.so #mini
