@@ -94,5 +94,25 @@ case "$1" in
     rm -rf /system/priv-app/Provision
     rm -rf /system/priv-app/QuickSearchBox
 
+    # Make required symbolic links
+    if [ $ARCH == armeabi-v7a ]; then
+      mkdir -p /system/app/FaceLock/lib/arm #mini
+      ln -s /system/lib/libfacelock_jni.so /system/app/FaceLock/lib/arm/libfacelock_jni.so #mini
+      mkdir -p /system/app/LatinIME/lib/arm
+      ln -s /system/lib/libjni_latinime.so /system/app/LatinIME/lib/arm/libjni_latinime.so
+      ln -s /system/lib/libjni_latinimegoogle.so /system/app/LatinIME/lib/arm/libjni_latinimegoogle.so
+    elif [ $ARCH == arm64-v8a ]; then
+      mkdir -p /system/app/FaceLock/lib/arm64 #mini
+      ln -s /system/lib64/libfacelock_jni.so /system/app/FaceLock/lib/arm64/libfacelock_jni.so #mini
+      mkdir -p /system/app/LatinIME/lib/arm64
+      ln -s /system/lib64/libjni_latinime.so /system/app/LatinIME/lib/arm64/libjni_latinime.so
+      ln -s /system/lib64/libjni_latinimegoogle.so /system/app/LatinIME/lib/arm64/libjni_latinimegoogle.so
+    else
+      mkdir -p /system/app/FaceLock/lib/arm #mini
+      ln -s /system/lib/libfacelock_jni.so /system/app/FaceLock/lib/arm/libfacelock_jni.so #mini
+      mkdir -p /system/app/LatinIME/lib/arm
+      ln -s /system/lib/libjni_latinime.so /system/app/LatinIME/lib/arm/libjni_latinime.so
+      ln -s /system/lib/libjni_latinimegoogle.so /system/app/LatinIME/lib/arm/libjni_latinimegoogle.so
+    fi
   ;;
 esac

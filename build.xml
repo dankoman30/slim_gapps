@@ -111,6 +111,9 @@
         <copy file="${app.dir}/extras/80-gapps.sh" todir="${work.dir}/system/addon.d">
             <filterchain>
                 <replaceregex pattern="@file.list@" replace="${file.list.zero}" flags="i"/>
+                <linecontains negate="true">
+                    <contains value="#mini"/>
+                </linecontains>
             </filterchain>
         </copy>
 
