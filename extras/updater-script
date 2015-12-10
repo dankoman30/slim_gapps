@@ -29,7 +29,7 @@ ifelse(
 
             ui_print("3. removing old files...");
             set_progress("0.3");
-            delete_recursive("/system/app/PicoTts","/system/app/Provision","/system/app/QuickSearchBox","/system/priv-app/Provision","/system/priv-app/QuickSearchBox");
+            delete_recursive("/system/app/PartnerBookmarksProvider","/system/app/PicoTts","/system/app/Provision","/system/app/QuickSearchBox","/system/priv-app/PartnerBookmarksProvider","/system/priv-app/Provision","/system/priv-app/QuickSearchBox");
             
             ui_print("4. installing new files...");
             set_progress("0.4");
@@ -57,7 +57,7 @@ ifelse(
 
             ui_print("3. removing old files...");
             set_progress("0.3");
-            delete_recursive("/system/app/PicoTts","/system/app/Provision","/system/app/QuickSearchBox","/system/priv-app/Provision","/system/priv-app/QuickSearchBox");
+            delete_recursive("/system/app/PartnerBookmarksProvider","/system/app/PicoTts","/system/app/Provision","/system/app/QuickSearchBox","/system/priv-app/PartnerBookmarksProvider","/system/priv-app/Provision","/system/priv-app/QuickSearchBox");
             delete(
             "@cleanup.list@"
             );
