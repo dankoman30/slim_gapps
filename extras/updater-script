@@ -27,9 +27,9 @@ ifelse(
             ui_print("  DUE TO CERTAIN MET CRITERIA IN YOUR BUILD.PROP!");
             ui_print("  gapps installation will now proceed...");
 
-            ui_print("3. removing old files...");
+            ui_print("3. removing conflicting files...");
             set_progress("0.3");
-            delete_recursive("/system/app/PartnerBookmarksProvider","/system/app/PicoTts","/system/app/Provision","/system/app/QuickSearchBox","/system/priv-app/PartnerBookmarksProvider","/system/priv-app/Provision","/system/priv-app/QuickSearchBox");
+            delete_recursive("/system/app/PartnerBookmarksProvider","/system/app/PicoTts","/system/app/Provision","/system/app/QuickSearchBox","/system/priv-app/PartnerBookmarksProvider","/system/priv-app/PicoTts","/system/priv-app/Provision","/system/priv-app/QuickSearchBox");
             
             ui_print("4. installing new files...");
             set_progress("0.4");
@@ -55,9 +55,9 @@ ifelse(
             ui_print("  FREE SPACE CHECK PASSED!");
             ui_print("  gapps installation will now proceed...");
 
-            ui_print("3. removing old files...");
+            ui_print("3. removing conflicting files...");
             set_progress("0.3");
-            delete_recursive("/system/app/PartnerBookmarksProvider","/system/app/PicoTts","/system/app/Provision","/system/app/QuickSearchBox","/system/priv-app/PartnerBookmarksProvider","/system/priv-app/Provision","/system/priv-app/QuickSearchBox");
+            delete_recursive("/system/app/PartnerBookmarksProvider","/system/app/PicoTts","/system/app/Provision","/system/app/QuickSearchBox","/system/priv-app/PartnerBookmarksProvider","/system/priv-app/PicoTts","/system/priv-app/Provision","/system/priv-app/QuickSearchBox");
             delete(
             "@cleanup.list@"
             );

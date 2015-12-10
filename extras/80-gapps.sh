@@ -84,6 +84,15 @@ case "$1" in
     # Stub
   ;;
   post-restore)
-    # Stub
+    # Re-remove conflicting apks
+    rm -rf /system/app/PartnerBookmarksProvider
+    rm -rf /system/app/PicoTts
+    rm -rf /system/app/Provision
+    rm -rf /system/app/QuickSearchBox
+    rm -rf /system/priv-app/PartnerBookmarksProvider
+    rm -rf /system/priv-app/PicoTts
+    rm -rf /system/priv-app/Provision
+    rm -rf /system/priv-app/QuickSearchBox
+
   ;;
 esac
