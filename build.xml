@@ -104,9 +104,17 @@
         </antcall>
 
         <!-- generate backup script --> 
-        <fileset id="item.file" dir="${work.dir}/system" includes="**/*"/>
+        <fileset id="item.file" dir="${work.dir}">
+            <include name="system/**/*"/>
+            <include name="dynamic/**/*"/>
+        </fileset>
         <pathconvert refid="item.file" property="file.list.zero" pathsep="&#10;" dirsep="/">
             <map from="${work.dir}/system/" to=''/>
+            <map from="${work.dir}/dynamic/LatinIME_swypelib/" to=''/>
+            <map from="${work.dir}/dynamic/PrebuiltGmsCore/arm/" to=''/>
+            <map from="${work.dir}/dynamic/PrebuiltGmsCore/arm64/" to=''/>
+            <map from="${work.dir}/dynamic/SetupWizard/phone/" to=''/>
+            <map from="${work.dir}/dynamic/SetupWizard/tablet/" to=''/>
         </pathconvert>
         <copy file="${app.dir}/extras/80-gapps.sh" todir="${work.dir}/system/addon.d">
             <filterchain>
@@ -187,9 +195,21 @@
         </antcall>
 
         <!-- generate backup script --> 
-        <fileset id="item.file" dir="${work.dir}/system" includes="**/*"/>
+        <fileset id="item.file" dir="${work.dir}">
+            <include name="system/**/*"/>
+            <include name="dynamic/**/*"/>
+        </fileset>
         <pathconvert refid="item.file" property="file.list.mini" pathsep="&#10;" dirsep="/">
             <map from="${work.dir}/system/" to=''/>
+            <map from="${work.dir}/dynamic/FaceLock/arm/" to=''/>
+            <map from="${work.dir}/dynamic/FaceLock/arm64/" to=''/>
+            <map from="${work.dir}/dynamic/LatinIME_swypelib/" to=''/>
+            <map from="${work.dir}/dynamic/PrebuiltGmsCore/arm/" to=''/>
+            <map from="${work.dir}/dynamic/PrebuiltGmsCore/arm64/" to=''/>
+            <map from="${work.dir}/dynamic/SetupWizard/phone/" to=''/>
+            <map from="${work.dir}/dynamic/SetupWizard/tablet/" to=''/>
+            <map from="${work.dir}/dynamic/Velvet/arm/" to=''/>
+            <map from="${work.dir}/dynamic/Velvet/arm64/" to=''/>
         </pathconvert>
         <copy file="${app.dir}/extras/80-gapps.sh" todir="${work.dir}/system/addon.d">
             <filterchain>
