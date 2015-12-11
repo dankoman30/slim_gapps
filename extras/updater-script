@@ -165,6 +165,27 @@ ifelse(
         )
 );
 
+ifelse(
+    file_getprop("/tmp/build.prop", "ro.gapps.install.status") == "5",
+        (
+            ui_print("* ARCHITECTURE MISMATCH *");
+            ui_print("this gapps package is not intended");
+            ui_print("for the current cpu architecture.");
+
+            set_progress("0.6");
+
+            ui_print("******* GAPPS INSTALLATION FAILED *******");
+            ui_print("no changes were made to your device");
+            ui_print(" ");
+            ui_print("now exiting...");
+
+            ui_print("NEED HELP?");
+            ui_print("1. in TWRP: Advanced > Copy log to SD");
+            ui_print("2. submit recovery.log from your root storage");
+            ui_print("       to slim gapps thread on xda");
+        )
+);
+
 ui_print("unmounting system...");
 set_progress("0.9");
 

@@ -7,7 +7,8 @@ current_gapps_size_kb=0
 buffer_kb=50000
 force_install=0
 # STATUS for use in edify (1=not enough space, 2=non-slim gapps installed,
-# 3=rom not installed, 4=rom and gapps versions don't match, 10=force install)
+# 3=rom not installed, 4=rom and gapps versions don't match,
+# 5=architecture mismatch, 10=force install)
 STATUS=0
 
 # functions
@@ -58,6 +59,7 @@ if [ -e $rom_build_prop ]
 then
     rom_build_name=$(file_getprop $rom_build_prop ro.build.display.id)
     ui_print "rom build: $rom_build_name"
+
     # prevent installation of incorrect gapps version
     rom_version_required=@version@
     rom_version_installed=$(file_getprop $rom_build_prop ro.build.version.release)
@@ -68,6 +70,18 @@ then
         ui_print "ROM and GAPPS versions match! Proceeding...";
     else
         special_status 4
+    fi
+
+    # prevent installation of gapps on wrong architecture
+    architecture_required=arm
+    architecture_installed=`grep ro.product.cpu.abi= $rom_build_prop | cut -d "=" -f 2`
+    ui_print "architecture required: $architecture_required"
+    ui_print "current cpu architecture: $architecture_installed"
+    if [ -z "${architecture_installed##*$architecture_required*}" ]
+    then
+        ui_print "architecture check passed! Proceeding...";
+    else
+        special_status 5
     fi
 
     # conditions in rom's build.prop that should force installation
