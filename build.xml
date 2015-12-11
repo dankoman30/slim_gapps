@@ -43,7 +43,7 @@
     <property name="sign.pk8"                     value="${app.dir}/tools/testkey.pk8"/>
     <property name="extra.dir"                    value="${app.dir}/extras"/>
     <tstamp>  
-        <format property="build.today" pattern="yyyyMMdd"/>
+        <format property="build.today" pattern="yyyyMMdd-HHmm"/>
     </tstamp>  
 
     <!--=======================================================================-->
