@@ -73,6 +73,9 @@ then
     fi
 
     # prevent installation of gapps on wrong architecture
+    # (this package supports armeabi, armeabi-v7a, and arm64-v8.
+    #  so, as long as the retrieved architecture from build.prop contains
+    #  "arm" then the device is supported.)
     architecture_required=arm
     architecture_installed=`grep ro.product.cpu.abi= $rom_build_prop | cut -d "=" -f 2`
     ui_print "architecture required: $architecture_required"
