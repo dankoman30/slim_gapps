@@ -39,7 +39,7 @@ ui_print() {
 }
 
 file_getprop() {
-    grep "^$2" "$1" | cut -d= -f2
+    grep "^$2" "$1" | cut -d= -f2;
 }
 
 if [ -e /system/priv-app/GoogleServicesFramework/GoogleServicesFramework.apk -a -e /system/priv-app/GoogleLoginService/GoogleLoginService.apk ]
@@ -77,14 +77,17 @@ then
     #  so, as long as the retrieved architecture from build.prop contains
     #  "arm" then the device is supported.)
     architecture_required=arm
-    architecture_installed=`grep ro.product.cpu.abi= $rom_build_prop | cut -d "=" -f 2`
+    architecture_installed="$(file_getprop $rom_build_prop "ro.product.cpu.abilist=")"
+    # If the recommended field is empty, fall back to the deprecated one
+    if [ -z "$architecture_installed" ]; then
+      architecture_installed="$(file_getprop $rom_build_prop "ro.product.cpu.abi=")"
+    fi
     ui_print "architecture required: $architecture_required"
-    ui_print "current cpu architecture: $architecture_installed"
-    if [ -z "${architecture_installed##*$architecture_required*}" ]
-    then
-        ui_print "architecture check passed! Proceeding...";
-    else
+    ui_print "current cpu architecture(s) supported: $architecture_installed"
+    if ! (echo "$architecture_installed" | grep -qi "$architecture_required"); then
         special_status 5
+    else
+        ui_print "architecture check passed! Proceeding...";
     fi
 
     # conditions in rom's build.prop that should force installation

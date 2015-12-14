@@ -6,9 +6,18 @@
 # Execute
 . /tmp/backuptool.functions
 
+# Functions
+file_getprop() {
+    grep "^$2" "$1" | cut -d= -f2;
+}
+
 # Variables
-ARCH=`grep ro.product.cpu.abi= /system/build.prop | grep armeabi`
-ARCH64=`grep ro.product.cpu.abi= /system/build.prop | grep arm64`
+rom_build_prop=/system/build.prop
+device_architecture="$(file_getprop $rom_build_prop "ro.product.cpu.abilist=")"
+# If the recommended field is empty, fall back to the deprecated one
+if [ -z "$device_architecture" ]; then
+  device_architecture="$(file_getprop $rom_build_prop "ro.product.cpu.abi=")"
+fi
 
 list_files() {
 cat <<EOF
@@ -52,18 +61,18 @@ case "$1" in
     rm -rf /system/priv-app/QuickSearchBox
 
     # Make required symbolic links
-    if [ ! $ARCH == "" ]; then
-      mkdir -p /system/app/FaceLock/lib/arm #mini
-      ln -s /system/lib/libfacelock_jni.so /system/app/FaceLock/lib/arm/libfacelock_jni.so #mini
-      mkdir -p /system/app/LatinIME/lib/arm
-      ln -s /system/lib/libjni_latinime.so /system/app/LatinIME/lib/arm/libjni_latinime.so
-      ln -s /system/lib/libjni_latinimegoogle.so /system/app/LatinIME/lib/arm/libjni_latinimegoogle.so
-    elif [ ! $ARCH64 == "" ]; then
+    if (echo "$device_architecture" | grep -qi "arm64"); then
       mkdir -p /system/app/FaceLock/lib/arm64 #mini
       ln -s /system/lib64/libfacelock_jni.so /system/app/FaceLock/lib/arm64/libfacelock_jni.so #mini
       mkdir -p /system/app/LatinIME/lib/arm64
       ln -s /system/lib64/libjni_latinime.so /system/app/LatinIME/lib/arm64/libjni_latinime.so
       ln -s /system/lib64/libjni_latinimegoogle.so /system/app/LatinIME/lib/arm64/libjni_latinimegoogle.so
+    elif (echo "$device_architecture" | grep -i "armeabi" | grep -qiv "arm64"); then
+      mkdir -p /system/app/FaceLock/lib/arm #mini
+      ln -s /system/lib/libfacelock_jni.so /system/app/FaceLock/lib/arm/libfacelock_jni.so #mini
+      mkdir -p /system/app/LatinIME/lib/arm
+      ln -s /system/lib/libjni_latinime.so /system/app/LatinIME/lib/arm/libjni_latinime.so
+      ln -s /system/lib/libjni_latinimegoogle.so /system/app/LatinIME/lib/arm/libjni_latinimegoogle.so
     fi
   ;;
 esac
