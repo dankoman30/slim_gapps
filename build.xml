@@ -2,6 +2,23 @@
 <!DOCTYPE project>
 <!--=========================================================================-->
 <!--                                                                         -->
+<!-- This file is part of slim_gapps.                                        -->
+<!--                                                                         -->
+<!-- slim_gapps is free software: you can redistribute it and/or modify      -->
+<!-- it under the terms of the GNU General Public License as published by    -->
+<!-- the Free Software Foundation, either version 3 of the License, or       -->
+<!-- (at your option) any later version.                                     -->
+<!--                                                                         -->
+<!-- slim_gapps is distributed in the hope that it will be useful,           -->
+<!-- but WITHOUT ANY WARRANTY; without even the implied warranty of          -->
+<!-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the           -->
+<!-- GNU General Public License for more details.                            -->
+<!--                                                                         -->
+<!-- You should have received a copy of the GNU General Public License       -->
+<!-- along with slim_gapps.  If not, see <http://www.gnu.org/licenses/>.     -->
+<!--                                                                         -->
+<!--=========================================================================-->
+<!--                                                                         -->
 <!--  PROJECT:  buildGapps                                                   -->
 <!--            SlimRoms (www.slimroms.org)                                  -->
 <!--                                                                         -->
@@ -41,7 +58,7 @@
     <property name="sign.jar"                     value="${app.dir}/tools/signapk.jar"/>
     <property name="sign.pem"                     value="${app.dir}/tools/testkey.x509.pem"/>
     <property name="sign.pk8"                     value="${app.dir}/tools/testkey.pk8"/>
-    <property name="extra.dir"                    value="${app.dir}/extras"/>
+    <property name="script.dir"                   value="${app.dir}/scripts"/>
     <tstamp>  
         <format property="build.today" pattern="yyyyMMdd-HHmm"/>
     </tstamp>  
@@ -75,16 +92,15 @@
                 <exclude name="system/vendor/**"/>
                 <exclude name="dynamic/FaceLock/**"/>
                 <exclude name="dynamic/Velvet/**"/>
-                <exclude name="dynamic.sh"/>
             </fileset>
         </copy>
-        <copy file="${app.dir}/extras/updater-script" todir="${work.dir}/META-INF/com/google/android">
+        <copy file="${script.dir}/updater-script" todir="${work.dir}/META-INF/com/google/android">
             <filterchain>
                 <replaceregex pattern="@package@" replace="zero" flags="i"/>
                 <replaceregex pattern="@cleanup.list@" replace="${cleanup.list}" flags="i"/>
             </filterchain>
         </copy>
-        <copy file="${app.dir}/structure/dynamic.sh" todir="${work.dir}">
+        <copy file="${script.dir}/dynamic.sh" todir="${work.dir}">
             <filterchain>
                 <linecontains negate="true">
                     <contains value="#mini"/>
@@ -116,7 +132,7 @@
             <map from="${work.dir}/dynamic/SetupWizard/phone/" to=''/>
             <map from="${work.dir}/dynamic/SetupWizard/tablet/" to=''/>
         </pathconvert>
-        <copy file="${app.dir}/extras/80-gapps.sh" todir="${work.dir}/system/addon.d">
+        <copy file="${script.dir}/80-gapps.sh" todir="${work.dir}/system/addon.d">
             <filterchain>
                 <replaceregex pattern="@file.list@" replace="${file.list.zero}" flags="i"/>
                 <linecontains negate="true">
@@ -138,12 +154,15 @@
         </propertyfile>
 
         <!-- copy space.sh and fill in values -->
-        <copy file="${app.dir}/extras/space.sh" todir="${work.dir}">
+        <copy file="${script.dir}/space.sh" todir="${work.dir}">
             <filterchain>
                 <replaceregex pattern="@version@" replace="${PRODUCT_VERSION_MAJOR}" flags="i"/>
                 <replaceregex pattern="@space_needed@" replace="${length.zero}" flags="i"/>
             </filterchain>
         </copy>
+
+        <!-- copy over rest of scripts -->
+        <copy file="${script.dir}/permissions.sh" todir="${work.dir}"/>
 
         <!-- zip and sign it --> 
         <antcall target="ZipAndSigning">
@@ -170,7 +189,7 @@
         <copy todir="${work.dir}">
             <fileset dir="${structure.dir}"/>
         </copy>
-        <copy file="${app.dir}/extras/updater-script" todir="${work.dir}/META-INF/com/google/android">
+        <copy file="${script.dir}/updater-script" todir="${work.dir}/META-INF/com/google/android">
             <filterchain>
                 <replaceregex pattern="@package@" replace="mini" flags="i"/>
                 <replaceregex pattern="@cleanup.list@" replace="${cleanup.list}" flags="i"/>
@@ -211,7 +230,7 @@
             <map from="${work.dir}/dynamic/Velvet/arm/" to=''/>
             <map from="${work.dir}/dynamic/Velvet/arm64/" to=''/>
         </pathconvert>
-        <copy file="${app.dir}/extras/80-gapps.sh" todir="${work.dir}/system/addon.d">
+        <copy file="${script.dir}/80-gapps.sh" todir="${work.dir}/system/addon.d">
             <filterchain>
                 <replaceregex pattern="@file.list@" replace="${file.list.mini}" flags="i"/>
             </filterchain>
@@ -230,12 +249,16 @@
         </propertyfile>
 
         <!-- copy space.sh and fill in values -->
-        <copy file="${app.dir}/extras/space.sh" todir="${work.dir}">
+        <copy file="${script.dir}/space.sh" todir="${work.dir}">
             <filterchain>
                 <replaceregex pattern="@version@" replace="${PRODUCT_VERSION_MAJOR}" flags="i"/>
                 <replaceregex pattern="@space_needed@" replace="${length.mini}" flags="i"/>
             </filterchain>
         </copy>
+
+        <!-- copy over rest of scripts -->
+        <copy file="${script.dir}/dynamic.sh" todir="${work.dir}"/>
+        <copy file="${script.dir}/permissions.sh" todir="${work.dir}"/>
 
         <!-- zip and sign it -->
         <antcall target="ZipAndSigning">
@@ -249,13 +272,13 @@
     <!--=======================================================================-->
     <target name="generateCleanUpList">
         <path id="cleanup.file">
-            <fileset dir="${extra.dir}">
+            <fileset dir="${script.dir}">
                 <include name="*.sh"/>
             </fileset>
             <fileset dir="${structure.dir}/system"/>
         </path>
         <pathconvert refid="cleanup.file" property="cleanup.list" pathsep="&quot;,&#10;&quot;" dirsep="/">
-            <map from="${extra.dir}" to="/system/addon.d"/>
+            <map from="${script.dir}" to="/system/addon.d"/>
             <map from="${structure.dir}/system/" to="/system/"/>
         </pathconvert>
     </target>

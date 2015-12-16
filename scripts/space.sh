@@ -1,4 +1,19 @@
 #!/sbin/sh
+#
+# This file is part of slim_gapps.
+#
+# slim_gapps is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# slim_gapps is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with slim_gapps.  If not, see <http://www.gnu.org/licenses/>.
 
 # vars
 g_prop=/system/etc/g.prop
@@ -19,18 +34,8 @@ special_status() {
 # get file descriptor for output
 OUTFD=$(ps | grep -v grep | grep -oE "update-binary(.*)" | cut -d " " -f 3)
 
-# same as ui_print command in updater_script, for example:
-#
-# ui_print "hello world!"
-#
-# will output "hello world!" to recovery, while
-#
-# ui_print
-#
-# outputs an empty line
-
 ui_print() {
-    if [ "$OUTFD" != "" ]; then
+    if [ -n "$OUTFD" ]; then
         echo "ui_print ${1} " 1>&$OUTFD;
         echo "ui_print " 1>&$OUTFD;
     else
