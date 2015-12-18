@@ -1,5 +1,6 @@
 ui_print("***********************************************");
 ui_print("        Slim @package@ GApps for Android 6.0");
+ui_print("       (TBO theme-ready gapps included)        ");
 ui_print("***********************************************");
 show_progress("1", 0);
 

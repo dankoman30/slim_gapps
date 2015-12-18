@@ -67,109 +67,8 @@
     <!-- complete build                                                        -->
     <!--=======================================================================-->
     <target name="buildAll"
-            depends="cleanupBefore,initit,generateCleanUpList,buildZero,buildMini,cleanupAfter"
+            depends="cleanupBefore,initit,generateCleanUpList,buildMini,cleanupAfter"
             description="execute complete build"/>
-
-    <!--=======================================================================-->
-    <!-- zero                                                                  -->
-    <!--=======================================================================-->
-    <target name="buildZero"
-            description="execute zero gapps build">
-
-        <!-- preparations -->
-        <property environment="env"/>
-        <property name="file.name.zero" value="${build.dir}/Slim_zero_gapps.${PRODUCT_VERSION_RELEASE_TYPE}.${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.${PRODUCT_VERSION_MAINTENANCE}-${build.today}.zip"/>
-        <delete dir="${work.dir}"/>
-        <propertyfile file="${build.dir}/gapps.filenames">
-            <entry key="zerofilename" value="${file.name.zero}"/>
-        </propertyfile>
-
-        <!-- copy files -->
-        <copy todir="${work.dir}">
-            <fileset dir="${structure.dir}">
-                <exclude name="system/app/ExchangeServices/**"/>
-                <exclude name="system/usr/**"/>
-                <exclude name="system/vendor/**"/>
-                <exclude name="dynamic/FaceLock/**"/>
-                <exclude name="dynamic/Velvet/**"/>
-            </fileset>
-        </copy>
-        <copy file="${script.dir}/updater-script" todir="${work.dir}/META-INF/com/google/android">
-            <filterchain>
-                <replaceregex pattern="@package@" replace="zero" flags="i"/>
-                <replaceregex pattern="@cleanup.list@" replace="${cleanup.list}" flags="i"/>
-            </filterchain>
-        </copy>
-        <copy file="${script.dir}/dynamic.sh" todir="${work.dir}">
-            <filterchain>
-                <linecontains negate="true">
-                    <contains value="#mini"/>
-                </linecontains>
-            </filterchain>
-        </copy>
-
-        <!-- repackage libs and zipalign -->
-        <antcall target="fixLibs">
-            <param name="apk.dir" value="${work.dir}/dynamic/PrebuiltGmsCore/arm/priv-app/PrebuiltGmsCore"/>
-        </antcall>
-        <antcall target="fixLibs">
-            <param name="apk.dir" value="${work.dir}/dynamic/PrebuiltGmsCore/arm64/priv-app/PrebuiltGmsCore"/>
-        </antcall>
-        <antcall target="fixLibs">
-            <param name="apk.dir" value="${work.dir}/system/app/GoogleTTS"/>
-        </antcall>
-
-        <!-- generate backup script --> 
-        <fileset id="item.file" dir="${work.dir}">
-            <include name="system/**/*"/>
-            <include name="dynamic/**/*"/>
-        </fileset>
-        <pathconvert refid="item.file" property="file.list.zero" pathsep="&#10;" dirsep="/">
-            <map from="${work.dir}/system/" to=''/>
-            <map from="${work.dir}/dynamic/LatinIME_swypelib/" to=''/>
-            <map from="${work.dir}/dynamic/PrebuiltGmsCore/arm/" to=''/>
-            <map from="${work.dir}/dynamic/PrebuiltGmsCore/arm64/" to=''/>
-            <map from="${work.dir}/dynamic/SetupWizard/phone/" to=''/>
-            <map from="${work.dir}/dynamic/SetupWizard/tablet/" to=''/>
-        </pathconvert>
-        <copy file="${script.dir}/80-gapps.sh" todir="${work.dir}/system/addon.d">
-            <filterchain>
-                <replaceregex pattern="@file.list@" replace="${file.list.zero}" flags="i"/>
-                <linecontains negate="true">
-                    <contains value="#mini"/>
-                </linecontains>
-            </filterchain>
-        </copy>
-
-        <!-- fill in g.prop values -->
-        <length property="length.zero" mode="all">
-            <fileset dir="${work.dir}"/>
-        </length>
-        <propertyfile file="${work.dir}/system/etc/g.prop">
-            <entry key="ro.addon.type" value="gapps"/>
-            <entry key="ro.addon.platform" value="mm"/>
-            <entry key="ro.addon.version" value="slim.zero.${build.today}"/>
-            <entry key="ro.addon.minimumversion" value="${PRODUCT_VERSION_MAJOR}"/>
-            <entry key="ro.addon.size" value="${length.zero}"/>
-        </propertyfile>
-
-        <!-- copy space.sh and fill in values -->
-        <copy file="${script.dir}/space.sh" todir="${work.dir}">
-            <filterchain>
-                <replaceregex pattern="@version@" replace="${PRODUCT_VERSION_MAJOR}" flags="i"/>
-                <replaceregex pattern="@space_needed@" replace="${length.zero}" flags="i"/>
-            </filterchain>
-        </copy>
-
-        <!-- copy over rest of scripts -->
-        <copy file="${script.dir}/permissions.sh" todir="${work.dir}"/>
-
-        <!-- zip and sign it --> 
-        <antcall target="ZipAndSigning">
-            <param name="hfile.name" value="${file.name.zero}"/>
-        </antcall>
-
-    </target>
 
     <!--=======================================================================-->
     <!-- mini                                                                  -->
@@ -211,6 +110,15 @@
         </antcall>
         <antcall target="fixLibs">
             <param name="apk.dir" value="${work.dir}/system/app/GoogleTTS"/>
+        </antcall>
+        <antcall target="fixLibs">
+            <param name="apk.dir" value="${work.dir}/system/app/PlusOne"/>
+        </antcall>
+        <antcall target="fixLibs">
+            <param name="apk.dir" value="${work.dir}/system/app/Hangouts"/>
+        </antcall>
+        <antcall target="fixLibs">
+            <param name="apk.dir" value="${work.dir}/system/app/YouTube"/>
         </antcall>
 
         <!-- generate backup script --> 
