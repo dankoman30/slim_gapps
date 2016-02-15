@@ -73,5 +73,3 @@ if (echo "$device_architecture" | grep -qi "arm64"); then #mini
 elif (echo "$device_architecture" | grep -i "armeabi" | grep -qiv "arm64"); then #mini
   cp -rf /tmp/Velvet/arm/* /system #mini
 fi #mini
-
-exit 0

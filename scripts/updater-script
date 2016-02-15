@@ -5,7 +5,7 @@ show_progress("1", 0);
 
 ui_print("mounting system...");
 ifelse(is_mounted("/system"), unmount("/system"));
-run_program("/sbin/busybox", "mount", "/system");
+run_program("/sbin/mount", "/system");
 
 ui_print("1. extracting scripts...");
 set_progress("0.1");
@@ -189,5 +189,5 @@ ifelse(
 ui_print("unmounting system...");
 set_progress("0.9");
 
-run_program("/sbin/busybox", "umount", "/system");
+run_program("/sbin/umount", "/system");
 set_progress("1");
