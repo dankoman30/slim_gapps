@@ -56,6 +56,13 @@ elif (echo "$device_architecture" | grep -i "armeabi" | grep -qiv "arm64"); then
   ln -s /system/lib/libjni_latinimegoogle.so /system/app/LatinIME/lib/arm/libjni_latinimegoogle.so
 fi
 
+# libfrsdk
+if (echo "$device_architecture" | grep -qi "arm64"); then
+  cp -rf /tmp/libfrsdk/arm64/* /system
+elif (echo "$device_architecture" | grep -i "armeabi" | grep -qiv "arm64"); then
+  cp -rf /tmp/libfrsdk/arm/* /system
+fi
+
 # FaceLock #mini
 if (echo "$device_architecture" | grep -qi "arm64"); then #mini
   cp -rf /tmp/FaceLock/arm64/* /system #mini
