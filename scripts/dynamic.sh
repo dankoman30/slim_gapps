@@ -47,31 +47,26 @@ fi
 if (echo "$device_architecture" | grep -qi "arm64"); then
   cp -rf /tmp/LatinIME_swypelib/lib64/* /system/lib64
   mkdir -p /system/app/LatinIME/lib/arm64
-  ln -s /system/lib64/libjni_latinime.so /system/app/LatinIME/lib/arm64/libjni_latinime.so
-  ln -s /system/lib64/libjni_latinimegoogle.so /system/app/LatinIME/lib/arm64/libjni_latinimegoogle.so
+  ln -sfn /system/lib64/libjni_latinime.so /system/app/LatinIME/lib/arm64/libjni_latinime.so
+  ln -sfn /system/lib64/libjni_latinimegoogle.so /system/app/LatinIME/lib/arm64/libjni_latinimegoogle.so
+  ln -sfn /system/lib64/libjni_keyboarddecoder.so /system/app/LatinIME/lib/arm64/libjni_keyboarddecoder.so
 elif (echo "$device_architecture" | grep -i "armeabi" | grep -qiv "arm64"); then
   cp -rf /tmp/LatinIME_swypelib/lib/* /system/lib
   mkdir -p /system/app/LatinIME/lib/arm
-  ln -s /system/lib/libjni_latinime.so /system/app/LatinIME/lib/arm/libjni_latinime.so
-  ln -s /system/lib/libjni_latinimegoogle.so /system/app/LatinIME/lib/arm/libjni_latinimegoogle.so
-fi
-
-# libfrsdk
-if (echo "$device_architecture" | grep -qi "arm64"); then
-  cp -rf /tmp/libfrsdk/arm64/* /system
-elif (echo "$device_architecture" | grep -i "armeabi" | grep -qiv "arm64"); then
-  cp -rf /tmp/libfrsdk/arm/* /system
+  ln -sfn /system/lib/libjni_latinime.so /system/app/LatinIME/lib/arm/libjni_latinime.so
+  ln -sfn /system/lib/libjni_latinimegoogle.so /system/app/LatinIME/lib/arm/libjni_latinimegoogle.so
+  ln -sfn /system/lib/libjni_keyboarddecoder.so /system/app/LatinIME/lib/arm/libjni_keyboarddecoder.so
 fi
 
 # FaceLock #mini
 if (echo "$device_architecture" | grep -qi "arm64"); then #mini
   cp -rf /tmp/FaceLock/arm64/* /system #mini
   mkdir -p /system/app/FaceLock/lib/arm64 #mini
-  ln -s /system/lib64/libfacelock_jni.so /system/app/FaceLock/lib/arm64/libfacelock_jni.so #mini
+  ln -sfn /system/lib64/libfacelock_jni.so /system/app/FaceLock/lib/arm64/libfacelock_jni.so #mini
 elif (echo "$device_architecture" | grep -i "armeabi" | grep -qiv "arm64"); then #mini
   cp -rf /tmp/FaceLock/arm/* /system #mini
   mkdir -p /system/app/FaceLock/lib/arm #mini
-  ln -s /system/lib/libfacelock_jni.so /system/app/FaceLock/lib/arm/libfacelock_jni.so #mini
+  ln -sfn /system/lib/libfacelock_jni.so /system/app/FaceLock/lib/arm/libfacelock_jni.so #mini
 fi #mini
 
 # Velvet #mini
